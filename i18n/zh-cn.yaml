@@ -2,7 +2,7 @@ toggleMenu:
   other: 切换菜单
 
 darkMode:
-  other:
+  other: 背景模式
 
 list:
   page: "{{ .Count }} 个页面"
