@@ -1,0 +1,38 @@
+{{ define "main" }}
+
+    {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
+    {{ $notHidden := where .Site.RegularPages "Params.hidden" "!=" true }}
+    {{ $filtered := ($pages | intersect $notHidden) }}
+    {{ $pag := .Paginate ($filtered) }}
+
+    <!-- 首页欢迎字幅 -->
+    <div class="welcome">
+        <p style="font-size: 2rem; text-align: center; font-weight: bold">
+            <span class="shake"> 🍻 </span>
+            <span class="jump-text1" > Welcome</span>
+            <span class="jump-text2"> back </span>
+            <span class="jump-text3"> to </span>
+            <span class="jump-text4" style="color:#e99312">R</span><span class="jump-text4" style="color:#e99312">a</span><span class="jump-text5" style="color:#e99312">n</span><span class="jump-text6" style="color:#e99312">c</span><span class="jump-text7" style="color:#e99312">h</span><span class="jump-text8" style="color:#e99312">'s</span>
+            <span class="jump-text8" style="color:#e99312">Blog </span>
+            <span class="jump-text9" > ！ </span>
+        </p>
+    </div>
+    <!-- 首页欢迎字幅 -->
+     
+    <section class="article-list">
+        {{ range $index, $element := $pag.Pages }}
+            {{ partial "article-list/default" . }}
+        {{ end }}
+    </section>
+    
+    {{- partial "pagination.html" . -}}
+    
+    {{- partial "footer/footer" . -}}
+    
+{{ end }}
+
+{{ define "right-sidebar" }}
+    {{ partial "sidebar/right.html" (dict "Context" . "Scope" "homepage") }}
+{{ end }}
+
+
