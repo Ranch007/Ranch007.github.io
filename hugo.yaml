@@ -57,8 +57,8 @@ params:
 
         avatar:
             enabled: true
-            local: true
-            src: img/avatar.png
+            local: false
+            src: https://github.com/Ranch007.png
 
     article:
         wordCount: true
