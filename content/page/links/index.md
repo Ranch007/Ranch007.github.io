@@ -13,7 +13,7 @@ links:
   - title: Stack
     description: 专为博客设计的卡片风格主题。
     website: https://stack.jimmycai.com/
-    image: img/stack-logo.png
+    image: https://stack.cai.im/logo.png
 menu:
     main: 
         weight: -50
