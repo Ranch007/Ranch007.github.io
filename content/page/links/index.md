@@ -10,10 +10,6 @@ links:
     description: 全球最快的网站建设框架。
     website: https://gohugo.io/
     image: https://gohugo.io/images/gopher-hero.svg
-  - title: Stack
-    description: 专为博客设计的卡片风格主题。
-    website: https://stack.jimmycai.com/
-    image: assets/img/stack-logo.png
 menu:
     main: 
         weight: -50
