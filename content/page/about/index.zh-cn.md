@@ -20,8 +20,8 @@ menu:
 
 # 🏡关于本站
 
-- 博客框架：[Hugo](https://gohugo.io/) v0.135.0
-- 博客主题：[Stack](https://stack.jimmycai.com/) v3.27.0
+- 博客框架：[Hugo](https://gohugo.io/)
+- 博客主题：[Stack](https://stack.jimmycai.com/)
 - 托管部署：[GitHub](https://www.github.com/Ranch007)
 - 评论系统：[Giscus](https://giscus.app/zh-CN)
 - 版权声明：[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
