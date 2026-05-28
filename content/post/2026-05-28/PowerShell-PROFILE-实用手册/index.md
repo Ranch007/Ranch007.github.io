@@ -4,7 +4,7 @@ title: "PowerShell $PROFILE 实用手册"
 slug: "PowerShell-PROFILE-实用手册"
 description: "从 PSReadLine 语法高亮、智能补全到自定义提示符、别名快捷函数，再到 Terminal-Icons 图标集成与 Oh My Posh 主题配置，一篇带你打造高效 PowerShell 工作环境的实战指南"
 date: "2026-05-28T10:00:00+08:00"
-image: 
+image: maxresdefault.jpg
 math: 
 license: 
 hidden: false
