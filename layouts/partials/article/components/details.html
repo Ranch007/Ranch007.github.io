@@ -61,7 +61,9 @@
             <div>
                 {{ partial "helper/icon" "clock" }}
                 <time class="article-time--reading">
-                    {{ T "article.readingTime" .ReadingTime }}
+                    {{ $readingSpeed := .Site.Params.reading_speed | default 100 }}
+                    {{ $readingTime := div (float .WordCount) $readingSpeed | math.Ceil }}
+                    {{ T "article.readingTime" $readingTime }}
                 </time>
             </div>
         {{ end }}
