@@ -80,14 +80,14 @@ ai_wiki/                      ai_wiki/
 
 ### 踩过的坑
 
-| 问题 | 原因 | 解决 |
-|------|------|------|
-| 仪表盘完全不显示 | 未启用 DataviewJS 查询 | Dataview 设置 → 开启 Enable Dataview JavaScript queries |
-| CSS 不生效 | `cssclasses` 应写作 `cssclass`（单数） | 修正 frontmatter key |
-| 统计卡片对不齐 | `dv.el({container})` 参数不可靠 | 改用 `document.createElement` + `dv.container.appendChild` |
-| 整个 DVJS 块不渲染 | 模板字符串内嵌 IIFE 解析失败 | 把逻辑提到外面先算好 |
-| 用户名读取报错 | `require('os')` 在 Obsidian 中不可用 | 改用 `app.vault.adapter.basePath` 提取 |
-| 底部索引不显示 | 用 `document.createElement` 但忘了 `appendChild` | 创建元素后要手动附加到容器 |
+| 问题               | 原因                                                | 解决                                                          |
+| ------------------ | --------------------------------------------------- | ------------------------------------------------------------- |
+| 仪表盘完全不显示   | 未启用 DataviewJS 查询                              | Dataview 设置 → 开启 Enable Dataview JavaScript queries      |
+| CSS 不生效         | `cssclasses` 应写作 `cssclass`（单数）          | 修正 frontmatter key                                          |
+| 统计卡片对不齐     | `dv.el({container})` 参数不可靠                   | 改用`document.createElement` + `dv.container.appendChild` |
+| 整个 DVJS 块不渲染 | 模板字符串内嵌 IIFE 解析失败                        | 把逻辑提到外面先算好                                          |
+| 用户名读取报错     | `require('os')` 在 Obsidian 中不可用              | 改用`app.vault.adapter.basePath` 提取                       |
+| 底部索引不显示     | 用`document.createElement` 但忘了 `appendChild` | 创建元素后要手动附加到容器                                    |
 
 ### 功能模块迭代顺序
 
@@ -125,14 +125,14 @@ const raw = poemLines[d % poemLines.length].replace(/^\s*\d+\.\s*/, '').trim();
 
 ### 问候语按时间段切换
 
-| 时间段 | 问候 |
-|-------|------|
-| 7:00–8:59 | 👋 早上好 |
-| 9:00–10:59 | 👋 上午好 |
-| 11:00–12:59 | 👋 中午好 |
-| 13:00–16:59 | 👋 下午好 |
-| 17:00–22:59 | 👋 晚上好 |
-| 23:00–6:59 | 👋 夜深了，早点休息吧 |
+| 时间段       | 问候                  |
+| ------------ | --------------------- |
+| 7:00–8:59   | 👋 早上好             |
+| 9:00–10:59  | 👋 上午好             |
+| 11:00–12:59 | 👋 中午好             |
+| 13:00–16:59 | 👋 下午好             |
+| 17:00–22:59 | 👋 晚上好             |
+| 23:00–6:59  | 👋 夜深了，早点休息吧 |
 
 ### 用户名自动读取
 
@@ -147,15 +147,15 @@ const userName = (app.vault.adapter.basePath || '')
 
 从一个简单规则文件逐步演变成完整的工作手册：
 
-| 版本 | 新增内容 |
-|------|---------|
-| v1 | Web Clipper 分类规则 |
-| v2 | merge 外部 CLAUDE.md（Ingest / Query / Lint 三大触发行为） |
-| v3 | 唤醒自动检查（哈喽/hello 触发） |
-| v4 | 图片管理规则（命名、分类、外链处理） |
-| v5 | Frontmatter 规范（created / published） |
-| v6 | 精简冗余规则，保留核心流程 |
-| v7 | log.md 改为新条目插最前面 |
+| 版本 | 新增内容                                                   |
+| ---- | ---------------------------------------------------------- |
+| v1   | Web Clipper 分类规则                                       |
+| v2   | merge 外部 CLAUDE.md（Ingest / Query / Lint 三大触发行为） |
+| v3   | 唤醒自动检查（哈喽/hello 触发）                            |
+| v4   | 图片管理规则（命名、分类、外链处理）                       |
+| v5   | Frontmatter 规范（created / published）                    |
+| v6   | 精简冗余规则，保留核心流程                                 |
+| v7   | log.md 改为新条目插最前面                                  |
 
 ### Frontmatter 规范
 
@@ -256,7 +256,7 @@ xbi-analysis-04.png
 - [helloianneo/obsidian-ai-second-brain](https://github.com/helloianneo/obsidian-ai-second-brain) — CLAUDE.md 模板参考
 
 ### 版权信息
-> 本文原载于 Ray's Wiki，请遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。
 
+> 本文原载于 Ray's Wiki，请遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。
 
 updated: Sat Jul  4 13:30:06     2026

@@ -1,5 +1,4 @@
 ---
-
 title: "PowerShell $PROFILE 实用手册"
 slug: "PowerShell-PROFILE-实用手册"
 description: "从 PSReadLine 语法高亮、智能补全到自定义提示符、别名快捷函数，再到 Terminal-Icons 图标集成与 Oh My Posh 主题配置，一篇带你打造高效 PowerShell 工作环境的实战指南"
@@ -11,15 +10,12 @@ hidden: false
 draft: false 
 categories: ["网络技术"]
 tags: ["PowerShell", "Windows", "环境"]
-
 ---
-
 ---
 
 ## 前言
 
 > [!WARNING]
->
 > **本篇文章内容，主要针对 PowerShell 实用性配置，不涉及终端美化，请酌情食用。**
 
 `$PROFILE` 是 PowerShell 中一个非常重要的自动变量，它存储了 PowerShell 配置文件（Profile）的路径。通过编辑它，你可以打造一个完全符合自己习惯的终端环境。
@@ -67,7 +63,6 @@ if (!(Test-Path $PROFILE)) { New-Item -Type File -Path $PROFILE -Force }
 在终端输入 `notepad $PROFILE`（或在 VS Code 中输入 `code $PROFILE`）打开并编辑文本。
 
 > [!IMPORTANT]
->
 > **PSReadLine**：优化命令历史、自动补全以及智能语法高亮。
 >
 > **常用路径别名**：通过 `Set-Alias` 将常用长命令或路径设为简写。
@@ -170,7 +165,6 @@ Set-ExecutionPolicy RemoteSigned
 ## 拓展
 
 > [!TIP]
->
 > 这里博主安装了新的 `Notepad.exe`，但是 PowerShell 中输入 `notepad` 命令依旧使用的是旧的 `notepad.exe`。
 >
 > 要解决这个问题，需要先"挪走"原有的旧版记事本。但由于它是系统核心文件，直接删除或改名会被系统拒绝。
@@ -199,5 +193,4 @@ New-Item -ItemType SymbolicLink -Path "C:\Windows\system32\notepad.exe" -Target 
 
 ### 版权信息
 
-本文原载于 [Ranch's Blog](https://ranch007.github.io)，遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。
-
+本文原载于 [Ranch&#39;s Blog](https://ranch007.github.io)，遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。

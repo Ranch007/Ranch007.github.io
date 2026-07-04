@@ -1,0 +1,50 @@
+name: compress-images
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'content/**.png'
+      - 'content/**.jpg'
+      - 'content/**.jpeg'
+      - 'static/**.png'
+      - 'static/**.jpg'
+      - 'static/**.jpeg'
+
+permissions:
+  contents: write
+
+jobs:
+  compress:
+    # 避免机器人自己的压缩提交触发死循环
+    if: "!contains(github.event.head_commit.message, '[compress]')"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Pillow
+        run: pip install Pillow
+
+      - name: Compress images
+        run: python scripts/compress-images.py
+
+      - name: Commit compressed images
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "没有需要压缩的图片"
+          else
+            git commit -m "[compress] 自动压缩图片"
+            git push
+          fi
