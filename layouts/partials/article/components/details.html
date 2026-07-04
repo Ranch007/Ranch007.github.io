@@ -37,17 +37,6 @@
             </div>
         {{ end }}
 
-        {{- if ne .Lastmod .Date -}}
-        <div>
-            <section class="article-lastmod">
-                {{ partial "helper/icon" "edit" }}
-                    <time class="article-lastmod">
-                        {{- .Lastmod | time.Format (or .Site.Params.dateFormat.lastUpdated "2006-01-02 15:04") -}}
-                    </time>
-            </section>
-        </div>
-        {{- end -}} 
-
         {{ if .Site.Params.article.readingTime }}
             <div>
                 {{ partial "helper/icon" "file-description" }}
@@ -56,7 +45,7 @@
                 </time>
             </div>
         {{ end }}
-      
+
         {{ if $showReadingTime }}
             <div>
                 {{ partial "helper/icon" "clock" }}
@@ -66,6 +55,17 @@
                 </time>
             </div>
         {{ end }}
+
+        {{- if ne .Lastmod .Date -}}
+        <div>
+            <section class="article-lastmod">
+                {{ partial "helper/icon" "edit" }}
+                    <time class="article-lastmod">
+                        {{- .Lastmod | time.Format (or .Site.Params.dateFormat.lastUpdated "2006-01-02 15:04") -}}
+                    </time>
+            </section>
+        </div>
+        {{- end -}}
     </footer>
     {{ end }}
 
