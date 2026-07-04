@@ -24,6 +24,29 @@ jobs:
         - name: Disable quotePath
           run: git config --global core.quotePath false
 
+        - name: Setup Python
+          uses: actions/setup-python@v5
+          with:
+              python-version: "3.12"
+
+        - name: Install Pillow
+          run: pip install Pillow
+
+        - name: Compress Images
+          run: python scripts/compress-images.py
+
+        - name: Commit Compressed Images
+          run: |
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add -A
+            if git diff --staged --quiet; then
+              echo "没有需要压缩的图片"
+            else
+              git commit -m "[compress] 自动压缩图片"
+              echo "compressed=true" >> $GITHUB_ENV
+            fi
+
         - name: Setup Hugo
           uses: peaceiris/actions-hugo@v3
           with:
