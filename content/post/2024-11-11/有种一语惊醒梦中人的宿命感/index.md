@@ -9,7 +9,7 @@ math:
 license: 
 hidden: false
 draft: false 
-categories: ["痴人呓语"]
+categories: ["阅读随记"]
 tags: [""]
 ---
 

@@ -8,7 +8,7 @@ math:
 license: 
 hidden: false
 draft: false 
-categories: ["网安笔记"]
+categories: ["网络技术"]
 tags: ["环境"]
 ---
 

@@ -8,7 +8,7 @@ math:
 license: 
 hidden: false
 draft: false 
-categories: ["日常折腾"]
+categories: ["网络技术"]
 tags: ["Windows","环境"]
 ---
 
