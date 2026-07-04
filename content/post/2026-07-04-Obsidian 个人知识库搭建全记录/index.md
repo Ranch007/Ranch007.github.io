@@ -9,7 +9,7 @@ license:
 hidden: false
 draft: false
 categories: ["网络技术"]
-tags: [""]
+tags: ["Obsidian", "wiki"]
 ---
 # Obsidian 个人知识库搭建全记录
 

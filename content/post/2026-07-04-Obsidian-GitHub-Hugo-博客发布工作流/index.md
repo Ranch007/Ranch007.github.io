@@ -9,7 +9,7 @@ license:
 hidden: false
 draft: false
 categories: ["网络技术"]
-tags: [""]
+tags: ["Blog", "Obsidian", "Hugo"]
 ---
 # Obsidian + GitHub + Hugo 博客发布工作流
 
