@@ -1,4 +1,5 @@
 """批量压缩 content/ 目录下的图片"""
+import io
 import os
 import sys
 from pathlib import Path
@@ -48,7 +49,6 @@ def compress_image(filepath: Path) -> dict:
                     else:
                         img_q = img.convert("P", palette=Image.Palette.ADAPTIVE, colors=256)
                     # Save to temp to check if it actually reduced size
-                    import io
                     buf_orig = io.BytesIO()
                     buf_quant = io.BytesIO()
                     img.save(buf_orig, format="PNG", optimize=True)
@@ -69,10 +69,19 @@ def compress_image(filepath: Path) -> dict:
                 bg.paste(img, mask=img.split()[3])
                 img = bg
 
-        # Save
-        img.save(filepath, **save_kwargs)
-        size_kb_after = filepath.stat().st_size / 1024
-        saved = size_kb_before - size_kb_after
+        # Save to buffer first, compare size, only overwrite if smaller
+        buf = io.BytesIO()
+        img.save(buf, format=fmt, **save_kwargs)
+        new_size = buf.tell()
+
+        if new_size < filepath.stat().st_size:
+            with open(filepath, "wb") as f:
+                f.write(buf.getvalue())
+            size_kb_after = new_size / 1024
+            saved = size_kb_before - size_kb_after
+        else:
+            size_kb_after = size_kb_before  # unchanged
+            saved = 0
 
         return {
             "status": "compressed",
