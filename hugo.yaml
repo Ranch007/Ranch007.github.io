@@ -17,6 +17,8 @@ languages:
     languageName: 简体中文
     title: Ranch's Blog
     weight: 1
+    params:
+      reading_speed: 100
 
 services:
   # Change it to your Disqus shortname before using
@@ -32,8 +34,6 @@ pagination:
 permalinks:
   post: /p/:slug/
   page: /:slug/
-
-readingspeed: 100
 
 params:
   mainSections:
