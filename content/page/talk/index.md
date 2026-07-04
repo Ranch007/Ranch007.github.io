@@ -1,5 +1,6 @@
 ---
 title: "留言"
+slug: "talk"
 date: 2024-10-15
 menu:
     main:

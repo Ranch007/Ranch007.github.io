@@ -1,5 +1,6 @@
 ---
 title: 友链
+slug: "links"
 date: 2024-10-15
 links:
   - title: GitHub
