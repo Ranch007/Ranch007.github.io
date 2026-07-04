@@ -3,7 +3,7 @@ title: "Obsidian 个人知识库搭建全记录"
 slug: "2026-07-04-Obsidian 个人知识库搭建全记录"
 description: ""
 date: "2026-07-04T08:00:00+08:00"
-image:Obsidian AI知识库搭建记录.png
+image: Obsidian AI知识库搭建记录.png
 math:
 license:
 hidden: false
