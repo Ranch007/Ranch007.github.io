@@ -3,7 +3,7 @@ title: "Obsidian + GitHub + Hugo 博客发布工作流"
 slug: "2026-07-04-Obsidian-GitHub-Hugo-博客发布工作流"
 description: ""
 date: "2026-07-04T08:00:00+08:00"
-image: 
+image: cover.jpg
 math:
 license:
 hidden: false
@@ -17,11 +17,11 @@ tags: [""]
 
 将 Obsidian 知识库中的笔记发布到个人博客，涉及三个角色的协作：
 
-| 角色 | 位置 | 职责 |
-|------|------|------|
-| **Obsidian 知识库** | 本地 `ai_wiki/` | 笔记的创作与存储 |
-| **GitHub 仓库** | `Ranch007.github.io` | Hugo 博客源码 + Git 版本管理 |
-| **GitHub Actions** | CI 构建 | 自动编译 Hugo 并部署到 gh-pages |
+| 角色                      | 位置                   | 职责                            |
+| ------------------------- | ---------------------- | ------------------------------- |
+| **Obsidian 知识库** | 本地`ai_wiki/`       | 笔记的创作与存储                |
+| **GitHub 仓库**     | `Ranch007.github.io` | Hugo 博客源码 + Git 版本管理    |
+| **GitHub Actions**  | CI 构建                | 自动编译 Hugo 并部署到 gh-pages |
 
 从 Obsidian 写笔记到博客上线，全自动无需手动操作博客仓库。
 
@@ -88,14 +88,14 @@ git submodule update --init
 
 #### 站点配置 (hugo.yaml) 关键点
 
-| 配置项 | 值 | 说明 |
-|--------|-----|------|
-| `theme` | `hugo-theme-stack` | Stack 主题 |
-| `DefaultContentLanguage` | `zh-cn` | 简体中文 |
-| `hasCJKLanguage` | `true` | 中日韩语言支持，影响 `.Summary` 和 `.WordCount` |
-| `baseurl` | `http://ranch007.github.io` | 站点根 URL |
-| `permalinks.post` | `/p/:slug/` | 博文 URL 结构 |
-| `pagination.pagerSize` | `6` | 每页文章数 |
+| 配置项                     | 值                            | 说明                                               |
+| -------------------------- | ----------------------------- | -------------------------------------------------- |
+| `theme`                  | `hugo-theme-stack`          | Stack 主题                                         |
+| `DefaultContentLanguage` | `zh-cn`                     | 简体中文                                           |
+| `hasCJKLanguage`         | `true`                      | 中日韩语言支持，影响`.Summary` 和 `.WordCount` |
+| `baseurl`                | `http://ranch007.github.io` | 站点根 URL                                         |
+| `permalinks.post`        | `/p/:slug/`                 | 博文 URL 结构                                      |
+| `pagination.pagerSize`   | `6`                         | 每页文章数                                         |
 
 #### 评论系统
 
@@ -152,10 +152,10 @@ content/
 博客侧边栏显示的三个分类，与 Obsidian wiki 的三个兴趣方向一一映射：
 
 | Obsidian wiki 子目录 | Hugo 分类 |
-|---------------------|----------|
-| `wiki/it-tech/` | 网络技术 |
-| `wiki/finance/` | 投资理财 |
-| `wiki/reading/` | 阅读随记 |
+| -------------------- | --------- |
+| `wiki/it-tech/`    | 网络技术  |
+| `wiki/finance/`    | 投资理财  |
+| `wiki/reading/`    | 阅读随记  |
 
 ---
 
@@ -190,15 +190,15 @@ Get-ChildItem -Path $WikiDir -Recurse -Filter "*.md" | ForEach-Object {
 
 #### 3.3 Frontmatter 转换（Obsidian → Hugo）
 
-| Obsidian 字段 | Hugo 字段 | 转换规则 |
-|-------------|----------|---------|
-| `title` | `title` | 原样保留 |
-| `published` | `date` | 取 `published`，无则取 `created`，均无则当天 |
-| `tags` | `tags` | 原样保留，过滤掉 `publish` 标签 |
-| `description` | `description` | 原样保留 |
-| — | `slug` | 由标题和日期生成 |
-| — | `image` | 正文第一张图片 |
-| — | `categories` | 根据 wiki 子目录自动映射 |
+| Obsidian 字段   | Hugo 字段       | 转换规则                                        |
+| --------------- | --------------- | ----------------------------------------------- |
+| `title`       | `title`       | 原样保留                                        |
+| `published`   | `date`        | 取`published`，无则取 `created`，均无则当天 |
+| `tags`        | `tags`        | 原样保留，过滤掉`publish` 标签                |
+| `description` | `description` | 原样保留                                        |
+| —              | `slug`        | 由标题和日期生成                                |
+| —              | `image`       | 正文第一张图片                                  |
+| —              | `categories`  | 根据 wiki 子目录自动映射                        |
 
 生成的 Hugo frontmatter 示例：
 
@@ -208,7 +208,7 @@ title: "Obsidian 个人知识库搭建全记录"
 slug: "2026-07-04-Obsidian-个人知识库搭建全记录"
 description: ""
 date: "2026-07-04T08:00:00+08:00"
-image:
+image: cover.jpg
 math:
 license:
 hidden: false
@@ -399,12 +399,12 @@ jobs:
 
 #### 目录映射规则
 
-| 源目录 | 映射为 |
-|-------|-------|
-| Obsidian `wiki/` | Hugo `content/post/` |
-| 每个 `publish: true` 笔记 | 一个 Hugo page bundle（独立目录） |
-| Obsidian `assets/` | 复制到 post bundle 内 |
-| wiki 子目录（如 it-tech） | 分类标签（如"网络技术"） |
+| 源目录                     | 映射为                            |
+| -------------------------- | --------------------------------- |
+| Obsidian`wiki/`          | Hugo`content/post/`             |
+| 每个`publish: true` 笔记 | 一个 Hugo page bundle（独立目录） |
+| Obsidian`assets/`        | 复制到 post bundle 内             |
+| wiki 子目录（如 it-tech）  | 分类标签（如"网络技术"）          |
 
 #### 前后 frontmatter 对照
 
@@ -415,7 +415,7 @@ jobs:
 title: Obsidian 个人知识库搭建全记录
 tags: [it-tech, obsidian, tutorial, workflow]
 created: 2026-07-04
-published: true
+publish: true
 ---
 ```
 
@@ -489,6 +489,5 @@ hugo server -D
 - [peaceiris/actions-gh-pages](https://github.com/peaceiris/actions-gh-pages) — GitHub Pages 部署 Action
 
 ### 版权信息
-> 本文原载于 [Ranch's Blog](https://ranch007.github.io)，遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。
 
-
+> 本文原载于 [Ranch&#39;s Blog](https://ranch007.github.io)，遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。
