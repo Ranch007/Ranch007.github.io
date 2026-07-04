@@ -3,7 +3,7 @@ title: "Obsidian + GitHub + Hugo 博客发布工作流"
 slug: "2026-07-04-Obsidian-GitHub-Hugo-博客发布工作流"
 description: ""
 date: "2026-07-04T08:00:00+08:00"
-image: cover.jpg
+image: 
 math:
 license:
 hidden: false
@@ -13,7 +13,7 @@ tags: [""]
 ---
 # Obsidian + GitHub + Hugo 博客发布工作流
 
-## 一、引言
+## 引言
 
 将 Obsidian 知识库中的笔记发布到个人博客，涉及三个角色的协作：
 
@@ -27,7 +27,7 @@ tags: [""]
 
 ---
 
-## 二、正文
+## 正文
 
 ### 1. 整体架构
 
@@ -208,7 +208,7 @@ title: "Obsidian 个人知识库搭建全记录"
 slug: "2026-07-04-Obsidian-个人知识库搭建全记录"
 description: ""
 date: "2026-07-04T08:00:00+08:00"
-image: cover.jpg
+image:
 math:
 license:
 hidden: false
@@ -415,7 +415,7 @@ jobs:
 title: Obsidian 个人知识库搭建全记录
 tags: [it-tech, obsidian, tutorial, workflow]
 created: 2026-07-04
-publish: true
+published: true
 ---
 ```
 
@@ -453,7 +453,7 @@ hugo server -D
 
 ---
 
-## 三、拓展
+## 拓展
 
 ### 局限性
 
@@ -472,7 +472,7 @@ hugo server -D
 
 ---
 
-## 四、附录
+## 附录
 
 ### 相关文件
 
