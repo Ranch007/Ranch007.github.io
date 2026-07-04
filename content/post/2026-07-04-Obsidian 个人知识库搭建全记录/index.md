@@ -1,6 +1,6 @@
 ---
-title: "obsidian-wiki-setup-guide"
-slug: "2026-07-04-obsidian-wiki-setup-guide"
+title: "Obsidian 个人知识库搭建全记录"
+slug: "2026-07-04-Obsidian 个人知识库搭建全记录"
 description: ""
 date: "2026-07-04T08:00:00+08:00"
 image:
@@ -257,4 +257,5 @@ xbi-analysis-04.png
 
 ### 版权信息
 > 本文原载于 Ray's Wiki，请遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。
+
 
