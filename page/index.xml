@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Pages on Ranch&#39;s Blog</title>
+        <link>http://ranch007.github.io/page/</link>
+        <description>Recent content in Pages on Ranch&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Ranch&#39;s Blog</copyright>
+        <lastBuildDate>Sat, 04 Jul 2026 13:22:56 +0800</lastBuildDate><atom:link href="http://ranch007.github.io/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>关于</title>
+        <link>http://ranch007.github.io/about/</link>
+        <pubDate>Tue, 15 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://ranch007.github.io/about/</guid>
+        <description>&lt;h1 id=&#34;关于本人&#34;&gt;👨‍💻关于本人
+&lt;/h1&gt;&lt;p&gt;    电影与阅读&lt;/p&gt;
+&lt;p&gt;    音乐与旅行&lt;/p&gt;
+&lt;p&gt;    朋友还有酒&lt;/p&gt;
+&lt;h1 id=&#34;关于本站&#34;&gt;🏡关于本站
+&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;博客框架：&lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;博客主题：&lt;a class=&#34;link&#34; href=&#34;https://stack.jimmycai.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Stack&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;托管部署：&lt;a class=&#34;link&#34; href=&#34;https://www.github.com/Ranch007&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;评论系统：&lt;a class=&#34;link&#34; href=&#34;https://giscus.app/zh-CN&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Giscus&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;版权声明：&lt;a class=&#34;link&#34; href=&#34;https://creativecommons.org/licenses/by-nc-sa/4.0/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;CC BY-NC-SA 4.0&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>归档</title>
+        <link>http://ranch007.github.io/archives/</link>
+        <pubDate>Tue, 15 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://ranch007.github.io/archives/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>留言</title>
+        <link>http://ranch007.github.io/talk/</link>
+        <pubDate>Tue, 15 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://ranch007.github.io/talk/</guid>
+        <description>&lt;p&gt;只有心灵相通的人，才有共鸣看人世间的潮起潮落&lt;br&gt;
+只有灵魂相近的人，才能看到彼此内心深藏的美丽&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>友链</title>
+        <link>http://ranch007.github.io/links/</link>
+        <pubDate>Tue, 15 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://ranch007.github.io/links/</guid>
+        <description>&lt;h1 id=&#34;人生漫长转瞬即逝有人见尘埃有人见星辰&#34;&gt;&amp;ldquo;人生漫长转瞬即逝，有人见尘埃，有人见星辰&amp;rdquo;&lt;br&gt;
+&lt;/h1&gt;</description>
+        </item>
+        
+    </channel>
+</rss>

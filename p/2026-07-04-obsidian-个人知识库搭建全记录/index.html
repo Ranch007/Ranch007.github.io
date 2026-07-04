@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Obsidian 个人知识库搭建全记录 引言 基于 Karpathy LLM Wiki 方法论，在 Obsidian 中搭建 AI 辅助个人知识库的完整过程。记录了每个阶段的真实决策、踩过的坑和最终方案。\n正文 让 AI 阅读方法论并设计结构 你： 阅读Karpathy wiki 方法论，帮我把仓库里的wiki文件夹的结构给建立起来\n">
+<title>Obsidian 个人知识库搭建全记录</title>
+
+<link rel='canonical' href='http://ranch007.github.io/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/'>
+
+<link rel="stylesheet" href="/scss/style.min.4dd5c05f7d951cb9f11c52fd8df2136a7affc98c428b6152d7519788cd1ab5dd.css"><meta property='og:title' content="Obsidian 个人知识库搭建全记录">
+<meta property='og:description' content="Obsidian 个人知识库搭建全记录 引言 基于 Karpathy LLM Wiki 方法论，在 Obsidian 中搭建 AI 辅助个人知识库的完整过程。记录了每个阶段的真实决策、踩过的坑和最终方案。\n正文 让 AI 阅读方法论并设计结构 你： 阅读Karpathy wiki 方法论，帮我把仓库里的wiki文件夹的结构给建立起来\n">
+<meta property='og:url' content='http://ranch007.github.io/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/'>
+<meta property='og:site_name' content='Ranch&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Obsidian' /><meta property='article:tag' content='wiki' /><meta property='article:published_time' content='2026-07-04T08:00:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-04T20:22:06&#43;08:00'/><meta property='og:image' content='http://ranch007.github.io/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/Obsidian%20AI%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95.png' />
+<meta name="twitter:title" content="Obsidian 个人知识库搭建全记录">
+<meta name="twitter:description" content="Obsidian 个人知识库搭建全记录 引言 基于 Karpathy LLM Wiki 方法论，在 Obsidian 中搭建 AI 辅助个人知识库的完整过程。记录了每个阶段的真实决策、踩过的坑和最终方案。\n正文 让 AI 阅读方法论并设计结构 你： 阅读Karpathy wiki 方法论，帮我把仓库里的wiki文件夹的结构给建立起来\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://ranch007.github.io/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/Obsidian%20AI%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95.png' />
+    <link rel="shortcut icon" href="/favcion.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside
+  class="sidebar left-sidebar sticky "
+>
+  <button
+    class="hamburger hamburger--spin"
+    type="button"
+    id="toggle-menu"
+    aria-label="切换菜单"
+  >
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </button>
+
+  <header>
+     
+    <figure class="site-avatar">
+      <a href="https://github.com/Ranch007">
+        
+        <img
+          src="https://github.com/Ranch007.png"
+          width="300"
+          height="300"
+          class="site-logo"
+          loading="lazy"
+          alt="Avatar"
+        />
+        
+      </a>
+      
+    </figure>
+     
+
+    <div class="site-meta">
+      <h1 class="site-name">
+        <a href="/"><span>Ranch</span></a>
+      </h1>
+      <h2 class="site-description">
+        知是行之始<br />行是知之成
+      </h2>
+    </div>
+  </header><ol class="menu-social">
+    
+    <li>
+      <a
+        href="https://github.com/Ranch007/Ranch007.github.io"
+        target="_blank"
+        
+        title="Ranch&#39;s GitHub"
+        
+        rel="me"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+ 
+      </a>
+    </li>
+    
+    <li>
+      <a
+        href="mailto:zhao11345lin07@163.com"
+        target="_blank"
+        
+        title="Email"
+        
+        rel="me"
+      >
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg> 
+      </a>
+    </li>
+    
+    <li>
+      <a
+        href="/index.xml"
+        target="_blank"
+        
+        title="RSS"
+        
+        rel="me"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+ 
+      </a>
+    </li>
+    
+  </ol><ol class="menu" id="main-menu">
+      
+    <li >
+      <a
+        href="/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+ 
+        <span>主页</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/about/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+ 
+        <span>关于</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/archives/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+ 
+        <span>归档</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/talk/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+ 
+        <span>留言</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/links/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+ 
+        <span>友链</span>
+      </a>
+    </li>
+    
+    <li class="menu-bottom-section">
+      <ol class="menu">
+
+        
+        
+        <li id="dark-mode-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun-high" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" />
+  <path d="M6.343 17.657l-1.414 1.414" />
+  <path d="M6.343 6.343l-1.414 -1.414" />
+  <path d="M17.657 6.343l1.414 -1.414" />
+  <path d="M17.657 17.657l1.414 1.414" />
+  <path d="M4 12h-2" />
+  <path d="M12 4v-2" />
+  <path d="M20 12h2" />
+  <path d="M12 20v2" />
+</svg> <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon-stars" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+  <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+  <path d="M19 11h2m-1 -1v2" />
+</svg>
+          <span>背景模式</span>
+        </li>
+        
+      </ol>
+    </li>
+  </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#引言">引言</a></li>
+    <li><a href="#正文">正文</a>
+      <ol>
+        <li><a href="#让-ai-阅读方法论并设计结构">让 AI 阅读方法论并设计结构</a></li>
+        <li><a href="#目录演变">目录演变</a></li>
+        <li><a href="#第一篇素材">第一篇素材</a></li>
+        <li><a href="#发现-raw-根目录需要整理">发现 raw/ 根目录需要整理</a></li>
+        <li><a href="#merge-外部-claudemd">merge 外部 CLAUDE.md</a></li>
+        <li><a href="#索引页的演变">索引页的演变</a></li>
+        <li><a href="#踩过的坑">踩过的坑</a></li>
+        <li><a href="#功能模块迭代顺序">功能模块迭代顺序</a></li>
+        <li><a href="#主题切换">主题切换</a></li>
+        <li><a href="#每日诗句">每日诗句</a></li>
+        <li><a href="#问候语按时间段切换">问候语按时间段切换</a></li>
+        <li><a href="#用户名自动读取">用户名自动读取</a></li>
+        <li><a href="#metaclaudemd-的演变">meta/CLAUDE.md 的演变</a></li>
+        <li><a href="#frontmatter-规范">Frontmatter 规范</a></li>
+        <li><a href="#assets-目录建立">assets/ 目录建立</a></li>
+        <li><a href="#命名规范">命名规范</a></li>
+        <li><a href="#图片管理流程">图片管理流程</a></li>
+        <li><a href="#初始化目录结构">初始化目录结构</a></li>
+        <li><a href="#灌入第一篇资料">灌入第一篇资料</a></li>
+        <li><a href="#搭建仪表盘">搭建仪表盘</a></li>
+        <li><a href="#日常-ingest">日常 Ingest</a></li>
+        <li><a href="#健康检查">健康检查</a></li>
+        <li><a href="#添加自定义规则">添加自定义规则</a></li>
+        <li><a href="#唤醒自动检查">唤醒自动检查</a></li>
+        <li><a href="#查询知识库">查询知识库</a></li>
+      </ol>
+    </li>
+    <li><a href="#拓展">拓展</a></li>
+    <li><a href="#附录">附录</a>
+      <ol>
+        <li><a href="#参考文章">参考文章</a></li>
+        <li><a href="#版权信息">版权信息</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/">
+                <img src="/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/Obsidian%20AI%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95_hu_7fcd88ae039c5e38.png"
+                        srcset="/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/Obsidian%20AI%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95_hu_7fcd88ae039c5e38.png 800w, /p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/Obsidian%20AI%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95_hu_e40451b925524025.png 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post Obsidian 个人知识库搭建全记录" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/" style="background-color: #2a9d8f; color: #fff;">
+                网络技术
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/">Obsidian 个人知识库搭建全记录</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-07-04</time>
+            </div>
+        
+
+        
+            <div>
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
+                <time class="article-words">
+                    2251 字
+                </time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    
+                    阅读时长: 23 分钟
+                </time>
+            </div>
+        <div>
+            <section class="article-lastmod">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z" /></svg>
+                    <time class="article-lastmod">2026-07-04 20:22</time>
+            </section>
+        </div></footer>
+    
+
+    
+</div>
+
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="obsidian-个人知识库搭建全记录">Obsidian 个人知识库搭建全记录
+</h1><h2 id="引言">引言
+</h2><p>基于 Karpathy LLM Wiki 方法论，在 Obsidian 中搭建 AI 辅助个人知识库的完整过程。记录了每个阶段的真实决策、踩过的坑和最终方案。</p>
+<hr>
+<h2 id="正文">正文
+</h2><h3 id="让-ai-阅读方法论并设计结构">让 AI 阅读方法论并设计结构
+</h3><blockquote>
+<p><strong>你：</strong> 阅读Karpathy wiki 方法论，帮我把仓库里的wiki文件夹的结构给建立起来</p>
+</blockquote>
+<p>AI 读完后，按照 Karpathy 的三层架构（raw / wiki / schema）设计了初始目录。经过讨论，确定了三个兴趣方向：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">it-tech/    ← IT 技术（编程、框架、工具、架构）
+</span></span><span class="line"><span class="cl">finance/    ← 投资理财（概念、策略、标的分析）
+</span></span><span class="line"><span class="cl">reading/    ← 阅读随记（书籍、文章、跨书主题）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>初始结构采用了严格的嵌套方案，后来扁平化调整，去掉了多余层级。</p>
+<h3 id="目录演变">目录演变
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">初始方案（三层嵌套）            最终方案（扁平）
+</span></span><span class="line"><span class="cl">─────────────────             ────────────────
+</span></span><span class="line"><span class="cl">ai_wiki/                      ai_wiki/
+</span></span><span class="line"><span class="cl">├── wiki/                     ├── raw/          ← 原始资料
+</span></span><span class="line"><span class="cl">│   ├── raw/                  ├── wiki/         ← 知识库
+</span></span><span class="line"><span class="cl">│   ├── wiki/                 │   ├── it-tech/
+</span></span><span class="line"><span class="cl">│   │   ├── it-tech/          │   ├── finance/
+</span></span><span class="line"><span class="cl">│   │   ├── finance/          │   └── reading/
+</span></span><span class="line"><span class="cl">│   │   └── reading/          ├── assets/       ← 配图
+</span></span><span class="line"><span class="cl">│   └── meta/                 └── meta/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第一篇素材">第一篇素材
+</h3><p>在 <code>raw/</code> 放入第一篇资料后直接说 <code>ingest</code>，AI 自动完成：归类子目录 → 读取内容 → 创建概念页 + 实体页 → 更新索引 → 写日志。</p>
+<h3 id="发现-raw-根目录需要整理">发现 raw/ 根目录需要整理
+</h3><p>使用 Obsidian Web Clipper 剪藏的笔记直接掉进 <code>raw/</code> 根目录，杂乱无章。于是加了一条规则：</p>
+<blockquote>
+<p>每次 Ingest 时，自动将 <code>raw/</code> 根目录下的未分类笔记按内容归类到对应子目录。</p>
+</blockquote>
+<p>写入 <code>meta/CLAUDE.md</code>，从此再也不用手动分类。</p>
+<h3 id="merge-外部-claudemd">merge 外部 CLAUDE.md
+</h3><p>发现 <a class="link" href="https://github.com/helloianneo/obsidian-ai-second-brain"  target="_blank" rel="noopener"
+    >helloianneo/obsidian-ai-second-brain</a> 的 CLAUDE.md 更完整，将其与本地规则合并，形成了当前 <code>meta/CLAUDE.md</code> 的基础。</p>
+<h3 id="索引页的演变">索引页的演变
+</h3><p>最初的 <code>index.md</code> 只是一个简单的文章列表：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gu">## IT技术
+</span></span></span><span class="line"><span class="cl"><span class="k">-</span> [<span class="nt">概念页</span>](<span class="na">概念页.md</span>) — 说明
+</span></span><span class="line"><span class="cl"><span class="k">-</span> [<span class="nt">实体页</span>](<span class="na">实体页.md</span>) — 说明
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>用了几个来回后，逐步进化成了动态仪表盘。</p>
+<h3 id="踩过的坑">踩过的坑
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>问题</th>
+					<th>原因</th>
+					<th>解决</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>仪表盘完全不显示</td>
+					<td>未启用 DataviewJS 查询</td>
+					<td>Dataview 设置 → 开启 Enable Dataview JavaScript queries</td>
+			</tr>
+			<tr>
+					<td>CSS 不生效</td>
+					<td><code>cssclasses</code> 应写作 <code>cssclass</code>（单数）</td>
+					<td>修正 frontmatter key</td>
+			</tr>
+			<tr>
+					<td>统计卡片对不齐</td>
+					<td><code>dv.el({container})</code> 参数不可靠</td>
+					<td>改用<code>document.createElement</code> + <code>dv.container.appendChild</code></td>
+			</tr>
+			<tr>
+					<td>整个 DVJS 块不渲染</td>
+					<td>模板字符串内嵌 IIFE 解析失败</td>
+					<td>把逻辑提到外面先算好</td>
+			</tr>
+			<tr>
+					<td>用户名读取报错</td>
+					<td><code>require('os')</code> 在 Obsidian 中不可用</td>
+					<td>改用<code>app.vault.adapter.basePath</code> 提取</td>
+			</tr>
+			<tr>
+					<td>底部索引不显示</td>
+					<td>用<code>document.createElement</code> 但忘了 <code>appendChild</code></td>
+					<td>创建元素后要手动附加到容器</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="功能模块迭代顺序">功能模块迭代顺序
+</h3><ol>
+<li><strong>统计卡片</strong> → 文章数、资料数、总计，三列等宽 Grid</li>
+<li><strong>兴趣方向</strong> → 各区域文章数 + 标签列表</li>
+<li><strong>主题切换</strong> → 🌙 emoji 按钮，一键切换深色/浅色</li>
+<li><strong>最近更新</strong> → 按修改时间排序，显示相对时间</li>
+<li><strong>每日诗句</strong> → 从诗词歌赋.md 按天轮换</li>
+<li><strong>随机索引</strong> → 每天随机展示各区域最多 5 篇</li>
+<li><strong>知识图谱</strong> → 点击跳转 Obsidian 关系图谱</li>
+</ol>
+<h3 id="主题切换">主题切换
+</h3><p>最初用文字按钮，后来改为纯 emoji 切换：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">btn</span><span class="p">.</span><span class="nx">onclick</span> <span class="o">=</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">isDark</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="s1">&#39;theme-dark&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s1">&#39;theme-dark&#39;</span><span class="p">,</span> <span class="o">!</span><span class="nx">isDark</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">toggle</span><span class="p">(</span><span class="s1">&#39;theme-light&#39;</span><span class="p">,</span> <span class="nx">isDark</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">btn</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">isDark</span> <span class="o">?</span> <span class="s1">&#39;☀️&#39;</span> <span class="o">:</span> <span class="s1">&#39;🌙&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="每日诗句">每日诗句
+</h3><p>从 <code>wiki/reading/books/诗词歌赋.md</code> 读取，以当天日期为种子选一行，同一天不重复：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">content</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">dv</span><span class="p">.</span><span class="nx">io</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="s2">&#34;wiki/reading/books/诗词歌赋.md&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">poemLines</span> <span class="o">=</span> <span class="nx">content</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">l</span> <span class="p">=&gt;</span> <span class="o">/^</span><span class="err">\</span><span class="nx">s</span><span class="o">*</span><span class="err">\</span><span class="nx">d</span><span class="o">+</span><span class="err">\</span><span class="p">.</span><span class="o">/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">l</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">d</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">((</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()</span> <span class="o">-</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">getFullYear</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="o">/</span> <span class="mi">86400000</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">poemLines</span><span class="p">[</span><span class="nx">d</span> <span class="o">%</span> <span class="nx">poemLines</span><span class="p">.</span><span class="nx">length</span><span class="p">].</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^\s*\d+\.\s*/</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">trim</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="问候语按时间段切换">问候语按时间段切换
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>时间段</th>
+					<th>问候</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>7:00–8:59</td>
+					<td>👋 早上好</td>
+			</tr>
+			<tr>
+					<td>9:00–10:59</td>
+					<td>👋 上午好</td>
+			</tr>
+			<tr>
+					<td>11:00–12:59</td>
+					<td>👋 中午好</td>
+			</tr>
+			<tr>
+					<td>13:00–16:59</td>
+					<td>👋 下午好</td>
+			</tr>
+			<tr>
+					<td>17:00–22:59</td>
+					<td>👋 晚上好</td>
+			</tr>
+			<tr>
+					<td>23:00–6:59</td>
+					<td>👋 夜深了，早点休息吧</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="用户名自动读取">用户名自动读取
+</h3><p>从 vault 路径 <code>C:\Users\{userName}\...</code> 提取，不硬编码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">userName</span> <span class="o">=</span> <span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">vault</span><span class="p">.</span><span class="nx">adapter</span><span class="p">.</span><span class="nx">basePath</span> <span class="o">||</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="sr">/[\\/]Users[\\/]([^\\/]+)/</span><span class="p">)</span><span class="o">?</span><span class="p">.[</span><span class="mi">1</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="metaclaudemd-的演变">meta/CLAUDE.md 的演变
+</h3><p>从一个简单规则文件逐步演变成完整的工作手册：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>版本</th>
+					<th>新增内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>v1</td>
+					<td>Web Clipper 分类规则</td>
+			</tr>
+			<tr>
+					<td>v2</td>
+					<td>merge 外部 CLAUDE.md（Ingest / Query / Lint 三大触发行为）</td>
+			</tr>
+			<tr>
+					<td>v3</td>
+					<td>唤醒自动检查（哈喽/hello 触发）</td>
+			</tr>
+			<tr>
+					<td>v4</td>
+					<td>图片管理规则（命名、分类、外链处理）</td>
+			</tr>
+			<tr>
+					<td>v5</td>
+					<td>Frontmatter 规范（created / published）</td>
+			</tr>
+			<tr>
+					<td>v6</td>
+					<td>精简冗余规则，保留核心流程</td>
+			</tr>
+			<tr>
+					<td>v7</td>
+					<td>log.md 改为新条目插最前面</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="frontmatter-规范">Frontmatter 规范
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">页面标题</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">主分类, 子分类]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">created</span><span class="p">:</span><span class="w"> </span><span class="ld">2026-07-04</span><span class="w">       </span><span class="c"># 我在 wiki 建页日期</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">published</span><span class="p">:</span><span class="w"> </span><span class="ld">2024-06-21</span><span class="w">     </span><span class="c"># 原始资料发布日期（有时效性内容必填）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">sources</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="l">raw/主题/来源文件名.md</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="assets-目录建立">assets/ 目录建立
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">assets/
+</span></span><span class="line"><span class="cl">├── it-tech/       ← IT 技术配图
+</span></span><span class="line"><span class="cl">├── finance/       ← 理财配图
+</span></span><span class="line"><span class="cl">└── reading/       ← 阅读配图
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>不按页面类型细分，一张图可能被多处引用。</p>
+<h3 id="命名规范">命名规范
+</h3><p>格式：<code>文章缩写-编号.扩展名</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">xbi-analysis-01.webp
+</span></span><span class="line"><span class="cl">xbi-analysis-02.webp
+</span></span><span class="line"><span class="cl">xbi-analysis-03.webp
+</span></span><span class="line"><span class="cl">xbi-analysis-04.png
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="图片管理流程">图片管理流程
+</h3><ol>
+<li>Web Clipper 剪藏后按 <code>Ctrl+Shift+D</code> 下载附件到 <code>assets/</code></li>
+<li>Ingest 时检查外链图片，提示下载到本地</li>
+<li>散落的图片移入对应主题子目录</li>
+<li>引用路径统一为 <code>![assets/主题/xxx.png](assets/主题/xxx.png.md)</code></li>
+</ol>
+<h3 id="初始化目录结构">初始化目录结构
+</h3><blockquote>
+<p><strong>你：</strong> 阅读Karpathy wiki 方法论，帮我把仓库里的wiki文件夹的结构给建立起来</p>
+</blockquote>
+<h3 id="灌入第一篇资料">灌入第一篇资料
+</h3><blockquote>
+<p><strong>你：</strong> ingest</p>
+</blockquote>
+<h3 id="搭建仪表盘">搭建仪表盘
+</h3><blockquote>
+<p><strong>你：</strong> 我想调整obsidian的面板，更美观，更能展现我的wiki</p>
+<p><strong>你：</strong> 我希望有一个切换深色/浅色主题的按钮</p>
+<p><strong>你：</strong> 仪表盘能加上每天展示一行诗句，从诗词歌赋.md读取</p>
+</blockquote>
+<h3 id="日常-ingest">日常 Ingest
+</h3><blockquote>
+<p><strong>你：</strong> ingest</p>
+</blockquote>
+<h3 id="健康检查">健康检查
+</h3><blockquote>
+<p><strong>你：</strong> 检查一下wiki是否搭建完善，做一轮健康检查</p>
+</blockquote>
+<h3 id="添加自定义规则">添加自定义规则
+</h3><blockquote>
+<p><strong>你：</strong> 我使用Obsidian Web Clipper，网页笔记会直接放到raw/，你更新的时候把源笔记也在raw里面分类一下，写成一条规则到meta/CLAUDE.md</p>
+</blockquote>
+<h3 id="唤醒自动检查">唤醒自动检查
+</h3><blockquote>
+<p><strong>你：</strong> 哈喽</p>
+</blockquote>
+<h3 id="查询知识库">查询知识库
+</h3><blockquote>
+<p><strong>你：</strong> 我想查询一下为什么房价会跌</p>
+</blockquote>
+<hr>
+<h2 id="拓展">拓展
+</h2><p>（留空，按需补充）</p>
+<hr>
+<h2 id="附录">附录
+</h2><h3 id="参考文章">参考文章
+</h3><ul>
+<li>[raw/it-tech/Karpathy wiki 方法论](raw/it-tech/Karpathy wiki 方法论.md) — Karpathy LLM Wiki 方法论（原始 gist）</li>
+<li><a class="link" href="meta/CLAUDE.md" >meta/CLAUDE</a> — AI 工作规则完整版</li>
+<li><a class="link" href="wiki/it-tech/concepts/llm-wiki-methodology.md" >wiki/it-tech/concepts/llm-wiki-methodology</a> — LLM Wiki 方法论概念页</li>
+<li><a class="link" href="wiki/it-tech/entities/karpathy-wiki.md" >wiki/it-tech/entities/karpathy-wiki</a> — Karpathy&rsquo;s LLM Wiki 实体页</li>
+<li><a class="link" href="wiki/it-tech/notes/obsidian-ai-knowledge-base-guide.md" >wiki/it-tech/notes/obsidian-ai-knowledge-base-guide</a> — Obsidian + Claude AI 搭建指南（第三方）</li>
+<li><a class="link" href="https://my.feishu.cn/wiki/LLtjwi38FiuWvKkgfPYcWiGFnab"  target="_blank" rel="noopener"
+    >Karpathy AI+Obsidian 知识库教程 - 栗氪聊AI</a> — 飞书文档（第三方）</li>
+<li><a class="link" href="https://github.com/helloianneo/obsidian-ai-second-brain"  target="_blank" rel="noopener"
+    >helloianneo/obsidian-ai-second-brain</a> — CLAUDE.md 模板参考</li>
+</ul>
+<h3 id="版权信息">版权信息
+</h3><blockquote>
+<p>本文原载于 Ray&rsquo;s Wiki，请遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。</p>
+</blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/obsidian/">Obsidian</a>
+        
+            <a href="/tags/wiki/">Wiki</a>
+        
+    </section>
+
+    
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>根据CC BY-NC-SA 4.0协议授权，转载请在留言板告知🔔</span>
+    </section>
+    <div>
+            <section class="article-lastmod">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z" /></svg>
+                    <time class="article-lastmod">
+                        最后更新于 2026-07-04 20:22</time>
+            </section>
+        </div></footer>
+
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/">
+        
+        
+            <div class="article-image">
+                <img src="/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/cover.6a116deb2d7c877da897835890e75137_hu_be21fa37db6b5854.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Obsidian &#43; GitHub &#43; Hugo 博客发布工作流"
+                        data-key="2026-07-04-Obsidian-GitHub-Hugo-博客发布工作流" 
+                        data-hash="md5-ahFt6y18h32ol4NYkOdRNw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Obsidian &#43; GitHub &#43; Hugo 博客发布工作流</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/powershell-profile-%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/">
+        
+        
+            <div class="article-image">
+                <img src="/p/powershell-profile-%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/maxresdefault.07d33dc2e9aa6fc8c1613ce20e3eff43_hu_849fef1599b39fcb.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PowerShell $PROFILE 实用手册"
+                        data-key="PowerShell-PROFILE-实用手册" 
+                        data-hash="md5-B9M9wumqb8jBYTziDj7/Qw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PowerShell $PROFILE 实用手册</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/app%E6%8A%93%E5%8C%85%E4%B9%8B-burpsuite-mumu%E6%A8%A1%E6%8B%9F%E5%99%A812%E6%8A%93%E5%8C%85/">
+        
+        
+            <div class="article-image">
+                <img src="/p/app%E6%8A%93%E5%8C%85%E4%B9%8B-burpsuite-mumu%E6%A8%A1%E6%8B%9F%E5%99%A812%E6%8A%93%E5%8C%85/bp&#43;mumu.96deed941e65041bf50bfa0613f9a286_hu_6b5506dc499b374c.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post APP抓包之 Burpsuite&#43;MuMu模拟器12抓包"
+                        data-key="APP抓包之 Burpsuite&#43;MuMu模拟器12抓包" 
+                        data-hash="md5-lt7tlB5lBBv1C/oGE/mihg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">APP抓包之 Burpsuite&#43;MuMu模拟器12抓包</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/">
+        
+        
+            <div class="article-image">
+                <img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/gns3.67b3be06ff1052d90046b29260caca6f_hu_8b0f13ce9a3b7c02.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post GNS3懒人版-2.2.45安装部署详细教程"
+                        data-key="GNS3懒人版-2.2.45安装部署详细教程" 
+                        data-hash="md5-Z7O&#43;Bv8QUtkARrKSYMrKbw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">GNS3懒人版-2.2.45安装部署详细教程</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/">
+        
+        
+            <div class="article-image">
+                <img src="/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/icipie.a033ad6466af6169cda29396add266da_hu_66fc20d42c1883a6.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 【HCIA 路由与交换 Wakin 谢Sir】TCP/IP网络模型"
+                        data-key="【HCIA 路由与交换 Wakin 谢Sir】TCP/IP网络模型" 
+                        data-hash="md5-oDOtZGavYWnNopOWrdJm2g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【HCIA 路由与交换 Wakin 谢Sir】TCP/IP网络模型</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="Ranch007/Message-Boards"
+    data-repo-id="R_kgDONBh4yw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDONBh4y84CjbwV"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Ranch&#39;s Blog
+    </section>
+
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script language="javascript"> 
+        var now = new Date();
+        function createtime(){
+            
+            now.setTime(now.getTime() + 250);
+            var grt = new Date("2024/10/15 00:00:00"); 
+            var days = (now - grt) / 1000 / 60 / 60 / 24;
+            var dnum = Math.floor(days);
+            var hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+            var hnum = Math.floor(hours);
+            if (String(hnum).length == 1) {
+                hnum = "0" + hnum;
+            }
+            var minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+            var mnum = Math.floor(minutes);
+            if (String(mnum).length == 1) {
+                mnum = "0" + mnum;
+            }
+            var seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            var snum = Math.round(seconds);
+            if (String(snum).length == 1) {
+                snum = "0" + snum;
+            }
+    
+            document.getElementById("timeDate").innerHTML = `本站已稳定运行<span style="color: lightblue;">${dnum}</span> 天`;
+            document.getElementById("timeDate").style.color = "gray"; 
+            document.getElementById("times").innerHTML = `<span style="color: lightblue;">${hnum}</span> 小时 <span style="color: lightblue;">${mnum}</span> 分 <span style="color: lightblue;">${snum}</span> 秒`;
+            document.getElementById("times").style.color = "gray"; 
+        }
+        setInterval(createtime, 250); 
+    </script>
+
+    
+    <section class="powerby">
+        
+            🤝本博客仅用于记录个人学习和成长。所有内容仅为个人观点，不代表任何团体或组织的立场。如有疑问，欢迎联系！ <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.27.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+
+</footer>
+
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script src="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.css" crossorigin="anonymous" />
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+
+    </body>
+</html>

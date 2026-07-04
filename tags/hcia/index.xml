@@ -1,0 +1,1234 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>HCIA on Ranch&#39;s Blog</title>
+        <link>http://ranch007.github.io/tags/hcia/</link>
+        <description>Recent content in HCIA on Ranch&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Ranch&#39;s Blog</copyright><atom:link href="http://ranch007.github.io/tags/hcia/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>【HCIA 路由与交换 Wakin 谢Sir】TCP/IP网络模型</title>
+        <link>http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/</link>
+        <pubDate>Mon, 11 Nov 2024 22:05:23 +0800</pubDate>
+        
+        <guid>http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/</guid>
+        <description>&lt;img src="http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/icipie.png" alt="Featured image of post 【HCIA 路由与交换 Wakin 谢Sir】TCP/IP网络模型" /&gt;&lt;hr&gt;
+&lt;h2 id=&#34;tcpip网络模型&#34;&gt;TCP/IP网络模型
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;TCP/IP模型是互联网的基础，它是一系列网络协议的总称。这些协议可以划分为四层，分别为链路层、网络层、传输层和应用层。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;链路层：负责封装和解封装IP报文，发送和接受ARP/RARP报文等。&lt;/li&gt;
+&lt;li&gt;网络层：负责路由以及把分组报文发送给目标网络或主机。&lt;/li&gt;
+&lt;li&gt;传输层：负责对报文进行分组和重组，并以TCP或UDP协议格式封装报文。&lt;/li&gt;
+&lt;li&gt;应用层：负责向用户提供应用程序，比如HTTP、FTP、Telnet、DNS、SMTP等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在网络体系结构中网络通信的建立必须是在通信双方的对等层进行，不能交错。 在整个数据传输过程中，数据在发送端时经过各层时都要附加上相应层的协议头和协议尾（仅数据链路层需要封装协议尾）部分，也就是要对数据进行协议封装，以标识对应层所用的通信协议。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th style=&#34;text-align: center&#34;&gt;&lt;font color=&#34;#ffff00&#34;&gt;TCP/IP模型&lt;/font&gt;&lt;/th&gt;
+					&lt;th style=&#34;text-align: center&#34;&gt;&lt;/th&gt;
+					&lt;th style=&#34;text-align: center&#34;&gt;&lt;font color=&#34;#ffff00&#34;&gt;OSI模型&lt;/font&gt;&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;应&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;为应用程序提供网络服务&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;应用层&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;用&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;数据格式化，加密、解密&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;表示层&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;层&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;建立、维护、管理会话连接&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;会话层&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;传输层&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;建立、维护、管理端到端连接&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;传输层&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;网络层&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;IP寻址和路由选择&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;网络层&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;数据链路层&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;控制网络层与物理层之间的通信&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;数据链路层&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;物理层&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;比特流传输&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;物理层&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;应用层-data-数据&#34;&gt;应用层 （Data 数据）
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;应用层：Application Layer
+为应用软件提供接口，使应用程序能够使用网络服务。&lt;/p&gt;
+&lt;p&gt;应用层协议指定相应的传输层协议，以及传输层所使用的端口等&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240823222745085.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;493&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;应用层协议指定相应的传输层协议，以及传输层所使用的端口等&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;243&#34;
+		data-flex-basis=&#34;584px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825092901628.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;530&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;应用层&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;226&#34;
+		data-flex-basis=&#34;543px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;dns&#34;&gt;DNS
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;Domain Name System，域名解析系统
+Port：53（TCP &amp;amp; UDP）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825093242520.png&#34;
+	width=&#34;1001&#34;
+	height=&#34;365&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;DNS，域名解析系统&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;274&#34;
+		data-flex-basis=&#34;658px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825093316148.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;583&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;域名的结构&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;205&#34;
+		data-flex-basis=&#34;493px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-powershell&#34; data-lang=&#34;powershell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;nslookup&lt;/span&gt;    &lt;span class=&#34;c&#34;&gt;#DNS调试工具&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ipconfig&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;displaydns&lt;/span&gt;    &lt;span class=&#34;c&#34;&gt;#查看DNS缓存&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ipconfig&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;flushdns&lt;/span&gt;    &lt;span class=&#34;c&#34;&gt;#清空DNS缓存&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825093946418.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;559&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;DNS查询过程&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;214&#34;
+		data-flex-basis=&#34;515px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825094250753.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;605&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;DNS查询过程&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;198&#34;
+		data-flex-basis=&#34;476px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;http--https&#34;&gt;HTTP &amp;amp; HTTPS
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;Hypertext Transfer Protocol(Secure)，超文本传输（安全）协议
+HTTP Port：80（TCP）
+HTTPS Port：443（TCP,SSL）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825094358706.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;333&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;HTTP &amp; HTTPS，超文本传输（安全）协议&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;360&#34;
+		data-flex-basis=&#34;864px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;telnet--ssh&#34;&gt;Telnet &amp;amp; SSH
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;远程管理服务
+Telnet Port：23（TCP）
+SSH Port：22（TCP）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825094740754.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;366&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;远程管理服务&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;327&#34;
+		data-flex-basis=&#34;786px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;ftp--tftp&#34;&gt;FTP &amp;amp; TFTP
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;File Transfer Protocol，文件传输协议；&lt;br&gt;
+FTP Port：20（FTP-Data，TCP）21（FTP-Control，TCP）&lt;/p&gt;
+&lt;p&gt;Trivial File Transfer Protoco，简单传输协议&lt;br&gt;
+TFTP Port：69（UDP）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825095845042.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;462&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;File Transfer Protocol，文件传输协议&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;259&#34;
+		data-flex-basis=&#34;623px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;传输层-segment-段&#34;&gt;传输层 （Segment 段）
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;建立“&lt;strong&gt;端到端&lt;/strong&gt;”（&lt;strong&gt;Port to Port&lt;/strong&gt;）的连接。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111225124233.png&#34;
+	width=&#34;1072&#34;
+	height=&#34;578&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;传输层：建立“端到端”（Port to Port）的连接 &#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;185&#34;
+		data-flex-basis=&#34;445px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;port&#34;&gt;Port
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;端口号，区分不同的网络服务（应用层协议）&lt;/p&gt;
+&lt;p&gt;【&lt;a class=&#34;link&#34; href=&#34;https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.xhtml&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;服务名称和传输协议端口号注册表&lt;/a&gt;】&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111222504052.png&#34;
+	width=&#34;1130&#34;
+	height=&#34;578&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;端口号，区分不同的网络服务（应用层协议）&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;195&#34;
+		data-flex-basis=&#34;469px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;tcp--udp&#34;&gt;TCP &amp;amp; UDP
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825101704921.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;420&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;传输层协议&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;285&#34;
+		data-flex-basis=&#34;685px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111225207249.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;406&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;TCP和UDP的对比&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;295&#34;
+		data-flex-basis=&#34;709px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111225334694.png&#34;
+	width=&#34;1184&#34;
+	height=&#34;568&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;TCP和UDP数据包结构对比&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;208&#34;
+		data-flex-basis=&#34;500px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;tcp&#34;&gt;TCP
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111225751135.png&#34;
+	width=&#34;1093&#34;
+	height=&#34;569&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;TCP会话的建立-三次握手：任何基于TCP的应用，发送数据前都需要先建立连接。&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;192&#34;
+		data-flex-basis=&#34;461px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825103358926.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;659&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;TCP的确认和重传：保证数据传输的可靠性&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;182&#34;
+		data-flex-basis=&#34;437px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825103452945.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;720&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;TCP的窗口滑动机制：控制数据的传输速率&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;166&#34;
+		data-flex-basis=&#34;400px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825103554359.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;654&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;TCP会话的关闭-四次挥手：断开连接，释放资源&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;183&#34;
+		data-flex-basis=&#34;440px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;udp&#34;&gt;UDP
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825103714402.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;614&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;不可靠的、无连接的服务&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;195&#34;
+		data-flex-basis=&#34;469px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;网络层-packet-包&#34;&gt;网络层 （Packet 包）
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;建立“&lt;strong&gt;点到点&lt;/strong&gt;”（&lt;strong&gt;End to End&lt;/strong&gt;）的连接&lt;/p&gt;
+&lt;p&gt;提供了无连接数据传输服务，即在发送数据报文时不需要先建立连接，每一个IP数据报文独立发送。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111230622250.png&#34;
+	width=&#34;1101&#34;
+	height=&#34;477&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;网络层：建立“点到点”（End to End）的连接&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;230&#34;
+		data-flex-basis=&#34;553px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;ip&#34;&gt;IP
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111230943731.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;356&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IP：Internet Protocol，因特网协议，TCP/IP协议簇中最核心的协议&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;337&#34;
+		data-flex-basis=&#34;808px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;ipv4报文结构&#34;&gt;IPv4报文结构
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825110905153.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;679&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IPv4报文结构&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;176&#34;
+		data-flex-basis=&#34;424px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;ttl&#34;&gt;TTL
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111231239289.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;501&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;TTL：Time to Live,生存时间（类似生命值）&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;239&#34;
+		data-flex-basis=&#34;574px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111231313349.png&#34;
+	width=&#34;917&#34;
+	height=&#34;562&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;路由跟踪：利用TTL特性，可以显示路径上的每一跳，一种非常重要的排错方法&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;163&#34;
+		data-flex-basis=&#34;391px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;protocol&#34;&gt;Protocol
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111231508778.png&#34;
+	width=&#34;998&#34;
+	height=&#34;570&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;协议号：用于标识上层协议&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;175&#34;
+		data-flex-basis=&#34;420px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825112526562.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;472&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;一些常用的协议号&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;254&#34;
+		data-flex-basis=&#34;610px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;ip地址及子网划分&#34;&gt;IP地址及子网划分
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111231829126.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;470&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IP地址：IP Address，用来标识网络中的一个节点或接口，用于寻址&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;255&#34;
+		data-flex-basis=&#34;612px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;ip地址结构&#34;&gt;IP地址结构
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111231951550.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;554&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IP地址结构：由32位二进制（32bits）组成，采用“点分十进制”表示，分4组&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;216&#34;
+		data-flex-basis=&#34;519px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825112924638.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;378&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IP地址关键术语&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;317&#34;
+		data-flex-basis=&#34;761px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825113048636.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;447&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IP地址具体表示&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;268&#34;
+		data-flex-basis=&#34;644px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;ip地址分类&#34;&gt;IP地址分类
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111232254889.png&#34;
+	width=&#34;1189&#34;
+	height=&#34;581&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IP地址分类：根据第一组8位二进制的不同规则定义&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;204&#34;
+		data-flex-basis=&#34;491px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111232447829.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;514&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;默认子网掩码&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;233&#34;
+		data-flex-basis=&#34;560px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825155238877.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;389&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;特殊IP地址及作用&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;308&#34;
+		data-flex-basis=&#34;740px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825155519414.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;270&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;A、B、C类私网地址范围&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;444&#34;
+		data-flex-basis=&#34;1066px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;网络地址主机地址广播地址&#34;&gt;网络地址、主机地址、广播地址
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825155715143.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;122&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;网络地址和广播地址&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;983&#34;
+		data-flex-basis=&#34;2360px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825160146960.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;722&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;网络地址、主机地址、广播地址&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;166&#34;
+		data-flex-basis=&#34;398px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;子网划分&#34;&gt;子网划分
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825160258884.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;742&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;子网划分&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;161&#34;
+		data-flex-basis=&#34;388px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825160334613.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;510&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;子网个数和子网中的可用主机个数&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;235&#34;
+		data-flex-basis=&#34;564px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;快=块（Block）=2^主机位数 =256-掩码&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825160923937.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;631&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;快=块（block）&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;190&#34;
+		data-flex-basis=&#34;456px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;ip地址规划&#34;&gt;IP地址规划
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825161705555.png&#34;
+	width=&#34;897&#34;
+	height=&#34;339&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IP地址规划参考原则&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;264&#34;
+		data-flex-basis=&#34;635px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;icmp&#34;&gt;ICMP
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111233327609.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;500&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ICMP：Internet Control Message Protocol，因特网控制消息协议&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;240&#34;
+		data-flex-basis=&#34;576px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h4 id=&#34;icmp报文结构&#34;&gt;ICMP报文结构
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825161849633.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;257&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ICMP报文结构&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;466&#34;
+		data-flex-basis=&#34;1120px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825161909701.png&#34;
+	width=&#34;1193&#34;
+	height=&#34;801&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;字段类型含义&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;148&#34;
+		data-flex-basis=&#34;357px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th style=&#34;text-align: center&#34;&gt;情况&lt;/th&gt;
+					&lt;th style=&#34;text-align: center&#34;&gt;说明&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;超时&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;对方主机不在线、屏蔽、网络拥塞等&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;传输失败&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;地址无效、主机本身没有路由&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;无法访问&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;无法访问目标网、中转设备没有路由、没有获取MAC地址&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;数据链路层-frame-帧&#34;&gt;数据链路层 （Frame 帧）
+&lt;/h2&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111233648839.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;523&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;数据链路层&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;229&#34;
+		data-flex-basis=&#34;550px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;以太网&#34;&gt;以太网
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;Ethernet：当今主导地位的“局域网组网技术”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;以太网帧结构&#34;&gt;以太网帧结构
+&lt;/h4&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111233749182.png&#34;
+	width=&#34;966&#34;
+	height=&#34;583&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;以太网帧结构&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;165&#34;
+		data-flex-basis=&#34;397px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/20240825163647.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;402&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;五种字段&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;298&#34;
+		data-flex-basis=&#34;716px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;mac地址&#34;&gt;MAC地址
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825163947682.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;270&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;MAC地址结构，全球唯一&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;444&#34;
+		data-flex-basis=&#34;1066px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111234136563.png&#34;
+	width=&#34;1034&#34;
+	height=&#34;582&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;MAC地址与IP地址的关系&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;177&#34;
+		data-flex-basis=&#34;426px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;arp协议&#34;&gt;ARP协议
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111234318338.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;355&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ARP：Address Resolution Protocol，地址解析协议&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;338&#34;
+		data-flex-basis=&#34;811px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825164432653.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;577&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ARP工作流程&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;207&#34;
+		data-flex-basis=&#34;499px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825164628957.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;658&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;免费ARP：用来检测IP地址是否冲突&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;182&#34;
+		data-flex-basis=&#34;437px&#34;
+	
+&gt;‘&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20240825164917444.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;563&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;代理ARP：可以帮助同一网段，不同物理网络上的计算机之间实现通信&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;213&#34;
+		data-flex-basis=&#34;511px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/file-20241111141851616.png&#34;
+	width=&#34;1082&#34;
+	height=&#34;665&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;ARP欺骗：攻击者发送“无故ARP响应”来伪装其它设备，导致通讯失败&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;162&#34;
+		data-flex-basis=&#34;390px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/assets/image-20241111235025076.png&#34;
+	width=&#34;890&#34;
+	height=&#34;298&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;使用科来更改ARP数据包&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;298&#34;
+		data-flex-basis=&#34;716px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;附录&#34;&gt;附录
+&lt;/h2&gt;&lt;h3 id=&#34;参考文献&#34;&gt;参考文献
+&lt;/h3&gt;&lt;p&gt;《&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1qP4y1w75v/?spm_id_from=333.999.0.0&amp;amp;vd_source=00d49c6b1d7b58728495868451fb3d19&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Wakin 谢Sir 最新数通精品课程_哔哩哔哩_bilibili&lt;/a&gt;》&lt;/p&gt;
+&lt;p&gt;《&lt;a class=&#34;link&#34; href=&#34;https://tonydeng.github.io/sdn-handbook/basic/tcpip.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;TCP/IP网络模型 · GitBook (tonydeng.github.io)&lt;/a&gt;》&lt;/p&gt;
+&lt;h3 id=&#34;版权信息&#34;&gt;版权信息
+&lt;/h3&gt;&lt;p&gt;本文原载于 &lt;a class=&#34;link&#34; href=&#34;https://ranch007.github.io&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Ranch&amp;rsquo;s Blog&lt;/a&gt;，遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>【HCIA 路由与交换 Wakin 谢Sir】数通网络基础</title>
+        <link>http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sir%E6%95%B0%E9%80%9A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</link>
+        <pubDate>Mon, 11 Nov 2024 21:06:03 +0800</pubDate>
+        
+        <guid>http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sir%E6%95%B0%E9%80%9A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/</guid>
+        <description>&lt;img src="http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sir%E6%95%B0%E9%80%9A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/icipie.png" alt="Featured image of post 【HCIA 路由与交换 Wakin 谢Sir】数通网络基础" /&gt;&lt;hr&gt;
+&lt;h2 id=&#34;数通基础&#34;&gt;数通基础
+&lt;/h2&gt;&lt;h3 id=&#34;什么是网络&#34;&gt;什么是网络？
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;网络的本质就是&lt;strong&gt;实现资源共享&lt;/strong&gt;
+将各个系统连接到一起，形成信息传递、接收、共享的信息交互平台&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;万物互联&#34;&gt;万物互联
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;人与人、人与物、物与物的互联
+本质是数据的联结与计算&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;数通是连结万物的管道&#34;&gt;数通是连结万物的“管道”
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sir%E6%95%B0%E9%80%9A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/assets/file-20240823213457760.png&#34;
+	width=&#34;871&#34;
+	height=&#34;190&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;file-20240823213457760&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;458&#34;
+		data-flex-basis=&#34;1100px&#34;
+	
+&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sir%E6%95%B0%E9%80%9A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/assets/file-20240823213857734.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;338&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;file-20240823213857734&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;355&#34;
+		data-flex-basis=&#34;852px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;数通网络介绍&#34;&gt;数通网络介绍
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Data Communication Network&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;一个典型的数通网络通常由&lt;font color=&#34;#4f81bd&#34;&gt;路由器&lt;/font&gt;、&lt;font color=&#34;#f79646&#34;&gt;交换机&lt;/font&gt;、&lt;font color=&#34;#c0504d&#34;&gt;防火墙&lt;/font&gt;、&lt;font color=&#34;#8064a2&#34;&gt;无线控制器&lt;/font&gt;、&lt;font color=&#34;#4bacc6&#34;&gt;无线接入点&lt;/font&gt;、个人电脑、网络打印机、服务器等设备构成的通信网络，最基本的功能就是&lt;strong&gt;实现数据互通&lt;/strong&gt;。
+而&lt;strong&gt;网络拓扑图&lt;/strong&gt;就是呈现一个数通网路的结构化布局。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;信息的传递&#34;&gt;信息的传递
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sir%E6%95%B0%E9%80%9A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/assets/file-20240823220627605.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;219&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;file-20240823220627605&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;547&#34;
+		data-flex-basis=&#34;1315px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sir%E6%95%B0%E9%80%9A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/assets/file-20240823220753114.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;669&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;file-20240823220753114&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;179&#34;
+		data-flex-basis=&#34;430px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h5 id=&#34;带宽bandwidth&#34;&gt;带宽：bandwidth
+&lt;/h5&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;描述在单位时间内传输的数量
+单位：bps（bit per second，比特每秒）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h5 id=&#34;延迟delay&#34;&gt;延迟：delay
+&lt;/h5&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;描述数据传输所经历的时间
+单位：ms（毫秒）&lt;/p&gt;
+&lt;h2 id=&#34;网络基础&#34;&gt;网络基础
+&lt;/h2&gt;&lt;h3 id=&#34;网络模型&#34;&gt;网络模型
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sir%E6%95%B0%E9%80%9A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/assets/file-20240823221112061.png&#34;
+	width=&#34;931&#34;
+	height=&#34;418&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;file-20240823221112061&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;222&#34;
+		data-flex-basis=&#34;534px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th style=&#34;text-align: center&#34;&gt;&lt;font color=&#34;#ffff00&#34;&gt;OSI模型&lt;/font&gt;&lt;/th&gt;
+					&lt;th style=&#34;text-align: center&#34;&gt;作用&lt;/th&gt;
+					&lt;th style=&#34;text-align: center&#34;&gt;&lt;font color=&#34;#ffff00&#34;&gt;TCP/IP模型&lt;/font&gt;&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;应用层&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;为应用程序提供网络服务&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;应&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;表示层&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;数据格式化，加密、解密&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;用&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;会话层&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;建立、维护、管理会话连接&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;层&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;传输层&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;建立、维护、管理端到端连接&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;传输层&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;网络层&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;IP寻址和路由选择&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;网络层&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;数据链路层&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;控制网络层与物理层之间的通信&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;数据链路层&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;物理层&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;比特流传输&lt;/td&gt;
+					&lt;td style=&#34;text-align: center&#34;&gt;物理层&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;网络基础架构&#34;&gt;网络基础架构
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sir%E6%95%B0%E9%80%9A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/assets/file-20240825100304756.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;559&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;file-20240825100304756&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;214&#34;
+		data-flex-basis=&#34;515px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;封装和解封装&#34;&gt;封装和解封装
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;encapsulation &amp;amp; de-encapsulation&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数据发送时，逐层向下，添加相关头部或尾部的过程，称为封装（打包）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sir%E6%95%B0%E9%80%9A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/assets/file-20240823221545828.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;653&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;file-20240823221545828&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;183&#34;
+		data-flex-basis=&#34;441px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数据接收时，逐层向上，拆除相关头部或尾部的过程，称为解封装（拆包）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sir%E6%95%B0%E9%80%9A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/assets/file-20240823221705699.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;621&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;file-20240823221705699&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;193&#34;
+		data-flex-basis=&#34;463px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OSI把每一层数据称为PDU（Protocol Data Unit，协议数据单元）&lt;/li&gt;
+&lt;li&gt;TCP/IP根据不同层分别使用：&lt;font color=&#34;#92d050&#34;&gt;数据（Data）&lt;/font&gt;、&lt;font color=&#34;#92d050&#34;&gt;段（Segment）&lt;/font&gt;、&lt;font color=&#34;#92d050&#34;&gt;包（Packet）&lt;/font&gt;、&lt;font color=&#34;#92d050&#34;&gt;帧（Frame）&lt;/font&gt;、&lt;font color=&#34;#92d050&#34;&gt;位（bit）&lt;/font&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sir%E6%95%B0%E9%80%9A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/assets/file-20240823221822129.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;629&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;file-20240823221822129&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;190&#34;
+		data-flex-basis=&#34;457px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;protocol协议&#34;&gt;Protocol：协议
+&lt;/h3&gt;&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sir%E6%95%B0%E9%80%9A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/assets/file-20240823222054502.png&#34;
+	width=&#34;922&#34;
+	height=&#34;210&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;file-20240823222054502&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;439&#34;
+		data-flex-basis=&#34;1053px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在通信领域中，协议就是用来决定数据的格式和传输的一些规则&lt;/p&gt;
+&lt;p&gt;网络通信中的“语言”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sir%E6%95%B0%E9%80%9A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/assets/file-20240823222141724.png&#34;
+	width=&#34;1200&#34;
+	height=&#34;543&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;file-20240823222141724&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;220&#34;
+		data-flex-basis=&#34;530px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://ranch007.github.io/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sir%E6%95%B0%E9%80%9A%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/assets/file-20240825112304112.png&#34;
+	width=&#34;1056&#34;
+	height=&#34;531&#34;
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;file-20240825112304112&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;198&#34;
+		data-flex-basis=&#34;477px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;【&lt;a class=&#34;link&#34; href=&#34;https://support.huawei.com/hedex/hdx.do?docid=EDOC1000105967&amp;amp;id=ZH-CN_CONCEPT_0000001501534705&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;华为官网公布的协议地图&lt;/a&gt;】&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;附录&#34;&gt;附录
+&lt;/h2&gt;&lt;h3 id=&#34;参考文献&#34;&gt;参考文献
+&lt;/h3&gt;&lt;p&gt;《&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1qP4y1w75v/?spm_id_from=333.999.0.0&amp;amp;vd_source=00d49c6b1d7b58728495868451fb3d19&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Wakin 谢Sir 最新数通精品课程_哔哩哔哩_bilibili&lt;/a&gt;》&lt;/p&gt;
+&lt;h3 id=&#34;版权信息&#34;&gt;版权信息
+&lt;/h3&gt;&lt;p&gt;本文原载于 &lt;a class=&#34;link&#34; href=&#34;https://ranch007.github.io&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Ranch&amp;rsquo;s Blog&lt;/a&gt;，遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

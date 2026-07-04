@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 前置条件 CPU 虚拟化 修改BIOS设置（VMX/AMD-v） windows 功能 适用于Linux的windows子系统 虚拟机平台 安装 默认 ubuntu 发行版 管理员权限打开 cmd\n1 wsl --install kali-linux --web-download 查看在线发行版 1 wsl --list --online 查看安装的子系统 1 wsl --list -v 如果 windows下 sublinux 安装出现“不能访问网络位置+有关网络排除故障的信息”\n">
+<title>超详细的wsl2教程：windows上的linux子系统</title>
+
+<link rel='canonical' href='http://ranch007.github.io/p/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84wsl2%E6%95%99%E7%A8%8Bwindows%E4%B8%8A%E7%9A%84linux%E5%AD%90%E7%B3%BB%E7%BB%9F/'>
+
+<link rel="stylesheet" href="/scss/style.min.4dd5c05f7d951cb9f11c52fd8df2136a7affc98c428b6152d7519788cd1ab5dd.css"><meta property='og:title' content="超详细的wsl2教程：windows上的linux子系统">
+<meta property='og:description' content=" 前置条件 CPU 虚拟化 修改BIOS设置（VMX/AMD-v） windows 功能 适用于Linux的windows子系统 虚拟机平台 安装 默认 ubuntu 发行版 管理员权限打开 cmd\n1 wsl --install kali-linux --web-download 查看在线发行版 1 wsl --list --online 查看安装的子系统 1 wsl --list -v 如果 windows下 sublinux 安装出现“不能访问网络位置+有关网络排除故障的信息”\n">
+<meta property='og:url' content='http://ranch007.github.io/p/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84wsl2%E6%95%99%E7%A8%8Bwindows%E4%B8%8A%E7%9A%84linux%E5%AD%90%E7%B3%BB%E7%BB%9F/'>
+<meta property='og:site_name' content='Ranch&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='环境' /><meta property='article:published_time' content='2024-11-02T21:54:21&#43;08:00'/><meta property='article:modified_time' content='2026-07-04T12:38:17&#43;08:00'/><meta property='og:image' content='http://ranch007.github.io/p/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84wsl2%E6%95%99%E7%A8%8Bwindows%E4%B8%8A%E7%9A%84linux%E5%AD%90%E7%B3%BB%E7%BB%9F/wsl.png' />
+<meta name="twitter:title" content="超详细的wsl2教程：windows上的linux子系统">
+<meta name="twitter:description" content=" 前置条件 CPU 虚拟化 修改BIOS设置（VMX/AMD-v） windows 功能 适用于Linux的windows子系统 虚拟机平台 安装 默认 ubuntu 发行版 管理员权限打开 cmd\n1 wsl --install kali-linux --web-download 查看在线发行版 1 wsl --list --online 查看安装的子系统 1 wsl --list -v 如果 windows下 sublinux 安装出现“不能访问网络位置+有关网络排除故障的信息”\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://ranch007.github.io/p/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84wsl2%E6%95%99%E7%A8%8Bwindows%E4%B8%8A%E7%9A%84linux%E5%AD%90%E7%B3%BB%E7%BB%9F/wsl.png' />
+    <link rel="shortcut icon" href="/favcion.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside
+  class="sidebar left-sidebar sticky "
+>
+  <button
+    class="hamburger hamburger--spin"
+    type="button"
+    id="toggle-menu"
+    aria-label="切换菜单"
+  >
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </button>
+
+  <header>
+     
+    <figure class="site-avatar">
+      <a href="https://github.com/Ranch007">
+        
+        <img
+          src="https://github.com/Ranch007.png"
+          width="300"
+          height="300"
+          class="site-logo"
+          loading="lazy"
+          alt="Avatar"
+        />
+        
+      </a>
+      
+    </figure>
+     
+
+    <div class="site-meta">
+      <h1 class="site-name">
+        <a href="/"><span>Ranch</span></a>
+      </h1>
+      <h2 class="site-description">
+        知是行之始<br />行是知之成
+      </h2>
+    </div>
+  </header><ol class="menu-social">
+    
+    <li>
+      <a
+        href="https://github.com/Ranch007/Ranch007.github.io"
+        target="_blank"
+        
+        title="Ranch&#39;s GitHub"
+        
+        rel="me"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+ 
+      </a>
+    </li>
+    
+    <li>
+      <a
+        href="mailto:zhao11345lin07@163.com"
+        target="_blank"
+        
+        title="Email"
+        
+        rel="me"
+      >
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg> 
+      </a>
+    </li>
+    
+    <li>
+      <a
+        href="/index.xml"
+        target="_blank"
+        
+        title="RSS"
+        
+        rel="me"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+ 
+      </a>
+    </li>
+    
+  </ol><ol class="menu" id="main-menu">
+      
+    <li >
+      <a
+        href="/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+ 
+        <span>主页</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/about/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+ 
+        <span>关于</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/archives/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+ 
+        <span>归档</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/talk/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+ 
+        <span>留言</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/links/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+ 
+        <span>友链</span>
+      </a>
+    </li>
+    
+    <li class="menu-bottom-section">
+      <ol class="menu">
+
+        
+        
+        <li id="dark-mode-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun-high" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" />
+  <path d="M6.343 17.657l-1.414 1.414" />
+  <path d="M6.343 6.343l-1.414 -1.414" />
+  <path d="M17.657 6.343l1.414 -1.414" />
+  <path d="M17.657 17.657l1.414 1.414" />
+  <path d="M4 12h-2" />
+  <path d="M12 4v-2" />
+  <path d="M20 12h2" />
+  <path d="M12 20v2" />
+</svg> <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon-stars" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+  <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+  <path d="M19 11h2m-1 -1v2" />
+</svg>
+          <span>背景模式</span>
+        </li>
+        
+      </ol>
+    </li>
+  </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前置条件">前置条件</a>
+      <ol>
+        <li><a href="#cpu-虚拟化">CPU 虚拟化</a></li>
+        <li><a href="#windows-功能">windows 功能</a></li>
+      </ol>
+    </li>
+    <li><a href="#安装">安装</a>
+      <ol>
+        <li><a href="#默认-ubuntu-发行版">默认 ubuntu 发行版</a></li>
+        <li><a href="#查看在线发行版">查看在线发行版</a></li>
+        <li><a href="#查看安装的子系统">查看安装的子系统</a></li>
+      </ol>
+    </li>
+    <li><a href="#使用">使用</a>
+      <ol>
+        <li><a href="#切换默认子系统">切换默认子系统</a></li>
+        <li><a href="#启动指定的子系统">启动指定的子系统</a></li>
+        <li><a href="#卸载">卸载</a></li>
+        <li><a href="#备份">备份</a></li>
+      </ol>
+    </li>
+    <li><a href="#kali-打开桌面窗口">kali 打开桌面窗口</a>
+      <ol>
+        <li><a href="#wsl2-黑科技">wsl2 黑科技</a>
+          <ol>
+            <li><a href="#wslg">WSLg</a></li>
+            <li><a href="#显卡直通">显卡直通</a></li>
+            <li><a href="#镜像网络模式">镜像网络模式</a></li>
+          </ol>
+        </li>
+        <li><a href="#kali-安装-win-kex">kali 安装 Win-Kex</a>
+          <ol>
+            <li><a href="#窗口模式">窗口模式</a></li>
+            <li><a href="#增强的会话模式">增强的会话模式</a></li>
+            <li><a href="#无缝模式">无缝模式</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#附录">附录</a>
+      <ol>
+        <li><a href="#参考文献">参考文献</a></li>
+        <li><a href="#版权信息">版权信息</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84wsl2%E6%95%99%E7%A8%8Bwindows%E4%B8%8A%E7%9A%84linux%E5%AD%90%E7%B3%BB%E7%BB%9F/">
+                <img src="/p/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84wsl2%E6%95%99%E7%A8%8Bwindows%E4%B8%8A%E7%9A%84linux%E5%AD%90%E7%B3%BB%E7%BB%9F/wsl_hu_4d5b3d4250cff5bc.png"
+                        srcset="/p/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84wsl2%E6%95%99%E7%A8%8Bwindows%E4%B8%8A%E7%9A%84linux%E5%AD%90%E7%B3%BB%E7%BB%9F/wsl_hu_4d5b3d4250cff5bc.png 800w, /p/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84wsl2%E6%95%99%E7%A8%8Bwindows%E4%B8%8A%E7%9A%84linux%E5%AD%90%E7%B3%BB%E7%BB%9F/wsl_hu_10fc859cd0b9b5aa.png 1600w"
+                        width="800" 
+                        height="287" 
+                        loading="lazy"
+                        alt="Featured image of post 超详细的wsl2教程：windows上的linux子系统" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/" style="background-color: #2a9d8f; color: #fff;">
+                网络技术
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84wsl2%E6%95%99%E7%A8%8Bwindows%E4%B8%8A%E7%9A%84linux%E5%AD%90%E7%B3%BB%E7%BB%9F/">超详细的wsl2教程：windows上的linux子系统</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024-11-02</time>
+            </div>
+        
+
+        
+            <div>
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
+                <time class="article-words">
+                    810 字
+                </time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    
+                    阅读时长: 9 分钟
+                </time>
+            </div>
+        <div>
+            <section class="article-lastmod">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z" /></svg>
+                    <time class="article-lastmod">2026-07-04 12:38</time>
+            </section>
+        </div></footer>
+    
+
+    
+</div>
+
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <hr>
+<h2 id="前置条件">前置条件
+</h2><h3 id="cpu-虚拟化">CPU 虚拟化
+</h3><ul>
+<li>修改BIOS设置（VMX/AMD-v）</li>
+</ul>
+<h3 id="windows-功能">windows 功能
+</h3><ul>
+<li>适用于Linux的windows子系统</li>
+<li>虚拟机平台</li>
+</ul>
+<h2 id="安装">安装
+</h2><h3 id="默认-ubuntu-发行版">默认 ubuntu 发行版
+</h3><p>管理员权限打开 cmd</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">wsl --install kali-linux --web-download
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查看在线发行版">查看在线发行版
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">wsl --list --online
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="查看安装的子系统">查看安装的子系统
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">wsl --list -v
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果 windows下 sublinux 安装出现“不能访问网络位置+有关网络排除故障的信息”</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">netsh winsock reset
+</span></span><span class="line"><span class="cl">netsh int ip reset all
+</span></span><span class="line"><span class="cl">netsh winhttp reset proxy
+</span></span><span class="line"><span class="cl">ipconfig /flushdns
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="使用">使用
+</h2><h3 id="切换默认子系统">切换默认子系统
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">wsl --set-default xxx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="启动指定的子系统">启动指定的子系统
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">wsl -d kali-linux
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="卸载">卸载
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">wsl --unregister kali-linux
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="备份">备份
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl"># 导出
+</span></span><span class="line"><span class="cl">wsl --export kali-linux kali.tar
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 导入
+</span></span><span class="line"><span class="cl">wsl --import kali2 D:/wsl C:\Users\admin\Desktop
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="kali-打开桌面窗口">kali 打开桌面窗口
+</h2><h3 id="wsl2-黑科技">wsl2 黑科技
+</h3><h4 id="wslg">WSLg
+</h4><p>允许 Linux 里面带有UI的应用程序，直接以 Windows 窗口的形式打开</p>
+<h4 id="显卡直通">显卡直通
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl"># 查看显卡
+</span></span><span class="line"><span class="cl">nvidia-smi
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84wsl2%E6%95%99%E7%A8%8Bwindows%E4%B8%8A%E7%9A%84linux%E5%AD%90%E7%B3%BB%E7%BB%9F/assets/file-20241012191845536.png"
+	width="720"
+	height="339"
+	
+	loading="lazy"
+	
+		alt="显卡直通示例图"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="212"
+		data-flex-basis="509px"
+	
+></p>
+<h4 id="镜像网络模式">镜像网络模式
+</h4><p>在 <code>C:\Users\xxx</code> 下面创建 <code>.wslconfig</code> 文件</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="o">[</span>wsl2<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">networkingMode</span> <span class="o">=</span> mirrored
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后保存，使用 <code>wsl --shutdown</code> 关闭虚拟机，等 8 秒。</p>
+<h3 id="kali-安装-win-kex">kali 安装 Win-Kex
+</h3><blockquote>
+<p>参考官方文档：【<a class="link" href="https://www.kali.org/docs/wsl/win-kex/"  target="_blank" rel="noopener"
+    >Win-Kex为Kali Linux提供GUI桌面体验</a>】</p>
+<p>win-kex支持以下三种模式</p>
+</blockquote>
+<h4 id="窗口模式">窗口模式
+</h4><blockquote>
+<p>要在支持声音的 Window 模式下启动 Win-KeX，请运行以下任一命令：</p>
+</blockquote>
+<ul>
+<li>Kali WSL 内部：<code>kex --win -s</code></li>
+<li>在 Windows 的命令提示符上：<code>wsl -d kali-linux kex --win -s</code></li>
+</ul>
+<p>有关更多信息，请参阅【 <a class="link" href="https://www.kali.org/docs/wsl/win-kex-win/"  target="_blank" rel="noopener"
+    >Win-KeX 窗口模式使用文档</a>】。</p>
+<h4 id="增强的会话模式">增强的会话模式
+</h4><blockquote>
+<p>要在具有声音支持和 ARM 解决方法的增强会话模式下启动 Win-KeX</p>
+<p>请运行以下任一命令：</p>
+</blockquote>
+<ul>
+<li>Kali WSL 内部：<code>kex --esm --ip -s</code></li>
+<li>在 Windows 的命令提示符上：<code>wsl -d kali-linux kex --esm --ip -s</code></li>
+</ul>
+<p>有关更多信息，请参阅【 <a class="link" href="https://www.kali.org/docs/wsl/win-kex-esm/"  target="_blank" rel="noopener"
+    >Win-KeX 增强型会话模式使用文档</a>】。</p>
+<h4 id="无缝模式">无缝模式
+</h4><p>使用无缝模式（win-kex SL），请在WSL设置里，将网络模式更改为<code>NAT</code></p>
+<p><img src="/p/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84wsl2%E6%95%99%E7%A8%8Bwindows%E4%B8%8A%E7%9A%84linux%E5%AD%90%E7%B3%BB%E7%BB%9F/assets/file-20241012192216372.png"
+	width="1132"
+	height="180"
+	
+	loading="lazy"
+	
+		alt="更改网络模式为NAT"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="628"
+		data-flex-basis="1509px"
+	
+></p>
+<p>进入kali系统，修改<code>/etc/resolv.conf</code>文件里的<code>nameserver</code>，其IP地址与windows中<code>vEthernet (WSL (Hyper-V firewall))</code>IP地址一致。</p>
+<p><img src="/p/%E8%B6%85%E8%AF%A6%E7%BB%86%E7%9A%84wsl2%E6%95%99%E7%A8%8Bwindows%E4%B8%8A%E7%9A%84linux%E5%AD%90%E7%B3%BB%E7%BB%9F/assets/file-20241012192143374.png"
+	width="1115"
+	height="628"
+	
+	loading="lazy"
+	
+		alt="修改vEthernet的IP地址"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="426px"
+	
+></p>
+<blockquote>
+<p>要在具有声音支持的无缝模式下启动 Win-KeX，请运行，运行以下任一：</p>
+</blockquote>
+<ul>
+<li>Kali WSL 内部：<code>kex --sl -s</code></li>
+<li>在 Windows 的命令提示符上：<code>wsl -d kali-linux kex --sl -s</code></li>
+</ul>
+<p>有关更多信息，请参阅【 <a class="link" href="https://www.kali.org/docs/wsl/win-kex-sl/"  target="_blank" rel="noopener"
+    >Win-KeX SL 使用文档</a>】。</p>
+<h2 id="附录">附录
+</h2><h3 id="参考文献">参考文献
+</h3><p>《<a class="link" href="https://archived.mednight4.com/2021/02/08/wsl2-linux-pei-zhi-liu-cheng-chao-xiang-xi-zhi-nan/"  target="_blank" rel="noopener"
+    >WSL2 + linux配置流程超详细指南 | mednight4</a>》</p>
+<h3 id="版权信息">版权信息
+</h3><p>本文原载于 <a class="link" href="https://ranch007.github.io"  target="_blank" rel="noopener"
+    >Ranch&rsquo;s Blog</a>，遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%8E%AF%E5%A2%83/">环境</a>
+        
+    </section>
+
+    
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>根据CC BY-NC-SA 4.0协议授权，转载请在留言板告知🔔</span>
+    </section>
+    <div>
+            <section class="article-lastmod">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z" /></svg>
+                    <time class="article-lastmod">
+                        最后更新于 2026-07-04 12:38</time>
+            </section>
+        </div></footer>
+
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/powershell-profile-%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/">
+        
+        
+            <div class="article-image">
+                <img src="/p/powershell-profile-%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/maxresdefault.07d33dc2e9aa6fc8c1613ce20e3eff43_hu_849fef1599b39fcb.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PowerShell $PROFILE 实用手册"
+                        data-key="PowerShell-PROFILE-实用手册" 
+                        data-hash="md5-B9M9wumqb8jBYTziDj7/Qw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PowerShell $PROFILE 实用手册</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/app%E6%8A%93%E5%8C%85%E4%B9%8B-burpsuite-mumu%E6%A8%A1%E6%8B%9F%E5%99%A812%E6%8A%93%E5%8C%85/">
+        
+        
+            <div class="article-image">
+                <img src="/p/app%E6%8A%93%E5%8C%85%E4%B9%8B-burpsuite-mumu%E6%A8%A1%E6%8B%9F%E5%99%A812%E6%8A%93%E5%8C%85/bp&#43;mumu.96deed941e65041bf50bfa0613f9a286_hu_6b5506dc499b374c.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post APP抓包之 Burpsuite&#43;MuMu模拟器12抓包"
+                        data-key="APP抓包之 Burpsuite&#43;MuMu模拟器12抓包" 
+                        data-hash="md5-lt7tlB5lBBv1C/oGE/mihg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">APP抓包之 Burpsuite&#43;MuMu模拟器12抓包</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/vs-code-%E9%85%8D%E7%BD%AE-c-c-%E7%BC%96%E7%A8%8B%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/">
+        
+        
+            <div class="article-image">
+                <img src="/p/vs-code-%E9%85%8D%E7%BD%AE-c-c-%E7%BC%96%E7%A8%8B%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/c&amp;c&#43;&#43;.01447a751ed47ef631ed238d113564d4_hu_d5467ad760089a77.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post VS Code 配置 C &amp; C&#43;&#43; 编程运行环境"
+                        data-key="VS Code 配置 C &amp; C&#43;&#43; 编程运行环境" 
+                        data-hash="md5-AUR6dR7UfvYx7SONETVk1A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">VS Code 配置 C &amp; C&#43;&#43; 编程运行环境</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%8E%8C%E6%8F%A1-docker%E9%AD%94%E6%B3%95windows-11-%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E5%AE%8C%E7%BE%8E%E5%AE%B9%E5%99%A8%E9%83%A8%E7%BD%B2%E7%BB%88%E6%9E%81%E6%8C%87%E5%8D%97/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%8E%8C%E6%8F%A1-docker%E9%AD%94%E6%B3%95windows-11-%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E5%AE%8C%E7%BE%8E%E5%AE%B9%E5%99%A8%E9%83%A8%E7%BD%B2%E7%BB%88%E6%9E%81%E6%8C%87%E5%8D%97/docker.900df66f4ce406eda1e02d601a8c7ded_hu_c246562c83795608.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 掌握 Docker魔法：Windows 11 平台上的完美容器部署终极指南"
+                        data-key="掌握 Docker魔法：Windows 11 平台上的完美容器部署终极指南" 
+                        data-hash="md5-kA32b0zkBu2h4C1gGox97Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">掌握 Docker魔法：Windows 11 平台上的完美容器部署终极指南</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/">
+        
+        
+            <div class="article-image">
+                <img src="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/jenv-for-windows.357ede4b61378889ebd081ec2b0de94b_hu_fb8c62ad2de1960c.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Win11使用JEnv管理多版本jdk"
+                        data-key="JEnv-for-Windows 安装与配置完全指南" 
+                        data-hash="md5-NX7eS2E3iInr0IHsKw3pSw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Win11使用JEnv管理多版本jdk</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="Ranch007/Message-Boards"
+    data-repo-id="R_kgDONBh4yw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDONBh4y84CjbwV"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Ranch&#39;s Blog
+    </section>
+
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script language="javascript"> 
+        var now = new Date();
+        function createtime(){
+            
+            now.setTime(now.getTime() + 250);
+            var grt = new Date("2024/10/15 00:00:00"); 
+            var days = (now - grt) / 1000 / 60 / 60 / 24;
+            var dnum = Math.floor(days);
+            var hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+            var hnum = Math.floor(hours);
+            if (String(hnum).length == 1) {
+                hnum = "0" + hnum;
+            }
+            var minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+            var mnum = Math.floor(minutes);
+            if (String(mnum).length == 1) {
+                mnum = "0" + mnum;
+            }
+            var seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            var snum = Math.round(seconds);
+            if (String(snum).length == 1) {
+                snum = "0" + snum;
+            }
+    
+            document.getElementById("timeDate").innerHTML = `本站已稳定运行<span style="color: lightblue;">${dnum}</span> 天`;
+            document.getElementById("timeDate").style.color = "gray"; 
+            document.getElementById("times").innerHTML = `<span style="color: lightblue;">${hnum}</span> 小时 <span style="color: lightblue;">${mnum}</span> 分 <span style="color: lightblue;">${snum}</span> 秒`;
+            document.getElementById("times").style.color = "gray"; 
+        }
+        setInterval(createtime, 250); 
+    </script>
+
+    
+    <section class="powerby">
+        
+            🤝本博客仅用于记录个人学习和成长。所有内容仅为个人观点，不代表任何团体或组织的立场。如有疑问，欢迎联系！ <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.27.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+
+</footer>
+
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script src="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.css" crossorigin="anonymous" />
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+
+    </body>
+</html>

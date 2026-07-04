@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" JEnv 介绍 【JEnv-for-Windows】是一个专为Windows系统设计的开源工具，由FelixSelter开发，其核心功能是让开发者能够轻松地在不同版本的Java开发工具包（JDK）之间进行切换。\n">
+<title>Win11使用JEnv管理多版本jdk</title>
+
+<link rel='canonical' href='http://ranch007.github.io/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/'>
+
+<link rel="stylesheet" href="/scss/style.min.4dd5c05f7d951cb9f11c52fd8df2136a7affc98c428b6152d7519788cd1ab5dd.css"><meta property='og:title' content="Win11使用JEnv管理多版本jdk">
+<meta property='og:description' content=" JEnv 介绍 【JEnv-for-Windows】是一个专为Windows系统设计的开源工具，由FelixSelter开发，其核心功能是让开发者能够轻松地在不同版本的Java开发工具包（JDK）之间进行切换。\n">
+<meta property='og:url' content='http://ranch007.github.io/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/'>
+<meta property='og:site_name' content='Ranch&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='windows' /><meta property='article:tag' content='环境' /><meta property='article:published_time' content='2024-10-22T19:37:09&#43;08:00'/><meta property='article:modified_time' content='2026-07-04T12:38:17&#43;08:00'/><meta property='og:image' content='http://ranch007.github.io/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/jenv-for-windows.png' />
+<meta name="twitter:title" content="Win11使用JEnv管理多版本jdk">
+<meta name="twitter:description" content=" JEnv 介绍 【JEnv-for-Windows】是一个专为Windows系统设计的开源工具，由FelixSelter开发，其核心功能是让开发者能够轻松地在不同版本的Java开发工具包（JDK）之间进行切换。\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://ranch007.github.io/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/jenv-for-windows.png' />
+    <link rel="shortcut icon" href="/favcion.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside
+  class="sidebar left-sidebar sticky "
+>
+  <button
+    class="hamburger hamburger--spin"
+    type="button"
+    id="toggle-menu"
+    aria-label="切换菜单"
+  >
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </button>
+
+  <header>
+     
+    <figure class="site-avatar">
+      <a href="https://github.com/Ranch007">
+        
+        <img
+          src="https://github.com/Ranch007.png"
+          width="300"
+          height="300"
+          class="site-logo"
+          loading="lazy"
+          alt="Avatar"
+        />
+        
+      </a>
+      
+    </figure>
+     
+
+    <div class="site-meta">
+      <h1 class="site-name">
+        <a href="/"><span>Ranch</span></a>
+      </h1>
+      <h2 class="site-description">
+        知是行之始<br />行是知之成
+      </h2>
+    </div>
+  </header><ol class="menu-social">
+    
+    <li>
+      <a
+        href="https://github.com/Ranch007/Ranch007.github.io"
+        target="_blank"
+        
+        title="Ranch&#39;s GitHub"
+        
+        rel="me"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+ 
+      </a>
+    </li>
+    
+    <li>
+      <a
+        href="mailto:zhao11345lin07@163.com"
+        target="_blank"
+        
+        title="Email"
+        
+        rel="me"
+      >
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg> 
+      </a>
+    </li>
+    
+    <li>
+      <a
+        href="/index.xml"
+        target="_blank"
+        
+        title="RSS"
+        
+        rel="me"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+ 
+      </a>
+    </li>
+    
+  </ol><ol class="menu" id="main-menu">
+      
+    <li >
+      <a
+        href="/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+ 
+        <span>主页</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/about/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+ 
+        <span>关于</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/archives/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+ 
+        <span>归档</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/talk/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+ 
+        <span>留言</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/links/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+ 
+        <span>友链</span>
+      </a>
+    </li>
+    
+    <li class="menu-bottom-section">
+      <ol class="menu">
+
+        
+        
+        <li id="dark-mode-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun-high" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" />
+  <path d="M6.343 17.657l-1.414 1.414" />
+  <path d="M6.343 6.343l-1.414 -1.414" />
+  <path d="M17.657 6.343l1.414 -1.414" />
+  <path d="M17.657 17.657l1.414 1.414" />
+  <path d="M4 12h-2" />
+  <path d="M12 4v-2" />
+  <path d="M20 12h2" />
+  <path d="M12 20v2" />
+</svg> <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon-stars" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+  <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+  <path d="M19 11h2m-1 -1v2" />
+</svg>
+          <span>背景模式</span>
+        </li>
+        
+      </ol>
+    </li>
+  </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#jenv-介绍">JEnv 介绍</a>
+      <ol>
+        <li><a href="#关键技术和框架">关键技术和框架</a></li>
+        <li><a href="#这是如何运作的呢">这是如何运作的呢？</a></li>
+      </ol>
+    </li>
+    <li><a href="#准备工作和详细安装步骤">准备工作和详细安装步骤</a>
+      <ol>
+        <li><a href="#步骤一下载jdk并配置">步骤一：下载JDK并配置</a>
+          <ol>
+            <li><a href="#安装-jdk">安装 JDK</a></li>
+            <li><a href="#配置环境变量">配置环境变量</a></li>
+          </ol>
+        </li>
+        <li><a href="#步骤二jenv-for-windows项目获取">步骤二：JEnv-for-Windows项目获取</a></li>
+        <li><a href="#步骤三jenv环境准备">步骤三：JEnv环境准备</a>
+          <ol>
+            <li><a href="#删除旧的java_home">删除旧的JAVA_HOME</a></li>
+            <li><a href="#添加jenv到系统路径">添加JEnv到系统路径</a></li>
+          </ol>
+        </li>
+        <li><a href="#步骤四初始化与配置">步骤四：初始化与配置</a>
+          <ol>
+            <li><a href="#首次运行jenv">首次运行JEnv</a></li>
+            <li><a href="#添加java环境">添加JAVA环境</a></li>
+            <li><a href="#步骤五验证">步骤五：验证</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#日常操作及使用方法">日常操作及使用方法</a></li>
+    <li><a href="#附录">附录</a>
+      <ol>
+        <li><a href="#参考文献">参考文献</a></li>
+        <li><a href="#版权信息">版权信息</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/">
+                <img src="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/jenv-for-windows_hu_ddf439cad8de0c75.png"
+                        srcset="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/jenv-for-windows_hu_ddf439cad8de0c75.png 800w, /p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/jenv-for-windows_hu_2c418ab6666a1b6e.png 1600w"
+                        width="800" 
+                        height="300" 
+                        loading="lazy"
+                        alt="Featured image of post Win11使用JEnv管理多版本jdk" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/" style="background-color: #2a9d8f; color: #fff;">
+                网络技术
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/">Win11使用JEnv管理多版本jdk</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024-10-22</time>
+            </div>
+        
+
+        
+            <div>
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
+                <time class="article-words">
+                    1006 字
+                </time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    
+                    阅读时长: 11 分钟
+                </time>
+            </div>
+        <div>
+            <section class="article-lastmod">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z" /></svg>
+                    <time class="article-lastmod">2026-07-04 12:38</time>
+            </section>
+        </div></footer>
+    
+
+    
+</div>
+
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <hr>
+<h2 id="jenv-介绍">JEnv 介绍
+</h2><blockquote>
+<p>【<a class="link" href="https://github.com/FelixSelter/JEnv-for-Windows"  target="_blank" rel="noopener"
+    >JEnv-for-Windows</a>】是一个专为Windows系统设计的开源工具，由FelixSelter开发，其核心功能是让开发者能够轻松地在不同版本的Java开发工具包（JDK）之间进行切换。</p>
+</blockquote>
+<h3 id="关键技术和框架">关键技术和框架
+</h3><ul>
+<li><strong>批处理脚本</strong>：用于创建快捷的Java版本切换逻辑；</li>
+<li><strong>PowerShell脚本</strong>：用于环境变量的动态管理，兼容性增强，以及更高级的操作；</li>
+<li><strong>无需额外依赖</strong>：直接通过环境变量和脚本操作来实现JDK版本的管理。</li>
+</ul>
+<h3 id="这是如何运作的呢">这是如何运作的呢？
+</h3><p><img src="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/assets/file-20241009233551384.png"
+	width="1512"
+	height="567"
+	
+	loading="lazy"
+	
+		alt="JEnv运作原理"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="266"
+		data-flex-basis="640px"
+	
+></p>
+<h2 id="准备工作和详细安装步骤">准备工作和详细安装步骤
+</h2><h3 id="步骤一下载jdk并配置">步骤一：下载JDK并配置
+</h3><h4 id="安装-jdk">安装 JDK
+</h4><ul>
+<li>jdk-1.8</li>
+</ul>
+<p>正常一步一步安装【<a class="link" href="https://www.oracle.com/sg/java/technologies/downloads/#license-lightbox"  target="_blank" rel="noopener"
+    >jdk-8u421-windows-x64.exe</a>】</p>
+<p><img src="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/assets/file-20241009224210707.png"
+	width="1112"
+	height="76"
+	
+	loading="lazy"
+	
+		alt="jdk-8u421-windows-x64.exe"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1463"
+		data-flex-basis="3511px"
+	
+></p>
+<ul>
+<li>jdk-xxx</li>
+</ul>
+<p>将其他版本jdk的.zip压缩包解压到对应文件夹</p>
+<p><img src="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/assets/file-20241009224714318.png"
+	width="678"
+	height="248"
+	
+	loading="lazy"
+	
+		alt="jdk"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="273"
+		data-flex-basis="656px"
+	
+></p>
+<ul>
+<li>最终目录结构可参考：</li>
+</ul>
+<p><img src="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/assets/file-20241009225152579.png"
+	width="250"
+	height="137"
+	
+	loading="lazy"
+	
+		alt="本机java环境变量目录"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="182"
+		data-flex-basis="437px"
+	
+></p>
+<h4 id="配置环境变量">配置环境变量
+</h4><p>①新建系统变量JAVA_HOME，路径为jdk8路径</p>
+<p><img src="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/assets/file-20241009225443108.png"
+	width="651"
+	height="133"
+	
+	loading="lazy"
+	
+		alt="新建JAVA_HOME变量"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="489"
+		data-flex-basis="1174px"
+	
+></p>
+<p>②新建系统变量CLASSPATH，指定类搜索路径</p>
+<p><img src="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/assets/file-20241009225506522.png"
+	width="651"
+	height="133"
+	
+	loading="lazy"
+	
+		alt="新建CLASSPATH变量"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="489"
+		data-flex-basis="1174px"
+	
+></p>
+<p>③系统变量Path中添加对应路径</p>
+<p><img src="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/assets/file-20241010201303811.png"
+	width="390"
+	height="44"
+	
+	loading="lazy"
+	
+		alt="添加path变量"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="886"
+		data-flex-basis="2127px"
+	
+></p>
+<h3 id="步骤二jenv-for-windows项目获取">步骤二：JEnv-for-Windows项目获取
+</h3><p>从GitHub克隆该仓库到本地对应文件夹</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">git clone https://github.com/FelixSelter/JEnv-for-Windows.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="步骤三jenv环境准备">步骤三：JEnv环境准备
+</h3><h4 id="删除旧的java_home">删除旧的JAVA_HOME
+</h4><p><img src="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/assets/file-20241009231943617.png"
+	width="419"
+	height="51"
+	
+	loading="lazy"
+	
+		alt="删除旧的JAVA_HOME"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="821"
+		data-flex-basis="1971px"
+	
+></p>
+<h4 id="添加jenv到系统路径">添加JEnv到系统路径
+</h4><p>将刚克隆的项目路径添加到系统的环境变量Path中，确保可以从任何地方调用jenv.bat脚本。</p>
+<p><img src="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/assets/image-20241022195723635.png"
+	width="625"
+	height="118"
+	
+	loading="lazy"
+	
+		alt="添加JEnv到path"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="529"
+		data-flex-basis="1271px"
+	
+></p>
+<h3 id="步骤四初始化与配置">步骤四：初始化与配置
+</h3><h4 id="首次运行jenv">首次运行JEnv
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">jenv -help
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/assets/image-20241022200117030.png"
+	width="1103"
+	height="277"
+	
+	loading="lazy"
+	
+		alt="JEnv的帮助指南"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="398"
+		data-flex-basis="955px"
+	
+></p>
+<h4 id="添加java环境">添加JAVA环境
+</h4><p>接下来，将其他版本jdk添加到JEnv管理中</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">jenv add jkd8 C:\Environment\Java\jdk-1.8
+</span></span><span class="line"><span class="cl">jenv add jdk17 C:\Environment\Java\jdk-17.0.12
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="步骤五验证">步骤五：验证
+</h4><p>列出jenv管理的所有jdk版本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">jenv list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/assets/file-20241009233230404.png"
+	width="843"
+	height="221"
+	
+	loading="lazy"
+	
+		alt="加入的java环境"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="381"
+		data-flex-basis="915px"
+	
+></p>
+<p>用命令切换jdk版本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">jenv use {name}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/assets/image-20241022200741127.png"
+	width="999"
+	height="248"
+	
+	loading="lazy"
+	
+		alt="jdk8切换到jdk17"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="402"
+		data-flex-basis="966px"
+	
+></p>
+<h2 id="日常操作及使用方法">日常操作及使用方法
+</h2><ol>
+<li>
+<p><strong>添加新的Java环境（需要绝对路径）</strong><br>
+<em>jenv add<code>&lt;name&gt; &lt;path&gt;</code></em><br>
+示例：<code>jenv add jdk15 D:\Programme\Java\jdk-15.0.1</code></p>
+</li>
+<li>
+<p><strong>更改当前会话的 java 版本</strong><br>
+<em>jenv use<code>&lt;name&gt;</code></em><br>
+示例：<code>jenv use jdk15</code><br>
+脚本编写的环境变量：<br>
+&mdash;PowerShell: <code>$ENV:JENVUSE=&quot;jdk17&quot;</code><br>
+&mdash;CMD/BATCH:<code>set &quot;JENVUSE=jdk17&quot;</code></p>
+</li>
+<li>
+<p><strong>清除当前会话的 java 版本</strong><br>
+<em>jenv use remove</em><br>
+示例：<code>jenv use remove</code><br>
+用于脚本编写的环境变量：<br>
+&mdash;PowerShell: <code>$ENV:JENVUSE=$null</code><br>
+&mdash;CMD/BATCH:<code>set &quot;JENVUSE=&quot;</code></p>
+</li>
+<li>
+<p><strong>全局更改您的 java 版本</strong><br>
+<em>jenv change<code>&lt;name&gt;</code></em><br>
+示例：<code>jenv change jdk15</code></p>
+</li>
+<li>
+<p><strong>始终在此文件夹</strong><br>
+<em>jenv local<code>&lt;name&gt;</code></em><br>
+中使用此 java 版本 示例：<code>jenv local jdk15</code></p>
+</li>
+<li>
+<p><strong>清除此文件夹的 java 版本</strong><br>
+<em>jenv local remove</em><br>
+示例：<code>jenv local remove</code></p>
+</li>
+<li>
+<p><strong>列出所有 Java 环境</strong><br>
+<em>jenv list</em><br>
+示例：<code>jenv list</code></p>
+</li>
+<li>
+<p><strong>从 JEnv 列表中删除现有的 JDK</strong><br>
+<em>jenv remove<code>&lt;name&gt;</code></em><br>
+示例：<code>jenv remove jdk15</code></p>
+</li>
+<li>
+<p><strong>允许使用位于 java 目录</strong><br>
+<em>jenv link<code>&lt;Executable name&gt;</code></em><br>
+中的 javac、javaw 或其他可执行文件 示例：<code>jenv link javac</code></p>
+</li>
+<li>
+<p><strong>卸载 jenv 并自动恢复您选择的 Java 版本</strong><br>
+<em>jenv uninstall<code>&lt;name&gt;</code></em><br>
+示例：<code>jenv uninstall jdk17</code></p>
+</li>
+<li>
+<p><strong>自动搜索要添加的 java 版本</strong><br>
+<em>jenv autoscan [&ndash;yes|-y]<code>?&lt;path&gt;?</code></em><br>
+示例：<code>jenv autoscan &quot;C:\Program Files\Java&quot;</code><br>
+示例：<code>jenv autoscan</code>// 将搜索整个系统 示例：<code>jenv autoscan -y &quot;C:\Program Files\Java&quot;</code>// 将接受默认值</p>
+</li>
+</ol>
+<h2 id="附录">附录
+</h2><h3 id="参考文献">参考文献
+</h3><ul>
+<li><a class="link" href="https://blog.csdn.net/gitblog_07878/article/details/142224949?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-4-142224949-blog-132979387.235%5Ev43%5Epc_blog_bottom_relevance_base9&amp;spm=1001.2101.3001.4242.3&amp;utm_relevant_index=7"  target="_blank" rel="noopener"
+    >JEnv-for-Windows 安装与配置完全指南</a></li>
+</ul>
+<h3 id="版权信息">版权信息
+</h3><p>本文原载于 <a class="link" href="https://ranch007.github.io"  target="_blank" rel="noopener"
+    >Ranch&rsquo;s Blog</a>，遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/windows/">Windows</a>
+        
+            <a href="/tags/%E7%8E%AF%E5%A2%83/">环境</a>
+        
+    </section>
+
+    
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>根据CC BY-NC-SA 4.0协议授权，转载请在留言板告知🔔</span>
+    </section>
+    <div>
+            <section class="article-lastmod">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z" /></svg>
+                    <time class="article-lastmod">
+                        最后更新于 2026-07-04 12:38</time>
+            </section>
+        </div></footer>
+
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/powershell-profile-%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/">
+        
+        
+            <div class="article-image">
+                <img src="/p/powershell-profile-%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/maxresdefault.07d33dc2e9aa6fc8c1613ce20e3eff43_hu_849fef1599b39fcb.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PowerShell $PROFILE 实用手册"
+                        data-key="PowerShell-PROFILE-实用手册" 
+                        data-hash="md5-B9M9wumqb8jBYTziDj7/Qw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PowerShell $PROFILE 实用手册</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/app%E6%8A%93%E5%8C%85%E4%B9%8B-burpsuite-mumu%E6%A8%A1%E6%8B%9F%E5%99%A812%E6%8A%93%E5%8C%85/">
+        
+        
+            <div class="article-image">
+                <img src="/p/app%E6%8A%93%E5%8C%85%E4%B9%8B-burpsuite-mumu%E6%A8%A1%E6%8B%9F%E5%99%A812%E6%8A%93%E5%8C%85/bp&#43;mumu.96deed941e65041bf50bfa0613f9a286_hu_6b5506dc499b374c.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post APP抓包之 Burpsuite&#43;MuMu模拟器12抓包"
+                        data-key="APP抓包之 Burpsuite&#43;MuMu模拟器12抓包" 
+                        data-hash="md5-lt7tlB5lBBv1C/oGE/mihg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">APP抓包之 Burpsuite&#43;MuMu模拟器12抓包</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/vs-code-%E9%85%8D%E7%BD%AE-c-c-%E7%BC%96%E7%A8%8B%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/">
+        
+        
+            <div class="article-image">
+                <img src="/p/vs-code-%E9%85%8D%E7%BD%AE-c-c-%E7%BC%96%E7%A8%8B%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83/c&amp;c&#43;&#43;.01447a751ed47ef631ed238d113564d4_hu_d5467ad760089a77.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post VS Code 配置 C &amp; C&#43;&#43; 编程运行环境"
+                        data-key="VS Code 配置 C &amp; C&#43;&#43; 编程运行环境" 
+                        data-hash="md5-AUR6dR7UfvYx7SONETVk1A==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">VS Code 配置 C &amp; C&#43;&#43; 编程运行环境</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E8%BD%AC%E8%BD%BDwindows-%E4%B8%8B%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8-scoop-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E8%BD%AC%E8%BD%BDwindows-%E4%B8%8B%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8-scoop-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/scoop.0df38d3ae5cb10a9fac4264700b881f2_hu_13be66b7504890ce.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 【转载】Windows 下包管理器 Scoop 的安装与使用"
+                        data-key="【转载】Windows 下包管理器 Scoop 的安装与使用" 
+                        data-hash="md5-DfONOuXLEKn6xCZHALiB8g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【转载】Windows 下包管理器 Scoop 的安装与使用</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/%E6%8E%8C%E6%8F%A1-docker%E9%AD%94%E6%B3%95windows-11-%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E5%AE%8C%E7%BE%8E%E5%AE%B9%E5%99%A8%E9%83%A8%E7%BD%B2%E7%BB%88%E6%9E%81%E6%8C%87%E5%8D%97/">
+        
+        
+            <div class="article-image">
+                <img src="/p/%E6%8E%8C%E6%8F%A1-docker%E9%AD%94%E6%B3%95windows-11-%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E5%AE%8C%E7%BE%8E%E5%AE%B9%E5%99%A8%E9%83%A8%E7%BD%B2%E7%BB%88%E6%9E%81%E6%8C%87%E5%8D%97/docker.900df66f4ce406eda1e02d601a8c7ded_hu_c246562c83795608.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 掌握 Docker魔法：Windows 11 平台上的完美容器部署终极指南"
+                        data-key="掌握 Docker魔法：Windows 11 平台上的完美容器部署终极指南" 
+                        data-hash="md5-kA32b0zkBu2h4C1gGox97Q==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">掌握 Docker魔法：Windows 11 平台上的完美容器部署终极指南</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="Ranch007/Message-Boards"
+    data-repo-id="R_kgDONBh4yw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDONBh4y84CjbwV"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Ranch&#39;s Blog
+    </section>
+
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script language="javascript"> 
+        var now = new Date();
+        function createtime(){
+            
+            now.setTime(now.getTime() + 250);
+            var grt = new Date("2024/10/15 00:00:00"); 
+            var days = (now - grt) / 1000 / 60 / 60 / 24;
+            var dnum = Math.floor(days);
+            var hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+            var hnum = Math.floor(hours);
+            if (String(hnum).length == 1) {
+                hnum = "0" + hnum;
+            }
+            var minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+            var mnum = Math.floor(minutes);
+            if (String(mnum).length == 1) {
+                mnum = "0" + mnum;
+            }
+            var seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            var snum = Math.round(seconds);
+            if (String(snum).length == 1) {
+                snum = "0" + snum;
+            }
+    
+            document.getElementById("timeDate").innerHTML = `本站已稳定运行<span style="color: lightblue;">${dnum}</span> 天`;
+            document.getElementById("timeDate").style.color = "gray"; 
+            document.getElementById("times").innerHTML = `<span style="color: lightblue;">${hnum}</span> 小时 <span style="color: lightblue;">${mnum}</span> 分 <span style="color: lightblue;">${snum}</span> 秒`;
+            document.getElementById("times").style.color = "gray"; 
+        }
+        setInterval(createtime, 250); 
+    </script>
+
+    
+    <section class="powerby">
+        
+            🤝本博客仅用于记录个人学习和成长。所有内容仅为个人观点，不代表任何团体或组织的立场。如有疑问，欢迎联系！ <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.27.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+
+</footer>
+
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script src="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.css" crossorigin="anonymous" />
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+
+    </body>
+</html>

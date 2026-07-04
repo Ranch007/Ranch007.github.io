@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 转载自《Windows 下包管理器 Scoop 的安装与使用 - Muxiner&rsquo;s Blog》\n🍉 什么是 Scoop ？ 😶\u200d🌫️ 可以去看【Scoop Github 上的介绍】。\n😶\u200d🌫️ 还有官方文档【Scoop Wiki】w\n😶\u200d🌫️ 官网【https://scoop.sh/】\n">
+<title>【转载】Windows 下包管理器 Scoop 的安装与使用</title>
+
+<link rel='canonical' href='http://ranch007.github.io/p/%E8%BD%AC%E8%BD%BDwindows-%E4%B8%8B%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8-scoop-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/'>
+
+<link rel="stylesheet" href="/scss/style.min.4dd5c05f7d951cb9f11c52fd8df2136a7affc98c428b6152d7519788cd1ab5dd.css"><meta property='og:title' content="【转载】Windows 下包管理器 Scoop 的安装与使用">
+<meta property='og:description' content=" 转载自《Windows 下包管理器 Scoop 的安装与使用 - Muxiner&rsquo;s Blog》\n🍉 什么是 Scoop ？ 😶\u200d🌫️ 可以去看【Scoop Github 上的介绍】。\n😶\u200d🌫️ 还有官方文档【Scoop Wiki】w\n😶\u200d🌫️ 官网【https://scoop.sh/】\n">
+<meta property='og:url' content='http://ranch007.github.io/p/%E8%BD%AC%E8%BD%BDwindows-%E4%B8%8B%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8-scoop-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/'>
+<meta property='og:site_name' content='Ranch&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='windows' /><meta property='article:published_time' content='2024-11-09T20:12:54&#43;08:00'/><meta property='article:modified_time' content='2026-07-04T12:38:17&#43;08:00'/><meta property='og:image' content='http://ranch007.github.io/p/%E8%BD%AC%E8%BD%BDwindows-%E4%B8%8B%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8-scoop-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/scoop.png' />
+<meta name="twitter:title" content="【转载】Windows 下包管理器 Scoop 的安装与使用">
+<meta name="twitter:description" content=" 转载自《Windows 下包管理器 Scoop 的安装与使用 - Muxiner&rsquo;s Blog》\n🍉 什么是 Scoop ？ 😶\u200d🌫️ 可以去看【Scoop Github 上的介绍】。\n😶\u200d🌫️ 还有官方文档【Scoop Wiki】w\n😶\u200d🌫️ 官网【https://scoop.sh/】\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://ranch007.github.io/p/%E8%BD%AC%E8%BD%BDwindows-%E4%B8%8B%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8-scoop-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/scoop.png' />
+    <link rel="shortcut icon" href="/favcion.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside
+  class="sidebar left-sidebar sticky "
+>
+  <button
+    class="hamburger hamburger--spin"
+    type="button"
+    id="toggle-menu"
+    aria-label="切换菜单"
+  >
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </button>
+
+  <header>
+     
+    <figure class="site-avatar">
+      <a href="https://github.com/Ranch007">
+        
+        <img
+          src="https://github.com/Ranch007.png"
+          width="300"
+          height="300"
+          class="site-logo"
+          loading="lazy"
+          alt="Avatar"
+        />
+        
+      </a>
+      
+    </figure>
+     
+
+    <div class="site-meta">
+      <h1 class="site-name">
+        <a href="/"><span>Ranch</span></a>
+      </h1>
+      <h2 class="site-description">
+        知是行之始<br />行是知之成
+      </h2>
+    </div>
+  </header><ol class="menu-social">
+    
+    <li>
+      <a
+        href="https://github.com/Ranch007/Ranch007.github.io"
+        target="_blank"
+        
+        title="Ranch&#39;s GitHub"
+        
+        rel="me"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+ 
+      </a>
+    </li>
+    
+    <li>
+      <a
+        href="mailto:zhao11345lin07@163.com"
+        target="_blank"
+        
+        title="Email"
+        
+        rel="me"
+      >
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg> 
+      </a>
+    </li>
+    
+    <li>
+      <a
+        href="/index.xml"
+        target="_blank"
+        
+        title="RSS"
+        
+        rel="me"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+ 
+      </a>
+    </li>
+    
+  </ol><ol class="menu" id="main-menu">
+      
+    <li >
+      <a
+        href="/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+ 
+        <span>主页</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/about/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+ 
+        <span>关于</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/archives/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+ 
+        <span>归档</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/talk/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+ 
+        <span>留言</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/links/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+ 
+        <span>友链</span>
+      </a>
+    </li>
+    
+    <li class="menu-bottom-section">
+      <ol class="menu">
+
+        
+        
+        <li id="dark-mode-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun-high" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" />
+  <path d="M6.343 17.657l-1.414 1.414" />
+  <path d="M6.343 6.343l-1.414 -1.414" />
+  <path d="M17.657 6.343l1.414 -1.414" />
+  <path d="M17.657 17.657l1.414 1.414" />
+  <path d="M4 12h-2" />
+  <path d="M12 4v-2" />
+  <path d="M20 12h2" />
+  <path d="M12 20v2" />
+</svg> <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon-stars" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+  <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+  <path d="M19 11h2m-1 -1v2" />
+</svg>
+          <span>背景模式</span>
+        </li>
+        
+      </ol>
+    </li>
+  </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#-什么是-scoop-">🍉 什么是 Scoop ？</a></li>
+    <li><a href="#-安装-scoop">🍉 安装 Scoop</a>
+      <ol>
+        <li><a href="#-准备工作">🍊 准备工作</a></li>
+        <li><a href="#-安装在默认位置">🍑 安装在默认位置</a></li>
+        <li><a href="#-自定义全局应用安装目录">🍑 自定义全局应用安装目录</a></li>
+      </ol>
+    </li>
+    <li><a href="#-使用-scoop">🍉 使用 Scoop</a>
+      <ol>
+        <li><a href="#-安装应用">🍒 安装应用</a>
+          <ol>
+            <li><a href="#为当前用户安装">😃为当前用户安装</a></li>
+            <li><a href="#为所有用户安装">😃为所有用户安装</a></li>
+          </ol>
+        </li>
+        <li><a href="#-卸载应用">🍒 卸载应用</a>
+          <ol>
+            <li><a href="#卸载某一程序">😃卸载某一程序</a></li>
+            <li><a href="#卸载程序并移除配置文件">😃卸载程序并移除配置文件</a></li>
+          </ol>
+        </li>
+        <li><a href="#-更新">🍒 更新</a>
+          <ol>
+            <li><a href="#更新-scoop-及所有-bucket-但不更新-app">😃更新 scoop 及所有 bucket 但不更新 app</a></li>
+            <li><a href="#更新某一-app">😃更新某一 app</a></li>
+            <li><a href="#更新-scoopbucketapp">😃更新 scoop、bucket、app</a></li>
+            <li><a href="#更新全局-app">😃更新全局 app</a></li>
+            <li><a href="#更多信息">😃更多信息</a></li>
+          </ol>
+        </li>
+        <li><a href="#-其他有用操作">🍒 其他有用操作</a>
+          <ol>
+            <li><a href="#查看已安装-app">😃查看已安装 app</a></li>
+            <li><a href="#查看可更新-app">😃查看可更新 app</a></li>
+            <li><a href="#查看某-app-主页">😃查看某 app 主页</a></li>
+            <li><a href="#查看已知库">😃查看「已知库」</a></li>
+            <li><a href="#添加已知库">😃添加「已知库」</a></li>
+            <li><a href="#查看已添加的库">😃查看已添加的库</a></li>
+            <li><a href="#删除已添加的库">😃删除已添加的库</a></li>
+            <li><a href="#添加第三方库">😃添加第三方库</a></li>
+            <li><a href="#删除已安装软件的旧版本">😃删除已安装软件的旧版本</a></li>
+            <li><a href="#清理软件缓存">😃清理软件缓存</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#-进阶">🍉 进阶</a></li>
+    <li><a href="#附录">附录</a>
+      <ol>
+        <li><a href="#参考文献">参考文献</a></li>
+        <li><a href="#版权信息">版权信息</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E8%BD%AC%E8%BD%BDwindows-%E4%B8%8B%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8-scoop-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+                <img src="/p/%E8%BD%AC%E8%BD%BDwindows-%E4%B8%8B%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8-scoop-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/scoop_hu_58008903642b5879.png"
+                        srcset="/p/%E8%BD%AC%E8%BD%BDwindows-%E4%B8%8B%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8-scoop-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/scoop_hu_58008903642b5879.png 800w, /p/%E8%BD%AC%E8%BD%BDwindows-%E4%B8%8B%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8-scoop-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/scoop_hu_22d9ced3c0eff80f.png 1600w"
+                        width="800" 
+                        height="450" 
+                        loading="lazy"
+                        alt="Featured image of post 【转载】Windows 下包管理器 Scoop 的安装与使用" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/" style="background-color: #2a9d8f; color: #fff;">
+                网络技术
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E8%BD%AC%E8%BD%BDwindows-%E4%B8%8B%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8-scoop-%E7%9A%84%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">【转载】Windows 下包管理器 Scoop 的安装与使用</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024-11-09</time>
+            </div>
+        
+
+        
+            <div>
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
+                <time class="article-words">
+                    1610 字
+                </time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    
+                    阅读时长: 17 分钟
+                </time>
+            </div>
+        <div>
+            <section class="article-lastmod">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z" /></svg>
+                    <time class="article-lastmod">2026-07-04 12:38</time>
+            </section>
+        </div></footer>
+    
+
+    
+</div>
+
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <hr>
+<blockquote>
+<p>转载自《<a class="link" href="https://muxiner.github.io/using-scoop/#%F0%9F%8D%89-%E5%AE%89%E8%A3%85-Scoop-1"  target="_blank" rel="noopener"
+    >Windows 下包管理器 Scoop 的安装与使用 - Muxiner&rsquo;s Blog</a>》</p>
+</blockquote>
+<hr>
+<h2 id="-什么是-scoop-">🍉 什么是 Scoop ？
+</h2><blockquote>
+<p>😶‍🌫️ 可以去看【<a class="link" href="https://github.com/ScoopInstaller/Scoop"  target="_blank" rel="noopener"
+    >Scoop Github 上的介绍</a>】。</p>
+<p>😶‍🌫️ 还有官方文档【<a class="link" href="https://github.com/ScoopInstaller/Scoop/wiki"  target="_blank" rel="noopener"
+    >Scoop Wiki</a>】w</p>
+<p>😶‍🌫️ 官网【<a class="link" href="https://scoop.sh/"  target="_blank" rel="noopener"
+    >https://scoop.sh/</a>】</p>
+</blockquote>
+<p><code>Scoop</code> 是 <code>Windows</code> 上的命令行安装工具。</p>
+<p>🙈 可以用来干嘛？</p>
+<p>🦥 通过命令行界面，<code>Scoop</code> 可以顺畅地安装应用程序。（官方说明）</p>
+<ul>
+<li>🌲 没有权限弹出窗口</li>
+<li>🌲 隐藏 GUI 向导式安装程序</li>
+<li>🌲 防止因而安装大量程序造成 PATH 污染</li>
+<li>🌲 避免安装和卸载程序的不当使用</li>
+<li>🌲 自动查找并安装依赖项</li>
+<li>🌲 自动执行所有额外的设置步骤来获取工作程序</li>
+</ul>
+<h2 id="-安装-scoop">🍉 安装 Scoop
+</h2><h3 id="-准备工作">🍊 准备工作
+</h3><ul>
+<li>
+<p><code>PowerShell</code> ： 确保已安装 <code>PowerShell 5.0</code> 或更高版本。</p>
+<blockquote>
+<p><code>Windows 10</code> 以及更高的版本默认安装的 <code>PowerShell 5.0</code>。</p>
+</blockquote>
+</li>
+<li>
+<p>确保以允许 <code>Powershell</code> 执行本地脚本。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">set-executionpolicy remotesigned -scope currentuser
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><code>Unrestricted</code> 也可以，但是安全性较低。</p>
+<p>最好使用 <code>RemoteSigned</code>。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="-安装在默认位置">🍑 安装在默认位置
+</h3><p>默认安装在 <code>C:\Users\username\scoop</code> 路径下。</p>
+<p>执行命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">Invoke</span><span class="o">-</span><span class="n">Expression</span> <span class="p">(</span><span class="n">New</span><span class="o">-</span><span class="ne">Object</span> <span class="n">System</span><span class="o">.</span><span class="n">Net</span><span class="o">.</span><span class="n">WebClient</span><span class="p">)</span><span class="o">.</span><span class="n">DownloadString</span><span class="p">(</span><span class="s1">&#39;https://get.scoop.sh&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或是执行（更短的）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">iwr -useb get.scoop.sh | iex
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>2022.11.17 更新：</strong></p>
+<p>为加快 Scoop 的安装速度，主要是下载速度，使用代理进行加速下载。</p>
+<ul>
+<li>
+<p><strong>fastgit</strong> 下载</p>
+<ul>
+<li>
+<p>进入用户主目录：<code>cd ~</code></p>
+</li>
+<li>
+<p>下载 <code>scoop_install.ps1</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl -o scoop_install.ps1 https://raw.fastgit.org/scoopinstaller/install/master/install.ps1
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>修改 <code>scoop_install.ps1</code> 中文件下载地址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="p">(</span><span class="n">Get</span><span class="o">-</span><span class="n">Content</span> <span class="n">scoop_install</span><span class="o">.</span><span class="n">ps1</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;https://github.com/ScoopInstaller/&#39;</span><span class="p">,</span> <span class="s1">&#39;https://download.fastgit.org//ScoopInstaller/&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="n">Set</span><span class="o">-</span><span class="n">Content</span> <span class="n">scoop_install</span><span class="o">.</span><span class="n">ps1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>安装 Scoop：<code>./scoop_install.ps1</code></p>
+</li>
+<li>
+<p>删除 <code>scoop_install.ps1</code>：<code>rm scoop_install.ps1</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>github proxy</strong> 下载</p>
+<ul>
+<li>
+<p>进入用户主目录：<code>cd ~</code></p>
+</li>
+<li>
+<p>下载 <code>scoop_install.ps1</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">curl -o scoop_install.ps1 https://ghproxy.com/https://raw.githubusercontent.com/scoopinstaller/install/master/install.ps1
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>修改 <code>scoop_install.ps1</code> 中文件下载地址：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">(Get-Content scoop_install.ps1).replace(&#39;https://github.com/ScoopInstaller/&#39;, &#39;https://ghproxy.com/https://github.com/ScoopInstaller/&#39;) | Set-Content scoop_install.ps1
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>安装 Scoop：<code>./scoop_install.ps1</code></p>
+</li>
+<li>
+<p>删除 <code>scoop_install.ps1</code>：<code>rm scoop_install.ps1</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<p>🍑 自定义安装目录</p>
+<p>例如将 <code>Scoop</code> 安装在 <code>C:\Scoop</code> 路径下。</p>
+<p>需要添加该路径到<strong>用户变量</strong>中：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$env:SCOOP=&#39;C:\scoop&#39;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[environment]::setEnvironmentVariable(&#39;SCOOP&#39;,$env:SCOOP,&#39;User&#39;)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>当然也可以添加到<strong>系统变量</strong>中：</p>
+<p>不过此时需要以<strong>管理员身份</strong>运行 <code>PowerShell</code> ，或是以<strong>管理员身份</strong>运行 <code>Windows Terminal</code>，再打开 <code>PowerShell</code> ，否则会报错：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[environment]::setEnvironmentVariable(&#39;SCOOP&#39;,$env:SCOOP,&#39;Machine&#39;)
+</span></span></code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<blockquote>
+<p>添加完环境变量后需要重启 PowerShell 或 Terminal 等待变量生效。</p>
+</blockquote>
+<p>然后再执行安装指令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">iwr -useb get.scoop.sh | iex
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>安装方式同上，<a class="link" href="https://muxiner.github.io/using-scoop/#install"  target="_blank" rel="noopener"
+    >点此跳转到新的安装方式</a></p>
+<h3 id="-自定义全局应用安装目录">🍑 自定义全局应用安装目录
+</h3><p>例如自定义将全局应用安装在 <code>C:\apps</code> 路径下：</p>
+<p>就需要将该目录添加到系统变量中，步骤同上文相同：</p>
+<ol>
+<li>😶‍🌫️ 以管理员身份运行</li>
+<li>😶‍🌫️ <code>$env:SCOOP_GLOBAL='C:\apps'</code></li>
+<li>😶‍🌫️ <code>[environment]::setEnvironmentVariable('SCOOP_GLOBAL',$env:SCOOP_GLOBAL,'Machine')</code></li>
+<li>😶‍🌫️ 安装指令：<code>scoop install -g &lt;app&gt;</code></li>
+</ol>
+<p>合起来就是：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$env:SCOOP_GLOBAL=&#39;C:\apps&#39;
+</span></span><span class="line"><span class="cl">[environment]::setEnvironmentVariable(&#39;SCOOP_GLOBAL&#39;,$env:SCOOP_GLOBAL,&#39;Machine&#39;)
+</span></span><span class="line"><span class="cl">scoop install -g &lt;app&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="-使用-scoop">🍉 使用 Scoop
+</h2><p>查看 scoop 的命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop help
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看命令的详细信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop help &lt;command&gt;
+</span></span><span class="line"><span class="cl"># for example: scoop help install 
+</span></span><span class="line"><span class="cl"># For more detailed information on INSTALL
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行 <code>scoop help install</code> ：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">Usage</span><span class="p">:</span> <span class="n">scoop</span> <span class="n">install</span> <span class="o">&lt;</span><span class="n">app</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="n">The</span> <span class="n">usual</span> <span class="n">way</span> <span class="n">to</span> <span class="n">install</span> <span class="n">an</span> <span class="n">app</span> <span class="p">(</span><span class="n">uses</span> <span class="n">your</span> <span class="n">local</span> <span class="s1">&#39;buckets&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">     <span class="n">scoop</span> <span class="n">install</span> <span class="n">git</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">To</span> <span class="n">install</span> <span class="n">an</span> <span class="n">app</span> <span class="n">from</span> <span class="n">a</span> <span class="n">manifest</span> <span class="n">at</span> <span class="n">a</span> <span class="n">URL</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">     <span class="n">scoop</span> <span class="n">install</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">raw</span><span class="o">.</span><span class="n">githubusercontent</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ScoopInstaller</span><span class="o">/</span><span class="n">Main</span><span class="o">/</span><span class="n">master</span><span class="o">/</span><span class="n">bucket</span><span class="o">/</span><span class="n">runat</span><span class="o">.</span><span class="n">json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">To</span> <span class="n">install</span> <span class="n">an</span> <span class="n">app</span> <span class="n">from</span> <span class="n">a</span> <span class="n">manifest</span> <span class="n">on</span> <span class="n">your</span> <span class="n">computer</span>
+</span></span><span class="line"><span class="cl">     <span class="n">scoop</span> <span class="n">install</span> \<span class="n">path</span>\<span class="n">to</span>\<span class="n">app</span><span class="o">.</span><span class="n">json</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Options</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span><span class="n">g</span><span class="p">,</span> <span class="o">--</span><span class="n">global</span>              <span class="n">Install</span> <span class="n">the</span> <span class="n">app</span> <span class="n">globally</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="o">--</span><span class="n">independent</span>         <span class="n">Don</span><span class="s1">&#39;t install dependencies automatically</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span><span class="n">k</span><span class="p">,</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">cache</span>            <span class="n">Don</span><span class="s1">&#39;t use the download cache</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span><span class="n">u</span><span class="p">,</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">update</span><span class="o">-</span><span class="n">scoop</span>     <span class="n">Don</span><span class="s1">&#39;t update Scoop before installing if it&#39;</span><span class="n">s</span> <span class="n">outdated</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span><span class="n">s</span><span class="p">,</span> <span class="o">--</span><span class="n">skip</span>                <span class="n">Skip</span> <span class="nb">hash</span> <span class="n">validation</span> <span class="p">(</span><span class="n">use</span> <span class="n">with</span> <span class="n">caution</span><span class="o">!</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">-</span><span class="n">a</span><span class="p">,</span> <span class="o">--</span><span class="n">arch</span> <span class="o">&lt;</span><span class="mi">32</span><span class="n">bit</span><span class="o">|</span><span class="mi">64</span><span class="n">bit</span><span class="o">&gt;</span>  <span class="n">Use</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">architecture</span><span class="p">,</span> <span class="k">if</span> <span class="n">the</span> <span class="n">app</span> <span class="n">supports</span> <span class="n">it</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="-安装应用">🍒 安装应用
+</h3><p>分为两种情况：</p>
+<h4 id="为当前用户安装">😃为当前用户安装
+</h4><p>安装路径：<code>scoop\apps</code></p>
+<blockquote>
+<p><code>scoop</code> 路径默认在 <code>C:\User\username</code> 。</p>
+<p>若是自定义安装路径，例如上文的位置，则在 <code>C:\Scoop</code></p>
+</blockquote>
+<p>安装命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop install &lt;app&gt;
+</span></span><span class="line"><span class="cl"># for example:
+</span></span><span class="line"><span class="cl"># scoop install nano
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="为所有用户安装">😃为所有用户安装
+</h4><p>默认的安装路径：<code>C:\ProgramData\scoop</code></p>
+<p>若是如上文所示，自定义了全局应用安装目录，则安装路径：<code>C:\apps</code></p>
+<blockquote>
+<p>需要以<strong>管理员身份</strong>运行。</p>
+</blockquote>
+<p>安装命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop install &lt;app&gt; -g
+</span></span><span class="line"><span class="cl"># for example:
+</span></span><span class="line"><span class="cl"># scoop install nano -g
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="-卸载应用">🍒 卸载应用
+</h3><h4 id="卸载某一程序">😃卸载某一程序
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop uninstall &lt;app&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="卸载程序并移除配置文件">😃卸载程序并移除配置文件
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop uninstall &lt;app&gt; -p
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>😃卸载全局程序</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop uninstall &lt;app&gt; -g
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>😃更多信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop help uninstall
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="-更新">🍒 更新
+</h3><h4 id="更新-scoop-及所有-bucket-但不更新-app">😃更新 scoop 及所有 bucket 但不更新 app
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop update
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="更新某一-app">😃更新某一 app
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop update &lt;app&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="更新-scoopbucketapp">😃更新 scoop、bucket、app
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop update *
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="更新全局-app">😃更新全局 app
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop update &lt;app&gt; -g
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="更多信息">😃更多信息
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop help update
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="-其他有用操作">🍒 其他有用操作
+</h3><h4 id="查看已安装-app">😃查看已安装 app
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="查看可更新-app">😃查看可更新 app
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop status
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="查看某-app-主页">😃查看某 app 主页
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop home &lt;app&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="查看已知库">😃查看「已知库」
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop bucket known
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="添加已知库">😃添加「已知库」
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop bucket add &lt;bucket&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="查看已添加的库">😃查看已添加的库
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop bucket list
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="删除已添加的库">😃删除已添加的库
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop bucket rm &lt;bucket&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="添加第三方库">😃添加第三方库
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop bucket add &lt;bucket&gt; &lt;bucket_url&gt;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="删除已安装软件的旧版本">😃删除已安装软件的旧版本
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop cleanup *
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="清理软件缓存">😃清理软件缓存
+</h4><p>通常是下载的软件安装包。</p>
+<p>以下命令清除所有缓存，即清空 <code>Scoop</code> 目录下的 <code>cache</code> 文件夹。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">scoop cache rm *
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="-进阶">🍉 进阶
+</h2><p>更多信息请查看【<a class="link" href="https://github.com/ScoopInstaller/Scoop/wiki"  target="_blank" rel="noopener"
+    >官方文档</a>】。</p>
+<h2 id="附录">附录
+</h2><h3 id="参考文献">参考文献
+</h3><p>转载自《<a class="link" href="https://muxiner.github.io/using-scoop/#%F0%9F%8D%89-%E5%AE%89%E8%A3%85-Scoop-1"  target="_blank" rel="noopener"
+    >Windows 下包管理器 Scoop 的安装与使用 - Muxiner&rsquo;s Blog</a>》</p>
+<h3 id="版权信息">版权信息
+</h3><p>本文原载于 <a class="link" href="https://muxiner.github.io/"  target="_blank" rel="noopener"
+    >Muxiner&rsquo;s Blog</a>，遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/windows/">Windows</a>
+        
+    </section>
+
+    
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>根据CC BY-NC-SA 4.0协议授权，转载请在留言板告知🔔</span>
+    </section>
+    <div>
+            <section class="article-lastmod">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z" /></svg>
+                    <time class="article-lastmod">
+                        最后更新于 2026-07-04 12:38</time>
+            </section>
+        </div></footer>
+
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/">
+        
+        
+            <div class="article-image">
+                <img src="/p/jenv-for-windows-%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE%E5%AE%8C%E5%85%A8%E6%8C%87%E5%8D%97/jenv-for-windows.357ede4b61378889ebd081ec2b0de94b_hu_fb8c62ad2de1960c.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Win11使用JEnv管理多版本jdk"
+                        data-key="JEnv-for-Windows 安装与配置完全指南" 
+                        data-hash="md5-NX7eS2E3iInr0IHsKw3pSw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Win11使用JEnv管理多版本jdk</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/">
+        
+        
+            <div class="article-image">
+                <img src="/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/cover.6a116deb2d7c877da897835890e75137_hu_be21fa37db6b5854.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Obsidian &#43; GitHub &#43; Hugo 博客发布工作流"
+                        data-key="2026-07-04-Obsidian-GitHub-Hugo-博客发布工作流" 
+                        data-hash="md5-ahFt6y18h32ol4NYkOdRNw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Obsidian &#43; GitHub &#43; Hugo 博客发布工作流</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/">
+        
+        
+            <div class="article-image">
+                <img src="/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/Obsidian%20AI%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95.9b08f17ba653076e5317d8dd0adabbb3_hu_5e6458c24243889.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Obsidian 个人知识库搭建全记录"
+                        data-key="2026-07-04-Obsidian 个人知识库搭建全记录" 
+                        data-hash="md5-mwjxe6ZTB25TF9jdCtq7sw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Obsidian 个人知识库搭建全记录</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/powershell-profile-%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/">
+        
+        
+            <div class="article-image">
+                <img src="/p/powershell-profile-%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/maxresdefault.07d33dc2e9aa6fc8c1613ce20e3eff43_hu_849fef1599b39fcb.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PowerShell $PROFILE 实用手册"
+                        data-key="PowerShell-PROFILE-实用手册" 
+                        data-hash="md5-B9M9wumqb8jBYTziDj7/Qw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PowerShell $PROFILE 实用手册</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/app%E6%8A%93%E5%8C%85%E4%B9%8B-burpsuite-mumu%E6%A8%A1%E6%8B%9F%E5%99%A812%E6%8A%93%E5%8C%85/">
+        
+        
+            <div class="article-image">
+                <img src="/p/app%E6%8A%93%E5%8C%85%E4%B9%8B-burpsuite-mumu%E6%A8%A1%E6%8B%9F%E5%99%A812%E6%8A%93%E5%8C%85/bp&#43;mumu.96deed941e65041bf50bfa0613f9a286_hu_6b5506dc499b374c.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post APP抓包之 Burpsuite&#43;MuMu模拟器12抓包"
+                        data-key="APP抓包之 Burpsuite&#43;MuMu模拟器12抓包" 
+                        data-hash="md5-lt7tlB5lBBv1C/oGE/mihg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">APP抓包之 Burpsuite&#43;MuMu模拟器12抓包</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="Ranch007/Message-Boards"
+    data-repo-id="R_kgDONBh4yw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDONBh4y84CjbwV"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Ranch&#39;s Blog
+    </section>
+
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script language="javascript"> 
+        var now = new Date();
+        function createtime(){
+            
+            now.setTime(now.getTime() + 250);
+            var grt = new Date("2024/10/15 00:00:00"); 
+            var days = (now - grt) / 1000 / 60 / 60 / 24;
+            var dnum = Math.floor(days);
+            var hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+            var hnum = Math.floor(hours);
+            if (String(hnum).length == 1) {
+                hnum = "0" + hnum;
+            }
+            var minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+            var mnum = Math.floor(minutes);
+            if (String(mnum).length == 1) {
+                mnum = "0" + mnum;
+            }
+            var seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            var snum = Math.round(seconds);
+            if (String(snum).length == 1) {
+                snum = "0" + snum;
+            }
+    
+            document.getElementById("timeDate").innerHTML = `本站已稳定运行<span style="color: lightblue;">${dnum}</span> 天`;
+            document.getElementById("timeDate").style.color = "gray"; 
+            document.getElementById("times").innerHTML = `<span style="color: lightblue;">${hnum}</span> 小时 <span style="color: lightblue;">${mnum}</span> 分 <span style="color: lightblue;">${snum}</span> 秒`;
+            document.getElementById("times").style.color = "gray"; 
+        }
+        setInterval(createtime, 250); 
+    </script>
+
+    
+    <section class="powerby">
+        
+            🤝本博客仅用于记录个人学习和成长。所有内容仅为个人观点，不代表任何团体或组织的立场。如有疑问，欢迎联系！ <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.27.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+
+</footer>
+
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script src="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.css" crossorigin="anonymous" />
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+
+    </body>
+</html>

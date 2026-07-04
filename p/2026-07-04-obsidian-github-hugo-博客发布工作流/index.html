@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Obsidian + GitHub + Hugo 博客发布工作流 引言 将 Obsidian 知识库中的笔记发布到个人博客，涉及三个角色的协作：\n角色 位置 职责 Obsidian 知识库 本地ai_wiki/ 笔记的创作与存储 GitHub 仓库 Ranch007.github.io Hugo 博客源码 + Git 版本管理 GitHub Actions CI 构建 自动编译 Hugo 并部署到 gh-pages 从 Obsidian 写笔记到博客上线，全自动无需手动操作博客仓库。\n">
+<title>Obsidian &#43; GitHub &#43; Hugo 博客发布工作流</title>
+
+<link rel='canonical' href='http://ranch007.github.io/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/'>
+
+<link rel="stylesheet" href="/scss/style.min.4dd5c05f7d951cb9f11c52fd8df2136a7affc98c428b6152d7519788cd1ab5dd.css"><meta property='og:title' content="Obsidian + GitHub + Hugo 博客发布工作流">
+<meta property='og:description' content="Obsidian + GitHub + Hugo 博客发布工作流 引言 将 Obsidian 知识库中的笔记发布到个人博客，涉及三个角色的协作：\n角色 位置 职责 Obsidian 知识库 本地ai_wiki/ 笔记的创作与存储 GitHub 仓库 Ranch007.github.io Hugo 博客源码 + Git 版本管理 GitHub Actions CI 构建 自动编译 Hugo 并部署到 gh-pages 从 Obsidian 写笔记到博客上线，全自动无需手动操作博客仓库。\n">
+<meta property='og:url' content='http://ranch007.github.io/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/'>
+<meta property='og:site_name' content='Ranch&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Blog' /><meta property='article:tag' content='Obsidian' /><meta property='article:tag' content='Hugo' /><meta property='article:published_time' content='2026-07-04T08:00:00&#43;08:00'/><meta property='article:modified_time' content='2026-07-04T19:52:12&#43;08:00'/><meta property='og:image' content='http://ranch007.github.io/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/cover.jpg' />
+<meta name="twitter:title" content="Obsidian + GitHub + Hugo 博客发布工作流">
+<meta name="twitter:description" content="Obsidian + GitHub + Hugo 博客发布工作流 引言 将 Obsidian 知识库中的笔记发布到个人博客，涉及三个角色的协作：\n角色 位置 职责 Obsidian 知识库 本地ai_wiki/ 笔记的创作与存储 GitHub 仓库 Ranch007.github.io Hugo 博客源码 + Git 版本管理 GitHub Actions CI 构建 自动编译 Hugo 并部署到 gh-pages 从 Obsidian 写笔记到博客上线，全自动无需手动操作博客仓库。\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://ranch007.github.io/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/cover.jpg' />
+    <link rel="shortcut icon" href="/favcion.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside
+  class="sidebar left-sidebar sticky "
+>
+  <button
+    class="hamburger hamburger--spin"
+    type="button"
+    id="toggle-menu"
+    aria-label="切换菜单"
+  >
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </button>
+
+  <header>
+     
+    <figure class="site-avatar">
+      <a href="https://github.com/Ranch007">
+        
+        <img
+          src="https://github.com/Ranch007.png"
+          width="300"
+          height="300"
+          class="site-logo"
+          loading="lazy"
+          alt="Avatar"
+        />
+        
+      </a>
+      
+    </figure>
+     
+
+    <div class="site-meta">
+      <h1 class="site-name">
+        <a href="/"><span>Ranch</span></a>
+      </h1>
+      <h2 class="site-description">
+        知是行之始<br />行是知之成
+      </h2>
+    </div>
+  </header><ol class="menu-social">
+    
+    <li>
+      <a
+        href="https://github.com/Ranch007/Ranch007.github.io"
+        target="_blank"
+        
+        title="Ranch&#39;s GitHub"
+        
+        rel="me"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+ 
+      </a>
+    </li>
+    
+    <li>
+      <a
+        href="mailto:zhao11345lin07@163.com"
+        target="_blank"
+        
+        title="Email"
+        
+        rel="me"
+      >
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg> 
+      </a>
+    </li>
+    
+    <li>
+      <a
+        href="/index.xml"
+        target="_blank"
+        
+        title="RSS"
+        
+        rel="me"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+ 
+      </a>
+    </li>
+    
+  </ol><ol class="menu" id="main-menu">
+      
+    <li >
+      <a
+        href="/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+ 
+        <span>主页</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/about/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+ 
+        <span>关于</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/archives/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+ 
+        <span>归档</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/talk/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+ 
+        <span>留言</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/links/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+ 
+        <span>友链</span>
+      </a>
+    </li>
+    
+    <li class="menu-bottom-section">
+      <ol class="menu">
+
+        
+        
+        <li id="dark-mode-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun-high" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" />
+  <path d="M6.343 17.657l-1.414 1.414" />
+  <path d="M6.343 6.343l-1.414 -1.414" />
+  <path d="M17.657 6.343l1.414 -1.414" />
+  <path d="M17.657 17.657l1.414 1.414" />
+  <path d="M4 12h-2" />
+  <path d="M12 4v-2" />
+  <path d="M20 12h2" />
+  <path d="M12 20v2" />
+</svg> <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon-stars" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+  <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+  <path d="M19 11h2m-1 -1v2" />
+</svg>
+          <span>背景模式</span>
+        </li>
+        
+      </ol>
+    </li>
+  </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#引言">引言</a></li>
+    <li><a href="#正文">正文</a>
+      <ol>
+        <li><a href="#1-整体架构">1. 整体架构</a></li>
+        <li><a href="#2-hugo-博客站">2. Hugo 博客站</a>
+          <ol>
+            <li><a href="#主题">主题</a></li>
+            <li><a href="#站点配置-hugoyaml-关键点">站点配置 (hugo.yaml) 关键点</a></li>
+            <li><a href="#评论系统">评论系统</a></li>
+            <li><a href="#侧边栏与头像">侧边栏与头像</a></li>
+            <li><a href="#内容目录结构">内容目录结构</a></li>
+            <li><a href="#分类体系">分类体系</a></li>
+          </ol>
+        </li>
+        <li><a href="#3-发布脚本详解">3. 发布脚本详解</a>
+          <ol>
+            <li><a href="#31-执行入口">3.1 执行入口</a></li>
+            <li><a href="#32-扫描阶段">3.2 扫描阶段</a></li>
+            <li><a href="#33-frontmatter-转换obsidian--hugo">3.3 Frontmatter 转换（Obsidian → Hugo）</a></li>
+            <li><a href="#34-正文转换">3.4 正文转换</a></li>
+            <li><a href="#35-slug-生成算法">3.5 Slug 生成算法</a></li>
+            <li><a href="#36-源笔记标记">3.6 源笔记标记</a></li>
+            <li><a href="#37-博客数据同步">3.7 博客数据同步</a></li>
+            <li><a href="#38-git-推送">3.8 Git 推送</a></li>
+          </ol>
+        </li>
+        <li><a href="#4-github-actions-持续部署">4. GitHub Actions 持续部署</a></li>
+        <li><a href="#5-完整发布流程端到端">5. 完整发布流程（端到端）</a></li>
+        <li><a href="#6-关键细节总结">6. 关键细节总结</a>
+          <ol>
+            <li><a href="#目录映射规则">目录映射规则</a></li>
+            <li><a href="#前后-frontmatter-对照">前后 frontmatter 对照</a></li>
+            <li><a href="#本地预览博客">本地预览博客</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#拓展">拓展</a>
+      <ol>
+        <li><a href="#局限性">局限性</a></li>
+        <li><a href="#后续可能优化">后续可能优化</a></li>
+      </ol>
+    </li>
+    <li><a href="#附录">附录</a>
+      <ol>
+        <li><a href="#相关文件">相关文件</a></li>
+        <li><a href="#参考文章">参考文章</a></li>
+        <li><a href="#版权信息">版权信息</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/">
+                <img src="/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/cover_hu_f3a4e317d52820d4.jpg"
+                        srcset="/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/cover_hu_f3a4e317d52820d4.jpg 800w, /p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/cover_hu_3a2d8cfbba915a38.jpg 1600w"
+                        width="800" 
+                        height="533" 
+                        loading="lazy"
+                        alt="Featured image of post Obsidian &#43; GitHub &#43; Hugo 博客发布工作流" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/" style="background-color: #2a9d8f; color: #fff;">
+                网络技术
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/">Obsidian &#43; GitHub &#43; Hugo 博客发布工作流</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-07-04</time>
+            </div>
+        
+
+        
+            <div>
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
+                <time class="article-words">
+                    3496 字
+                </time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    
+                    阅读时长: 35 分钟
+                </time>
+            </div>
+        <div>
+            <section class="article-lastmod">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z" /></svg>
+                    <time class="article-lastmod">2026-07-04 19:52</time>
+            </section>
+        </div></footer>
+    
+
+    
+</div>
+
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="obsidian--github--hugo-博客发布工作流">Obsidian + GitHub + Hugo 博客发布工作流
+</h1><h2 id="引言">引言
+</h2><p>将 Obsidian 知识库中的笔记发布到个人博客，涉及三个角色的协作：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>角色</th>
+					<th>位置</th>
+					<th>职责</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Obsidian 知识库</strong></td>
+					<td>本地<code>ai_wiki/</code></td>
+					<td>笔记的创作与存储</td>
+			</tr>
+			<tr>
+					<td><strong>GitHub 仓库</strong></td>
+					<td><code>Ranch007.github.io</code></td>
+					<td>Hugo 博客源码 + Git 版本管理</td>
+			</tr>
+			<tr>
+					<td><strong>GitHub Actions</strong></td>
+					<td>CI 构建</td>
+					<td>自动编译 Hugo 并部署到 gh-pages</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>从 Obsidian 写笔记到博客上线，全自动无需手动操作博客仓库。</p>
+<hr>
+<h2 id="正文">正文
+</h2><h3 id="1-整体架构">1. 整体架构
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">┌─────────────────────┐     &#34;发布到博客&#34;      ┌──────────────────────┐
+</span></span><span class="line"><span class="cl">│   Obsidian Vault    │ ──────────────────→   │  Ranch007.github.io  │
+</span></span><span class="line"><span class="cl">│   ai_wiki/          │    publish-to-blog    │  Hugo 博客源码仓库   │
+</span></span><span class="line"><span class="cl">│                     │    .ps1 脚本执行      │                      │
+</span></span><span class="line"><span class="cl">│   wiki/             │                      │  content/post/       │
+</span></span><span class="line"><span class="cl">│   ├── it-tech/      │   1. 扫描 publish:    │  ├── xxx/index.md   │
+</span></span><span class="line"><span class="cl">│   ├── finance/      │      true 笔记         │  ├── yyy/index.md   │
+</span></span><span class="line"><span class="cl">│   └── reading/      │   2. 转换 frontmatter  │  └── ...            │
+</span></span><span class="line"><span class="cl">│                     │   3. 拷贝配图          │                      │
+</span></span><span class="line"><span class="cl">│   publish: true ────│   4. git commit &amp; push │                      │
+</span></span><span class="line"><span class="cl">└─────────────────────┘                       └───────┬──────────────┘
+</span></span><span class="line"><span class="cl">                                                       │ push main
+</span></span><span class="line"><span class="cl">                                                       ▼
+</span></span><span class="line"><span class="cl">                                              ┌─────────────────────┐
+</span></span><span class="line"><span class="cl">                                              │  GitHub Actions     │
+</span></span><span class="line"><span class="cl">                                              │  deploy.yaml        │
+</span></span><span class="line"><span class="cl">                                              │                     │
+</span></span><span class="line"><span class="cl">                                              │  Hugo Extended      │
+</span></span><span class="line"><span class="cl">                                              │  v0.139.0 build     │
+</span></span><span class="line"><span class="cl">                                              │                     │
+</span></span><span class="line"><span class="cl">                                              │  → gh-pages 分支    │
+</span></span><span class="line"><span class="cl">                                              └─────────────────────┘
+</span></span><span class="line"><span class="cl">                                                       │
+</span></span><span class="line"><span class="cl">                                                       ▼
+</span></span><span class="line"><span class="cl">                                              ┌─────────────────────┐
+</span></span><span class="line"><span class="cl">                                              │  GitHub Pages       │
+</span></span><span class="line"><span class="cl">                                              │  ranch007.github.io │
+</span></span><span class="line"><span class="cl">                                              └─────────────────────┘
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="2-hugo-博客站">2. Hugo 博客站
+</h3><p>博客仓库：<a class="link" href="https://github.com/Ranch007/Ranch007.github.io"  target="_blank" rel="noopener"
+    >Ranch007.github.io</a></p>
+<h4 id="主题">主题
+</h4><p>使用 <a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack"  target="_blank" rel="noopener"
+    >CaiJimmy/hugo-theme-stack</a>，以 Git 子模块方式引入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="c1"># .gitmodules</span>
+</span></span><span class="line"><span class="cl"><span class="k">[submodule &#34;themes/hugo-theme-stack&#34;]</span>
+</span></span><span class="line"><span class="cl">    <span class="na">path</span> <span class="o">=</span> <span class="s">themes/hugo-theme-stack
+</span></span></span><span class="line"><span class="cl"><span class="s">    url = https://github.com/CaiJimmy/hugo-theme-stack</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>克隆时需初始化子模块：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git clone https://github.com/Ranch007/Ranch007.github.io.git
+</span></span><span class="line"><span class="cl">git submodule update --init
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="站点配置-hugoyaml-关键点">站点配置 (hugo.yaml) 关键点
+</h4><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>配置项</th>
+					<th>值</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>theme</code></td>
+					<td><code>hugo-theme-stack</code></td>
+					<td>Stack 主题</td>
+			</tr>
+			<tr>
+					<td><code>DefaultContentLanguage</code></td>
+					<td><code>zh-cn</code></td>
+					<td>简体中文</td>
+			</tr>
+			<tr>
+					<td><code>hasCJKLanguage</code></td>
+					<td><code>true</code></td>
+					<td>中日韩语言支持，影响<code>.Summary</code> 和 <code>.WordCount</code></td>
+			</tr>
+			<tr>
+					<td><code>baseurl</code></td>
+					<td><code>http://ranch007.github.io</code></td>
+					<td>站点根 URL</td>
+			</tr>
+			<tr>
+					<td><code>permalinks.post</code></td>
+					<td><code>/p/:slug/</code></td>
+					<td>博文 URL 结构</td>
+			</tr>
+			<tr>
+					<td><code>pagination.pagerSize</code></td>
+					<td><code>6</code></td>
+					<td>每页文章数</td>
+			</tr>
+	</tbody>
+</table></div>
+<h4 id="评论系统">评论系统
+</h4><p>基于 giscus（GitHub Discussions）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">comments</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="l">giscus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">giscus</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l">Ranch007/Message-Boards</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">mapping</span><span class="p">:</span><span class="w"> </span><span class="l">pathname</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">lang</span><span class="p">:</span><span class="w"> </span><span class="l">zh-CN</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用独立的留言板仓库 <code>Ranch007/Message-Boards</code>，与博客仓库解耦。</p>
+<h4 id="侧边栏与头像">侧边栏与头像
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">sidebar</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">subtitle1</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;知是行之始&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">subtitle2</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;行是知之成&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">avatar</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">src</span><span class="p">:</span><span class="w"> </span><span class="l">https://github.com/Ranch007.png </span><span class="w"> </span><span class="c"># GitHub 头像</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用了两个副标题来呈现个人格言。</p>
+<h4 id="内容目录结构">内容目录结构
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">content/
+</span></span><span class="line"><span class="cl">├── _index.md              # 首页
+</span></span><span class="line"><span class="cl">├── _index.zh-cn.md        # 中文首页
+</span></span><span class="line"><span class="cl">├── post/                  # 博文（page bundle 结构）
+</span></span><span class="line"><span class="cl">│   └── 文章slug/
+</span></span><span class="line"><span class="cl">│       └── index.md       # 博文正文 + 配图
+</span></span><span class="line"><span class="cl">├── page/                  # 独立页面
+</span></span><span class="line"><span class="cl">│   ├── about/             # 关于
+</span></span><span class="line"><span class="cl">│   ├── archives/          # 归档
+</span></span><span class="line"><span class="cl">│   ├── links/             # 友链
+</span></span><span class="line"><span class="cl">│   └── talk/              # 留言板
+</span></span><span class="line"><span class="cl">├── categories/            # 分类聚合页
+</span></span><span class="line"><span class="cl">│   ├── 网络技术/
+</span></span><span class="line"><span class="cl">│   ├── 投资理财/
+</span></span><span class="line"><span class="cl">│   └── 阅读随记/
+</span></span><span class="line"><span class="cl">└── tags/                  # 标签聚合页
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>博文使用 <strong>Hugo page bundle</strong>（每篇文章独立目录），方便携带封面图和资源文件。</p>
+<h4 id="分类体系">分类体系
+</h4><p>博客侧边栏显示的三个分类，与 Obsidian wiki 的三个兴趣方向一一映射：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>Obsidian wiki 子目录</th>
+					<th>Hugo 分类</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>wiki/it-tech/</code></td>
+					<td>网络技术</td>
+			</tr>
+			<tr>
+					<td><code>wiki/finance/</code></td>
+					<td>投资理财</td>
+			</tr>
+			<tr>
+					<td><code>wiki/reading/</code></td>
+					<td>阅读随记</td>
+			</tr>
+	</tbody>
+</table></div>
+<hr>
+<h3 id="3-发布脚本详解">3. 发布脚本详解
+</h3><p>核心脚本位于 <code>meta/scripts/publish-to-blog.ps1</code>，做<strong>一次性全量发布</strong>而非增量同步。</p>
+<h4 id="31-执行入口">3.1 执行入口
+</h4><p><strong>触发词</strong>：“发布到博客”或“publish”。</p>
+<p><strong>动作（定义在 <code>meta/CLAUDE.md</code> 触发 4）：</strong></p>
+<ol>
+<li>AI 在笔记 frontmatter 添加 <code>publish: true</code></li>
+<li>运行 <code>meta/scripts/publish-to-blog.ps1</code></li>
+<li>脚本扫描 → 转换 → 复制 → git push</li>
+<li>源笔记 <code>publish: true</code> → <code>published: true</code></li>
+</ol>
+<h4 id="32-扫描阶段">3.2 扫描阶段
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Get-ChildItem</span> <span class="n">-Path</span> <span class="nv">$WikiDir</span> <span class="n">-Recurse</span> <span class="n">-Filter</span> <span class="s2">&#34;*.md&#34;</span> <span class="p">|</span> <span class="nb">ForEach-Object</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$content</span> <span class="p">=</span> <span class="nb">Get-Content</span> <span class="nv">$_</span><span class="p">.</span><span class="py">FullName</span> <span class="n">-Raw</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># 正则匹配 frontmatter 中的 publish: true</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nv">$frontmatter</span> <span class="o">-match</span> <span class="s2">&#34;(?m)^publish:\s*true$&#34;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$toPublish</span> <span class="p">+=</span> <span class="nv">$_</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>递归扫描 <code>wiki/</code> 下所有 <code>.md</code> 文件，正则匹配 frontmatter 中 <code>publish: true</code> 字段。</p>
+<h4 id="33-frontmatter-转换obsidian--hugo">3.3 Frontmatter 转换（Obsidian → Hugo）
+</h4><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>Obsidian 字段</th>
+					<th>Hugo 字段</th>
+					<th>转换规则</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>title</code></td>
+					<td><code>title</code></td>
+					<td>原样保留</td>
+			</tr>
+			<tr>
+					<td><code>published</code></td>
+					<td><code>date</code></td>
+					<td>取<code>published</code>，无则取 <code>created</code>，均无则当天</td>
+			</tr>
+			<tr>
+					<td><code>tags</code></td>
+					<td><code>tags</code></td>
+					<td>原样保留，过滤掉<code>publish</code> 标签</td>
+			</tr>
+			<tr>
+					<td><code>description</code></td>
+					<td><code>description</code></td>
+					<td>原样保留</td>
+			</tr>
+			<tr>
+					<td>—</td>
+					<td><code>slug</code></td>
+					<td>由标题和日期生成</td>
+			</tr>
+			<tr>
+					<td>—</td>
+					<td><code>image</code></td>
+					<td>正文第一张图片</td>
+			</tr>
+			<tr>
+					<td>—</td>
+					<td><code>categories</code></td>
+					<td>根据 wiki 子目录自动映射</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>生成的 Hugo frontmatter 示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Obsidian 个人知识库搭建全记录&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">slug</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;2026-07-04-Obsidian-个人知识库搭建全记录&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;2026-07-04T08:00:00+08:00&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">cover.jpg</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">math</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">license</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">hidden</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">draft</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">categories</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;网络技术&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="34-正文转换">3.4 正文转换
+</h4><p><strong>Wiki-link 转换</strong>：所有 Obsidian 内部链接转为标准 markdown 链接：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="c"># [显示文字](链接.md) → [显示文字](链接.md)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="p">[</span><span class="no">regex</span><span class="p">]::</span><span class="n">Replace</span><span class="p">(</span><span class="nv">$body</span><span class="p">,</span> <span class="s1">&#39;\[\[([^\]|]+)\|([^\]]+)\]\]&#39;</span><span class="p">,</span> <span class="s1">&#39;[${2}](${1}.md)&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c"># [链接](链接.md) → [链接](链接.md)</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="p">[</span><span class="no">regex</span><span class="p">]::</span><span class="n">Replace</span><span class="p">(</span><span class="nv">$body</span><span class="p">,</span> <span class="s1">&#39;\[\[([^\]|]+)\]\]&#39;</span><span class="p">,</span> <span class="s1">&#39;[${1}](${1}.md)&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>Dataview 剥离</strong>：<code>dataview</code> 和 <code>dataviewjs</code> 代码块不兼容 Hugo，直接移除：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="nv">$body</span> <span class="o">-replace</span> <span class="s1">&#39;(?s)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="nv">$body</span> <span class="o">-replace</span> <span class="s1">&#39;(?s)&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>图片处理</strong>：内嵌图片 <code>![assets/xxx](assets/xxx.md)</code> 处理逻辑：</p>
+<ol>
+<li>第一张图片 → <strong>封面图</strong>（复制到 post 根目录，写入 <code>image</code> 字段）</li>
+<li>其余图片 → 复制到 <code>post_slug/assets/</code> 子目录</li>
+<li>图片引用转为 <code>![](图片名)</code> 的相对路径</li>
+<li>如果在 assets 指定路径未找到，递归搜索 assets 所有子目录</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$body</span> <span class="p">=</span> <span class="p">[</span><span class="no">regex</span><span class="p">]::</span><span class="n">Replace</span><span class="p">(</span><span class="nv">$body</span><span class="p">,</span> <span class="s1">&#39;!\[\[assets/([^\]]+)\]\]&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># 图片存在 → 复制 + 替换引用</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># 第一张图 -&gt; featuredImage（封面）</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># 其余图 -&gt; assets/ 子目录</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># 不存在 → 报错并保留原样</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>空行清理</strong>：连续三个以上换行压缩为两个。</p>
+<h4 id="35-slug-生成算法">3.5 Slug 生成算法
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="kd">function</span><span class="w"> </span><span class="nb">Get-Slug</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">param</span><span class="p">([</span><span class="no">string</span><span class="p">]</span><span class="nv">$Title</span><span class="p">,</span> <span class="p">[</span><span class="no">string</span><span class="p">]</span><span class="nv">$DateStr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># 保留中英文、数字和空格</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$clean</span> <span class="p">=</span> <span class="nv">$Title</span> <span class="o">-replace</span> <span class="s1">&#39;[^\w一-鿿\s-]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># 空格替换为 -</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$clean</span> <span class="p">=</span> <span class="nv">$clean</span><span class="p">.</span><span class="py">Trim</span><span class="p">()</span> <span class="o">-replace</span> <span class="s1">&#39;\s+&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">([</span><span class="no">string</span><span class="p">]::</span><span class="n">IsNullOrWhiteSpace</span><span class="p">(</span><span class="nv">$clean</span><span class="p">))</span> <span class="p">{</span> <span class="nv">$clean</span> <span class="p">=</span> <span class="s2">&#34;post&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="s2">&#34;</span><span class="nv">$DateStr</span><span class="s2">-</span><span class="nv">$clean</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>最终 URL 格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://ranch007.github.io/p/{slug-lowercase-urlencoded}/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>例如 <code>2026-07-04-Obsidian 个人知识库搭建全记录</code> → URL 编码后变为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">https://ranch007.github.io/p/2026-07-04-obsidian-个人知识库搭建全记录/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="36-源笔记标记">3.6 源笔记标记
+</h4><p>发布成功后，源笔记的 <code>publish: true</code> 被替换为 <code>published: true</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nv">$newContent</span> <span class="p">=</span> <span class="nv">$content</span> <span class="o">-replace</span> <span class="s1">&#39;(?m)^publish:\s*true\s*$&#39;</span><span class="p">,</span> <span class="s1">&#39;published: true&#39;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这确保了同一篇笔记不会重复发布，并在 frontmatter 中保留了发布记录。</p>
+<h4 id="37-博客数据同步">3.7 博客数据同步
+</h4><p>脚本同步更新 vault 内的 <code>meta/blog-posts.md</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">&lt;!-- 此文件由 publish-to-blog.ps1 自动维护 --&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">总篇数: 1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="gu">## 最新发布
+</span></span></span><span class="line"><span class="cl"><span class="k">-</span> [<span class="nt">文章标题</span>](<span class="na">https://ranch007.github.io/p/slug/</span>) — 2026-07-04
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该文件被仪表盘 <code>index.md</code> 读取展示博客统计和最近发布。</p>
+<h4 id="38-git-推送">3.8 Git 推送
+</h4><p>脚本自动进入博客仓库目录执行：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="nb">Push-Location</span> <span class="nv">$BlogPath</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">add</span> <span class="n">-A</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">commit</span> <span class="n">-m</span> <span class="s2">&#34;publish: N 篇博客更新&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">git</span> <span class="n">push</span>
+</span></span><span class="line"><span class="cl"><span class="nb">Pop-Location</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>推送到 <code>main</code> 分支后，GitHub Actions 会自动构建部署。</p>
+<hr>
+<h3 id="4-github-actions-持续部署">4. GitHub Actions 持续部署
+</h3><p>工作流文件：<code>.github/workflows/deploy.yaml</code></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">deploy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">push</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">main       </span><span class="w"> </span><span class="c"># 只有 main 分支触发</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">env</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">TZ</span><span class="p">:</span><span class="w"> </span><span class="l">Asia/Shanghai         </span><span class="w"> </span><span class="c"># 时区设置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">jobs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">deploy</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l">ubuntu-latest</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">actions/checkout@v5</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">submodules</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">     </span><span class="c"># 拉取主题子模块</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">fetch-depth</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">       </span><span class="c"># 完整 git 历史（用于 enableGitInfo）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Disable quotePath</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">git config --global core.quotePath false </span><span class="w"> </span><span class="c"># 中文文件名不乱码</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Setup Hugo</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-hugo@v3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">hugo-version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;0.139.0&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">extended</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">        </span><span class="c"># 必须用 extended 版（支持 SCSS）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Build</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l">hugo -D           </span><span class="w"> </span><span class="c"># 构建（包括 draft 文章）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">Deploy</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l">peaceiris/actions-gh-pages@v4</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">github_token</span><span class="p">:</span><span class="w"> </span><span class="l">${{ secrets.GITHUB_TOKEN }}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">publish_branch</span><span class="p">:</span><span class="w"> </span><span class="l">gh-pages</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">publish_dir</span><span class="p">:</span><span class="w"> </span><span class="l">./public</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">commit_message</span><span class="p">:</span><span class="w"> </span><span class="l">auto deploy</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>关键细节：</strong></p>
+<ul>
+<li><code>submodules: true</code> — 必须拉取 <code>hugo-theme-stack</code> 子模块，否则构建失败</li>
+<li><code>extended: true</code> — Stack 主题使用 SCSS，需要 Hugo Extended 版</li>
+<li><code>core.quotePath false</code> — 中文文件名在 git 中不被引用转义</li>
+<li><code>enableGitInfo: true</code> — Hugo 配置中启用，利用 git 提交时间作为 <code>lastmod</code></li>
+<li>目标分支为 <code>gh-pages</code>，GitHub Pages 从该分支提供服务</li>
+<li>仓库设置为 <code>Ranch007/Message-Boards</code> 作为 giscus 评论数据源</li>
+</ul>
+<hr>
+<h3 id="5-完整发布流程端到端">5. 完整发布流程（端到端）
+</h3><p><strong>第 1 步：</strong> 在 Obsidian 中写笔记，存入 <code>wiki/</code> 对应目录
+<strong>第 2 步：</strong> 告诉 AI &ldquo;发布到博客&rdquo; 或 &ldquo;把 xxx 发布到博客&rdquo;
+<strong>第 3 步：</strong> AI 在笔记 frontmatter 添加 <code>publish: true</code>（如果指定了某篇文章）
+<strong>第 4 步：</strong> AI 执行 <code>meta/scripts/publish-to-blog.ps1</code>
+<strong>第 5 步：</strong> 脚本扫描所有 <code>publish: true</code> 笔记：
+- 转换为 Hugo 格式
+- 复制配图
+- 写入 <code>content/post/{slug}/index.md</code>
+- 标记源笔记 <code>published: true</code>
+- 更新 <code>meta/blog-posts.md</code>
+- Git add → commit → push
+<strong>第 6 步：</strong> GitHub Actions 检测到 push，自动构建 Hugo → 部署 gh-pages
+<strong>第 7 步：</strong> 约 1-2 分钟后博客上线</p>
+<hr>
+<h3 id="6-关键细节总结">6. 关键细节总结
+</h3><h4 id="目录映射规则">目录映射规则
+</h4><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>源目录</th>
+					<th>映射为</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>Obsidian<code>wiki/</code></td>
+					<td>Hugo<code>content/post/</code></td>
+			</tr>
+			<tr>
+					<td>每个<code>publish: true</code> 笔记</td>
+					<td>一个 Hugo page bundle（独立目录）</td>
+			</tr>
+			<tr>
+					<td>Obsidian<code>assets/</code></td>
+					<td>复制到 post bundle 内</td>
+			</tr>
+			<tr>
+					<td>wiki 子目录（如 it-tech）</td>
+					<td>分类标签（如&quot;网络技术&quot;）</td>
+			</tr>
+	</tbody>
+</table></div>
+<h4 id="前后-frontmatter-对照">前后 frontmatter 对照
+</h4><p><strong>源笔记（Obsidian）：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">Obsidian 个人知识库搭建全记录</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">it-tech, obsidian, tutorial, workflow]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">created</span><span class="p">:</span><span class="w"> </span><span class="ld">2026-07-04</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">publish</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>发布后（Obsidian）：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="l">Obsidian 个人知识库搭建全记录</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">it-tech, obsidian, tutorial, workflow]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">created</span><span class="p">:</span><span class="w"> </span><span class="ld">2026-07-04</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">published</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>博客端（Hugo）：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;Obsidian 个人知识库搭建全记录&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">slug</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;2026-07-04-Obsidian-个人知识库搭建全记录&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;2026-07-04T08:00:00+08:00&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">categories</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;网络技术&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nt">draft</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nn">---</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="本地预览博客">本地预览博客
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> Ranch007.github.io
+</span></span><span class="line"><span class="cl">hugo server -D
+</span></span><span class="line"><span class="cl"><span class="c1"># 访问 http://localhost:1313</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="拓展">拓展
+</h2><h3 id="局限性">局限性
+</h3><ul>
+<li>目前是一次性全量扫描发布，不支持增量差异发布</li>
+<li>publish 脚本是 PowerShell（Windows 限定），跨平台需适配</li>
+<li>Wiki-link 转换后，博客端链接指向本地 <code>.md</code> 文件而非实际页面</li>
+<li>如果笔记中有多条 <code>publish: true</code> 同时发布，会作为一次 git commit</li>
+<li>封面图依赖 Unsplash API 自动搜索（由 AI 执行），脚本本身不包含此逻辑</li>
+</ul>
+<h3 id="后续可能优化">后续可能优化
+</h3><ol>
+<li>支持只在笔记变更时增量复制（通过 git diff 判断）</li>
+<li>添加博客端链接重写为实际 URL 的能力</li>
+<li>支持自定义 slug 覆盖（通过 frontmatter 字段）</li>
+<li>发布前预览：在本地构建 Hugo 并预览效果再推送</li>
+</ol>
+<hr>
+<h2 id="附录">附录
+</h2><h3 id="相关文件">相关文件
+</h3><ul>
+<li><a class="link" href="meta/scripts/publish-to-blog.ps1.md" >meta/scripts/publish-to-blog.ps1</a> — 发布脚本（PowerShell）</li>
+<li><a class="link" href="meta/blog-posts.md.md" >meta/blog-posts.md</a> — 博客数据文件（自动维护）</li>
+<li><a class="link" href="meta/CLAUDE.md" >meta/CLAUDE</a> — AI 工作规则（触发 4 定义了发布流程）</li>
+</ul>
+<h3 id="参考文章">参考文章
+</h3><ul>
+<li><a class="link" href="wiki/it-tech/notes/obsidian-wiki-setup-guide.md" >wiki/it-tech/notes/obsidian-wiki-setup-guide</a> — Obsidian 个人知识库搭建全记录（已发布到博客）</li>
+<li><a class="link" href="wiki/it-tech/notes/obsidian-ai-plugin-skill-guide.md" >wiki/it-tech/notes/obsidian-ai-plugin-skill-guide</a> — Obsidian AI 知识库所用插件与 Skills 清单</li>
+<li><a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack"  target="_blank" rel="noopener"
+    >CaiJimmy/hugo-theme-stack</a> — Stack 主题</li>
+<li><a class="link" href="https://github.com/peaceiris/actions-hugo"  target="_blank" rel="noopener"
+    >peaceiris/actions-hugo</a> — Hugo GitHub Action</li>
+<li><a class="link" href="https://github.com/peaceiris/actions-gh-pages"  target="_blank" rel="noopener"
+    >peaceiris/actions-gh-pages</a> — GitHub Pages 部署 Action</li>
+</ul>
+<h3 id="版权信息">版权信息
+</h3><blockquote>
+<p>本文原载于 <a class="link" href="https://ranch007.github.io"  target="_blank" rel="noopener"
+    >Ranch's Blog</a>，遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。</p>
+</blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/blog/">Blog</a>
+        
+            <a href="/tags/obsidian/">Obsidian</a>
+        
+            <a href="/tags/hugo/">Hugo</a>
+        
+    </section>
+
+    
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>根据CC BY-NC-SA 4.0协议授权，转载请在留言板告知🔔</span>
+    </section>
+    <div>
+            <section class="article-lastmod">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z" /></svg>
+                    <time class="article-lastmod">
+                        最后更新于 2026-07-04 19:52</time>
+            </section>
+        </div></footer>
+
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/">
+        
+        
+            <div class="article-image">
+                <img src="/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/Obsidian%20AI%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95.9b08f17ba653076e5317d8dd0adabbb3_hu_5e6458c24243889.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Obsidian 个人知识库搭建全记录"
+                        data-key="2026-07-04-Obsidian 个人知识库搭建全记录" 
+                        data-hash="md5-mwjxe6ZTB25TF9jdCtq7sw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Obsidian 个人知识库搭建全记录</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/powershell-profile-%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/">
+        
+        
+            <div class="article-image">
+                <img src="/p/powershell-profile-%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/maxresdefault.07d33dc2e9aa6fc8c1613ce20e3eff43_hu_849fef1599b39fcb.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PowerShell $PROFILE 实用手册"
+                        data-key="PowerShell-PROFILE-实用手册" 
+                        data-hash="md5-B9M9wumqb8jBYTziDj7/Qw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PowerShell $PROFILE 实用手册</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/app%E6%8A%93%E5%8C%85%E4%B9%8B-burpsuite-mumu%E6%A8%A1%E6%8B%9F%E5%99%A812%E6%8A%93%E5%8C%85/">
+        
+        
+            <div class="article-image">
+                <img src="/p/app%E6%8A%93%E5%8C%85%E4%B9%8B-burpsuite-mumu%E6%A8%A1%E6%8B%9F%E5%99%A812%E6%8A%93%E5%8C%85/bp&#43;mumu.96deed941e65041bf50bfa0613f9a286_hu_6b5506dc499b374c.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post APP抓包之 Burpsuite&#43;MuMu模拟器12抓包"
+                        data-key="APP抓包之 Burpsuite&#43;MuMu模拟器12抓包" 
+                        data-hash="md5-lt7tlB5lBBv1C/oGE/mihg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">APP抓包之 Burpsuite&#43;MuMu模拟器12抓包</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/">
+        
+        
+            <div class="article-image">
+                <img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/gns3.67b3be06ff1052d90046b29260caca6f_hu_8b0f13ce9a3b7c02.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post GNS3懒人版-2.2.45安装部署详细教程"
+                        data-key="GNS3懒人版-2.2.45安装部署详细教程" 
+                        data-hash="md5-Z7O&#43;Bv8QUtkARrKSYMrKbw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">GNS3懒人版-2.2.45安装部署详细教程</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/">
+        
+        
+            <div class="article-image">
+                <img src="/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/icipie.a033ad6466af6169cda29396add266da_hu_66fc20d42c1883a6.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 【HCIA 路由与交换 Wakin 谢Sir】TCP/IP网络模型"
+                        data-key="【HCIA 路由与交换 Wakin 谢Sir】TCP/IP网络模型" 
+                        data-hash="md5-oDOtZGavYWnNopOWrdJm2g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【HCIA 路由与交换 Wakin 谢Sir】TCP/IP网络模型</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="Ranch007/Message-Boards"
+    data-repo-id="R_kgDONBh4yw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDONBh4y84CjbwV"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Ranch&#39;s Blog
+    </section>
+
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script language="javascript"> 
+        var now = new Date();
+        function createtime(){
+            
+            now.setTime(now.getTime() + 250);
+            var grt = new Date("2024/10/15 00:00:00"); 
+            var days = (now - grt) / 1000 / 60 / 60 / 24;
+            var dnum = Math.floor(days);
+            var hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+            var hnum = Math.floor(hours);
+            if (String(hnum).length == 1) {
+                hnum = "0" + hnum;
+            }
+            var minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+            var mnum = Math.floor(minutes);
+            if (String(mnum).length == 1) {
+                mnum = "0" + mnum;
+            }
+            var seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            var snum = Math.round(seconds);
+            if (String(snum).length == 1) {
+                snum = "0" + snum;
+            }
+    
+            document.getElementById("timeDate").innerHTML = `本站已稳定运行<span style="color: lightblue;">${dnum}</span> 天`;
+            document.getElementById("timeDate").style.color = "gray"; 
+            document.getElementById("times").innerHTML = `<span style="color: lightblue;">${hnum}</span> 小时 <span style="color: lightblue;">${mnum}</span> 分 <span style="color: lightblue;">${snum}</span> 秒`;
+            document.getElementById("times").style.color = "gray"; 
+        }
+        setInterval(createtime, 250); 
+    </script>
+
+    
+    <section class="powerby">
+        
+            🤝本博客仅用于记录个人学习和成长。所有内容仅为个人观点，不代表任何团体或组织的立场。如有疑问，欢迎联系！ <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.27.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+
+</footer>
+
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script src="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.css" crossorigin="anonymous" />
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+
+    </body>
+</html>

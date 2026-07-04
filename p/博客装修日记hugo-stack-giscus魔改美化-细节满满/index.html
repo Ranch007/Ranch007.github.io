@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" [!TIP]\n避免踩坑的建议：\n凡是需要更改的文件都从themes/主题复制到主目录（hugo new site xxx创建的那个）下\n接下来的个性化配置文件建议都在博客主目录下操作，减少更新主题时个性化配置被覆盖的麻烦\n">
+<title>【博客装修日记】Hugo➕ Stack ➕ Giscus魔改美化 细节满满</title>
+
+<link rel='canonical' href='http://ranch007.github.io/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/'>
+
+<link rel="stylesheet" href="/scss/style.min.4dd5c05f7d951cb9f11c52fd8df2136a7affc98c428b6152d7519788cd1ab5dd.css"><meta property='og:title' content="【博客装修日记】Hugo➕ Stack ➕ Giscus魔改美化 细节满满">
+<meta property='og:description' content=" [!TIP]\n避免踩坑的建议：\n凡是需要更改的文件都从themes/主题复制到主目录（hugo new site xxx创建的那个）下\n接下来的个性化配置文件建议都在博客主目录下操作，减少更新主题时个性化配置被覆盖的麻烦\n">
+<meta property='og:url' content='http://ranch007.github.io/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/'>
+<meta property='og:site_name' content='Ranch&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='blog' /><meta property='article:published_time' content='2024-10-20T11:55:35&#43;00:00'/><meta property='article:modified_time' content='2026-07-04T12:38:17&#43;08:00'/><meta property='og:image' content='http://ranch007.github.io/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/hugo-stack.png' />
+<meta name="twitter:title" content="【博客装修日记】Hugo➕ Stack ➕ Giscus魔改美化 细节满满">
+<meta name="twitter:description" content=" [!TIP]\n避免踩坑的建议：\n凡是需要更改的文件都从themes/主题复制到主目录（hugo new site xxx创建的那个）下\n接下来的个性化配置文件建议都在博客主目录下操作，减少更新主题时个性化配置被覆盖的麻烦\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://ranch007.github.io/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/hugo-stack.png' />
+    <link rel="shortcut icon" href="/favcion.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside
+  class="sidebar left-sidebar sticky "
+>
+  <button
+    class="hamburger hamburger--spin"
+    type="button"
+    id="toggle-menu"
+    aria-label="切换菜单"
+  >
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </button>
+
+  <header>
+     
+    <figure class="site-avatar">
+      <a href="https://github.com/Ranch007">
+        
+        <img
+          src="https://github.com/Ranch007.png"
+          width="300"
+          height="300"
+          class="site-logo"
+          loading="lazy"
+          alt="Avatar"
+        />
+        
+      </a>
+      
+    </figure>
+     
+
+    <div class="site-meta">
+      <h1 class="site-name">
+        <a href="/"><span>Ranch</span></a>
+      </h1>
+      <h2 class="site-description">
+        知是行之始<br />行是知之成
+      </h2>
+    </div>
+  </header><ol class="menu-social">
+    
+    <li>
+      <a
+        href="https://github.com/Ranch007/Ranch007.github.io"
+        target="_blank"
+        
+        title="Ranch&#39;s GitHub"
+        
+        rel="me"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+ 
+      </a>
+    </li>
+    
+    <li>
+      <a
+        href="mailto:zhao11345lin07@163.com"
+        target="_blank"
+        
+        title="Email"
+        
+        rel="me"
+      >
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg> 
+      </a>
+    </li>
+    
+    <li>
+      <a
+        href="/index.xml"
+        target="_blank"
+        
+        title="RSS"
+        
+        rel="me"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+ 
+      </a>
+    </li>
+    
+  </ol><ol class="menu" id="main-menu">
+      
+    <li >
+      <a
+        href="/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+ 
+        <span>主页</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/about/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+ 
+        <span>关于</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/archives/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+ 
+        <span>归档</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/talk/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+ 
+        <span>留言</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/links/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+ 
+        <span>友链</span>
+      </a>
+    </li>
+    
+    <li class="menu-bottom-section">
+      <ol class="menu">
+
+        
+        
+        <li id="dark-mode-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun-high" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" />
+  <path d="M6.343 17.657l-1.414 1.414" />
+  <path d="M6.343 6.343l-1.414 -1.414" />
+  <path d="M17.657 6.343l1.414 -1.414" />
+  <path d="M17.657 17.657l1.414 1.414" />
+  <path d="M4 12h-2" />
+  <path d="M12 4v-2" />
+  <path d="M20 12h2" />
+  <path d="M12 20v2" />
+</svg> <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon-stars" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+  <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+  <path d="M19 11h2m-1 -1v2" />
+</svg>
+          <span>背景模式</span>
+        </li>
+        
+      </ol>
+    </li>
+  </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#导入主题">导入主题</a></li>
+    <li><a href="#基础配置">基础配置</a>
+      <ol>
+        <li><a href="#打开hugoyaml">打开<code>hugo.yaml</code></a></li>
+        <li><a href="#网站-icon时间格式博客头像">网站 <code>icon</code>、时间格式、博客头像</a></li>
+        <li><a href="#license和留言板功能"><code>License</code>和留言板功能</a></li>
+        <li><a href="#社交功能">社交功能</a></li>
+      </ol>
+    </li>
+    <li><a href="#主题魔改">主题魔改</a>
+      <ol>
+        <li><a href="#整体布局">整体布局</a></li>
+        <li><a href="#一些细节">一些细节</a>
+          <ol>
+            <li><a href="#添加文章开头更新时间和字数统计">添加文章开头更新时间和字数统计</a></li>
+            <li><a href="#添加文章末尾最后更新时间">添加文章末尾最后更新时间</a></li>
+            <li><a href="#添加网站运行时间组件">添加网站运行时间组件</a></li>
+            <li><a href="#左侧栏-id-和简介换行">左侧栏 ID 和简介换行</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#附录">附录</a>
+      <ol>
+        <li><a href="#参考文献">参考文献</a></li>
+        <li><a href="#版权信息">版权信息</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/">
+                <img src="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/hugo-stack_hu_6df193d7f66e165c.png"
+                        srcset="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/hugo-stack_hu_6df193d7f66e165c.png 800w, /p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/hugo-stack_hu_59414d354c2cb94d.png 1600w"
+                        width="800" 
+                        height="267" 
+                        loading="lazy"
+                        alt="Featured image of post 【博客装修日记】Hugo➕ Stack ➕ Giscus魔改美化 细节满满" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/" style="background-color: #2a9d8f; color: #fff;">
+                网络技术
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/">【博客装修日记】Hugo➕ Stack ➕ Giscus魔改美化 细节满满</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024-10-20</time>
+            </div>
+        
+
+        
+            <div>
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
+                <time class="article-words">
+                    2451 字
+                </time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    
+                    阅读时长: 25 分钟
+                </time>
+            </div>
+        <div>
+            <section class="article-lastmod">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z" /></svg>
+                    <time class="article-lastmod">2026-07-04 12:38</time>
+            </section>
+        </div></footer>
+    
+
+    
+</div>
+
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <hr>
+<blockquote>
+<p>[!TIP]</p>
+<p>避免踩坑的建议：</p>
+<p><strong>凡是需要更改的文件都从<code>themes/主题</code>复制到主目录（<code>hugo new site xxx</code>创建的那个）下</strong></p>
+<p>接下来的个性化配置文件建议都在博客主目录下操作，减少更新主题时个性化配置被覆盖的麻烦</p>
+<p><img src="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/assets/file-20241016122530828.png"
+	width="1095"
+	height="95"
+	
+	loading="lazy"
+	
+		alt="启动hugo服务"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1152"
+		data-flex-basis="2766px"
+	
+></p>
+<p>每次服务启动，会同步更新所有位置配置文件，但主目录配置文件优先级最高</p>
+</blockquote>
+<hr>
+<h2 id="导入主题">导入主题
+</h2><p>安装主题一般而言存在三种方式：</p>
+<ul>
+<li>git submodule 安装</li>
+<li>go module 安装（需要安装 Go 语言）</li>
+<li>本地安装</li>
+</ul>
+<p>​	我个人更推荐第一种方式，考虑到后续升级的难易，这算是最均衡的一种方式。具体的安装方法可以在各主题的说明中找到，我这里安装的是【<a class="link" href="https://stack.jimmycai.com/"  target="_blank" rel="noopener"
+    >Stack</a>】。 在网站根目录下，输入：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cmd" data-lang="cmd"><span class="line"><span class="cl">git submodule add https://github.com/CaiJimmy/hugo-theme-stack/ hugo-theme-stack
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 更新主题
+</span></span><span class="line"><span class="cl">git submodule init	//初始化子模块
+</span></span><span class="line"><span class="cl">git submodule update	//更新子模块到最新版本
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/assets/image-20241019125653882.png"
+	width="702"
+	height="291"
+	
+	loading="lazy"
+	
+		alt="指定Stack主题下载到thems文件下的hugo-theme-stack文件下"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="241"
+		data-flex-basis="578px"
+	
+></p>
+<p>​	等待下载完成后，便可以进行【<a class="link" href="https://oxidane-uni.github.io/p/%E4%BD%BF%E7%94%A8-hugo-%E5%AF%B9%E5%8D%9A%E5%AE%A2%E7%9A%84%E9%87%8D%E5%BB%BA%E4%B8%8E-stack-%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96%E8%AE%B0%E5%BD%95/##%e4%b8%bb%e9%a2%98%e9%85%8d%e7%bd%ae%e5%8e%86%e7%a8%8b"  target="_blank" rel="noopener"
+    >配置</a>】了。假如你想用其他方式安装，也可以参考【<a class="link" href="https://stack.jimmycai.com/guide/getting-started"  target="_blank" rel="noopener"
+    >这里</a>】，而且Stack本身有全英文的【<a class="link" href="https://stack.jimmycai.com/config/"  target="_blank" rel="noopener"
+    >说明文档</a>】。我建议是将<code>./themes/hugo-theme-stack/exampleSite/</code>文件下的<code>content</code>和<code>hugo.yaml</code>直接复制到博客主目录下（这是一个作者放的例子，这里面有许多提示），根据说明与需求修改，会剩下很多时间。</p>
+<p><img src="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/assets/image-20241019130528587.png"
+	width="661"
+	height="278"
+	
+	loading="lazy"
+	
+		alt="复制选中的两个文件"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="237"
+		data-flex-basis="570px"
+	
+></p>
+<h2 id="基础配置">基础配置
+</h2><h3 id="打开hugoyaml">打开<code>hugo.yaml</code>
+</h3><p>​	本地调试的时候<code>baseurl</code>可以设置为<code>http://localhost:1313</code>。调试完推送到GitHub上，记得改为网站根目录，有疑问请参考【<a class="link" href="https://gohugo.io/methods/site/baseurl/"  target="_blank" rel="noopener"
+    >这里</a>】。</p>
+<p><img src="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/assets/file-20241016114218549.png"
+	width="610"
+	height="399"
+	
+	loading="lazy"
+	
+		alt="个性化基础配置"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="152"
+		data-flex-basis="366px"
+	
+></p>
+<h3 id="网站-icon时间格式博客头像">网站 <code>icon</code>、时间格式、博客头像
+</h3><ul>
+<li>网站icon存储路径：<code>/static/favcion.ico</code></li>
+<li>Go语言时间格式：</li>
+<li>博客头像存储路径：<code>/assets/img/avatar.png</code></li>
+</ul>
+<p><code>favicon</code>、<code>avatar</code>的路径格式如下图所示</p>
+<p><img src="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/assets/file-20241016115207720-1729329924518-3.png"
+	width="696"
+	height="468"
+	
+	loading="lazy"
+	
+		alt="博客左侧栏的具体配置"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="148"
+		data-flex-basis="356px"
+	
+></p>
+<h3 id="license和留言板功能"><code>License</code>和留言板功能
+</h3><ul>
+<li><code>license</code>：做好公共版权许可协议声明</li>
+<li><code>comments</code>：进入【<a class="link" href="https://giscus.app/zh-CN"  target="_blank" rel="noopener"
+    >Giscus</a>】官网，在线安装app，进入Giscus的配置页面，根据官方提示配置留言板功能。</li>
+</ul>
+<p><img src="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/assets/image-20241019173614074.png"
+	width="804"
+	height="498"
+	
+	loading="lazy"
+	
+		alt="配置licens和comments功能"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="161"
+		data-flex-basis="387px"
+	
+></p>
+<p>这里我也给出我的配置，仅供参考。<code>Message-Boards</code>是我新建的一个留言板专属存放的<code>public</code>仓库。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">    </span><span class="nt">comments</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="l">giscus</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">giscus</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l">Ranch007/Message-Boards</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">repoID</span><span class="p">:</span><span class="w"> </span><span class="l">R_kgDONBh4yw</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">category</span><span class="p">:</span><span class="w"> </span><span class="l">Announcements</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">categoryID</span><span class="p">:</span><span class="w"> </span><span class="l">DIC_kwDONBh4y84CjbwV</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">mapping</span><span class="p">:</span><span class="w"> </span><span class="l">pathname</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">strict</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">lightTheme</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">darkTheme</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">reactionsEnabled</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">emitMetadata</span><span class="p">:</span><span class="w"> </span><span class="m">0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">inputPosition</span><span class="p">:</span><span class="w"> </span><span class="l">top</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nt">lang</span><span class="p">:</span><span class="w"> </span><span class="l">zh-CN</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="社交功能">社交功能
+</h3><ul>
+<li>加入个人社交平台的链接</li>
+<li><code>icon</code>路径：博客主目录的<code>/assets/icons</code>下，所有<code>icon</code>都在这里，都是<code>svg</code>文件。</li>
+</ul>
+<p><img src="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/assets/image-20241020122409585.png"
+	width="1148"
+	height="622"
+	
+	loading="lazy"
+	
+		alt="可以换上自己喜欢的icon"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="184"
+		data-flex-basis="442px"
+	
+></p>
+<h2 id="主题魔改">主题魔改
+</h2><h3 id="整体布局">整体布局
+</h3><p>照抄Naive Koala老师的文章《<a class="link" href="https://www.xalaok.top/post/stack-modify/"  target="_blank" rel="noopener"
+    >Hugo-theme-Stack 魔改美化</a>》，文章写的很细心也很用心，属于喂饭教程。</p>
+<blockquote>
+<p>[!NOTE]</p>
+<p>1.没有目录的自己创建一个同名目录，切记要仔细保证这些单词准确</p>
+<p>2.代码看不懂没事，读文章尝试理解，看一下作者改的那些代码，那就是实现变动的关键点</p>
+</blockquote>
+<p>这里涉及到复制的文件分别有：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">themes\hugo-theme-stack\assets\scss\custom.scss 复制到 /assets/scss/custom.scss
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">themes\hugo-theme-stack\layouts\partials\footer\custom.html 复制到 /layouts/partials/footer/custom.html
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">themes\hugo-theme-stack\assets\scss\partials\sidebar.scss 复制到 /assets/scss/partials/sidebar.scss（这里需要下载两个icon，记得更改好指定命名保存到/assets/icons；还涉及到去代码中更改，作者有提供行数，版本不一样所以不一定准确，所以得审一下代码，注意缩进）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">themes\hugo-theme-stack\layouts\partials\sidebar\left.html 复制到 /layouts/partials/sidebar/left.html
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">themes\hugo-theme-stack\assets\scss\grid.scss 复制到 /assets/scss/grid.scss
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">themes\hugo-theme-stack\layouts\index.html 复制到 /layouts/index.html
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">在 static 文件夹下新建 code-header.svg（macOS 风格红绿灯图标）
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">themes\hugo-theme-stack\assets\scss\partials\layout\article.scss 复制到 /assets/scss/partials/layout/article.scss
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">“显示语言和复制按钮”与代码行自带的copy重叠了，这里我没有弄
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果你想更从容一点，可以提前把上面的文件复制主目录。开始魔改前，记得整体备份一下。</p>
+<h3 id="一些细节">一些细节
+</h3><h4 id="添加文章开头更新时间和字数统计">添加文章开头更新时间和字数统计
+</h4><p>​	在<code>layouts\partials\article\components\details.html</code>文件中，红框标记的就是增添组件的代码，黄框标记的就是两个组件的<code>icon</code>命名（目录在<code>/assets/icons</code>下）</p>
+<p><img src="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/assets/image-20241020113121718.png"
+	width="1200"
+	height="894"
+	
+	loading="lazy"
+	
+		alt="组件代码和icon命名"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="134"
+		data-flex-basis="322px"
+	
+></p>
+<p>下图所示，就是增添后的文章标题组件</p>
+<p><img src="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/assets/file-20241017144622345.png"
+	width="875"
+	height="96"
+	
+	loading="lazy"
+	
+		alt="最后更新时间和字数统计组件"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="911"
+		data-flex-basis="2187px"
+	
+></p>
+<h4 id="添加文章末尾最后更新时间">添加文章末尾最后更新时间
+</h4><p>​	在博客主文件夹下 <code>layouts\partials\article\components\footer.html</code>更新下面代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">footer</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;article-footer&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    {{ partial &#34;article/components/tags&#34; . }}
+</span></span><span class="line"><span class="cl">    {{ if and (.Site.Params.article.license.enabled) (not (eq .Params.license false)) }}
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">section</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;article-copyright&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        {{ partial &#34;helper/icon&#34; &#34;copyright&#34; }}
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span>{{ default .Site.Params.article.license.default .Params.license | markdownify }}<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    {{ end }}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    {{- if ne .Lastmod .Date -}}
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">section</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;article-lastmod&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                {{ partial &#34;helper/icon&#34; &#34;edit&#34; }}
+</span></span><span class="line"><span class="cl">                    <span class="p">&lt;</span><span class="nt">time</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;article-lastmod&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">                        {{ T &#34;article.lastUpdatedOn&#34; }}{{- .Lastmod.Format (or .Site.Params.published &#34;2006-01-02T15:04&#34;) -}}
+</span></span><span class="line"><span class="cl">                    <span class="p">&lt;/</span><span class="nt">time</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;/</span><span class="nt">section</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    {{- end -}}
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">footer</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过上面代码第16行，<code>article.lastUpdatedOn</code>添加“最后更新于”</p>
+<p><img src="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/assets/file-20241017144701072.png"
+	width="723"
+	height="134"
+	
+	loading="lazy"
+	
+		alt="“最后更新于”示例图"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="539"
+		data-flex-basis="1294px"
+	
+></p>
+<h4 id="添加网站运行时间组件">添加网站运行时间组件
+</h4><p>​	打开<code>layouts\partials\footer\footer.html</code>文件，将下面代码插入</p>
+<p><img src="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/assets/image-20241020113933670.png"
+	width="1200"
+	height="887"
+	
+	loading="lazy"
+	
+		alt="image-20241020113933670"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="135"
+		data-flex-basis="324px"
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;timeDate&#34;</span><span class="p">&gt;</span>载入天数...<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">id</span><span class="o">=</span><span class="s">&#34;times&#34;</span><span class="p">&gt;</span>载入时分秒...<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">script</span> <span class="na">language</span><span class="o">=</span><span class="s">&#34;javascript&#34;</span><span class="p">&gt;</span> 
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">function</span> <span class="nx">createtime</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 当前时间
+</span></span></span><span class="line"><span class="cl">            <span class="nx">now</span><span class="p">.</span><span class="nx">setTime</span><span class="p">(</span><span class="nx">now</span><span class="p">.</span><span class="nx">getTime</span><span class="p">()</span><span class="o">+</span><span class="mi">250</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">var</span> <span class="nx">grt</span><span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="s2">&#34;2024/10/15 00:00:00&#34;</span><span class="p">);</span> <span class="c1">//网站诞生时间
+</span></span></span><span class="line"><span class="cl">            <span class="nx">days</span> <span class="o">=</span> <span class="p">(</span><span class="nx">now</span> <span class="o">-</span> <span class="nx">grt</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">/</span> <span class="mi">24</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">dnum</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">days</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">hours</span> <span class="o">=</span> <span class="p">(</span><span class="nx">now</span> <span class="o">-</span> <span class="nx">grt</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">/</span> <span class="mi">60</span> <span class="o">-</span> <span class="p">(</span><span class="mi">24</span> <span class="o">*</span> <span class="nx">dnum</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">hnum</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">hours</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">hnum</span><span class="p">).</span><span class="nx">length</span> <span class="o">==</span><span class="mi">1</span> <span class="p">){</span><span class="nx">hnum</span> <span class="o">=</span> <span class="s2">&#34;0&#34;</span> <span class="o">+</span> <span class="nx">hnum</span><span class="p">;}</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">minutes</span> <span class="o">=</span> <span class="p">(</span><span class="nx">now</span> <span class="o">-</span> <span class="nx">grt</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">/</span><span class="mi">60</span> <span class="o">-</span> <span class="p">(</span><span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="nx">dnum</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="nx">hnum</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">mnum</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">minutes</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">mnum</span><span class="p">).</span><span class="nx">length</span> <span class="o">==</span><span class="mi">1</span> <span class="p">){</span><span class="nx">mnum</span> <span class="o">=</span> <span class="s2">&#34;0&#34;</span> <span class="o">+</span> <span class="nx">mnum</span><span class="p">;}</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">seconds</span> <span class="o">=</span> <span class="p">(</span><span class="nx">now</span> <span class="o">-</span> <span class="nx">grt</span> <span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">-</span> <span class="p">(</span><span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="nx">dnum</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">*</span> <span class="nx">hnum</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="nx">mnum</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">snum</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="nx">seconds</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="nb">String</span><span class="p">(</span><span class="nx">snum</span><span class="p">).</span><span class="nx">length</span> <span class="o">==</span><span class="mi">1</span> <span class="p">){</span><span class="nx">snum</span> <span class="o">=</span> <span class="s2">&#34;0&#34;</span> <span class="o">+</span> <span class="nx">snum</span><span class="p">;}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;timeDate&#34;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">&#34;本站已稳定运行&#34;</span><span class="o">+</span><span class="nx">dnum</span><span class="o">+</span><span class="s2">&#34; 天 &#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&#34;times&#34;</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">hnum</span> <span class="o">+</span> <span class="s2">&#34; 小时 &#34;</span> <span class="o">+</span> <span class="nx">mnum</span> <span class="o">+</span> <span class="s2">&#34; 分 &#34;</span> <span class="o">+</span> <span class="nx">snum</span> <span class="o">+</span> <span class="s2">&#34; 秒&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">setInterval</span><span class="p">(</span><span class="s2">&#34;createtime()&#34;</span><span class="p">,</span><span class="mi">250</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span> 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该组件效果展示：</p>
+<p><img src="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/assets/file-20241017144358548.png"
+	width="1109"
+	height="243"
+	
+	loading="lazy"
+	
+		alt="网站运行时间统计"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="456"
+		data-flex-basis="1095px"
+	
+></p>
+<h4 id="左侧栏-id-和简介换行">左侧栏 ID 和简介换行
+</h4><p>​	找到<code>layouts\partials\footer\footer.html</code>中下方代码，更改为</p>
+<p><img src="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/assets/image-20241020114848291.png"
+	width="1299"
+	height="195"
+	
+	loading="lazy"
+	
+		alt="模板中默认代码"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="666"
+		data-flex-basis="1598px"
+	
+></p>
+<p>可以按照个人需求对下面代码进行调整，我将“个人ID”直接写进代码，通过更改<code>subtitle</code>实现换行</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;site-meta&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;site-name&#34;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{ .Site.BaseURL | relLangURL }}&#34;</span><span class="p">&gt;&lt;</span><span class="nt">span</span><span class="p">&gt;</span>Ranch<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">&lt;</span><span class="nt">h2</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;site-description&#34;</span><span class="p">&gt;</span>{{ .Site.Params.sidebar.subtitle1 }}<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>{{ .Site.Params.sidebar.subtitle2 }}<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>实际效果展示</p>
+<p><img src="/p/%E5%8D%9A%E5%AE%A2%E8%A3%85%E4%BF%AE%E6%97%A5%E8%AE%B0hugo-stack-giscus%E9%AD%94%E6%94%B9%E7%BE%8E%E5%8C%96-%E7%BB%86%E8%8A%82%E6%BB%A1%E6%BB%A1/assets/image-20241020115150916.png"
+	width="929"
+	height="199"
+	
+	loading="lazy"
+	
+		alt="左侧栏效果展示"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="466"
+		data-flex-basis="1120px"
+	
+></p>
+<p>到这里使用Hugo➕Stack➕Giscus部署到GitHub的博客搭建和魔改美化就告一段落啦</p>
+<p>后续如果有更新也会继续记录到<code>Blog</code>这个标签里</p>
+<h2 id="附录">附录
+</h2><h3 id="参考文献">参考文献
+</h3><ul>
+<li>《<a class="link" href="https://www.xalaok.top/post/stack-modify/"  target="_blank" rel="noopener"
+    >Hugo-theme-Stack 魔改美化</a>》</li>
+<li>《<a class="link" href="https://zhuanlan.zhihu.com/p/660791672"  target="_blank" rel="noopener"
+    >如何使用git submodule</a>》</li>
+<li>《<a class="link" href="https://oxidane-uni.github.io/p/%E5%B0%86%E5%8D%9A%E5%AE%A2%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F%E7%94%B1-utterance-%E8%BF%81%E7%A7%BB%E8%87%B3-giscus/"  target="_blank" rel="noopener"
+    >将博客评论系统由 utterance 迁移至 giscus</a>》</li>
+<li>《<a class="link" href="https://yelleis.top/p/61fdb627/"  target="_blank" rel="noopener"
+    >hugo stack 主题美化</a>》</li>
+<li>《<a class="link" href="https://blog.reincarnatey.net/2023/build-hugo-blog-with-stack-mod/"  target="_blank" rel="noopener"
+    >建站技术 | 使用 Hugo + Stack 简单搭建一个博客</a>》</li>
+<li>《<a class="link" href="https://dnwzlx.com/posts/146871a6/"  target="_blank" rel="noopener"
+    >Hugo和Github Action正确修改文章的最后更新日期</a>》</li>
+</ul>
+<h3 id="版权信息">版权信息
+</h3><p>本文原载于 <a class="link" href="https://ranch007.github.io"  target="_blank" rel="noopener"
+    >Ranch&rsquo;s Blog</a>，遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/blog/">Blog</a>
+        
+    </section>
+
+    
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>根据CC BY-NC-SA 4.0协议授权，转载请在留言板告知🔔</span>
+    </section>
+    <div>
+            <section class="article-lastmod">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z" /></svg>
+                    <time class="article-lastmod">
+                        最后更新于 2026-07-04 12:38</time>
+            </section>
+        </div></footer>
+
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/free%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BAgithub%E7%A7%81%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+        
+        
+            <div class="article-image">
+                <img src="/p/free%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BAgithub%E7%A7%81%E4%BA%BA%E5%8D%9A%E5%AE%A2/hugo-stack.7251e9aa187810e3d12031427c367da0_hu_7cf5bc9c9bae6f69.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 【Free】使用Hugo搭建GitHub私人博客"
+                        data-key="【Free】使用Hugo搭建GitHub私人博客" 
+                        data-hash="md5-clHpqhh4EOPRIDFCfDZ9oA==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【Free】使用Hugo搭建GitHub私人博客</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/">
+        
+        
+            <div class="article-image">
+                <img src="/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/cover.6a116deb2d7c877da897835890e75137_hu_be21fa37db6b5854.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Obsidian &#43; GitHub &#43; Hugo 博客发布工作流"
+                        data-key="2026-07-04-Obsidian-GitHub-Hugo-博客发布工作流" 
+                        data-hash="md5-ahFt6y18h32ol4NYkOdRNw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Obsidian &#43; GitHub &#43; Hugo 博客发布工作流</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/">
+        
+        
+            <div class="article-image">
+                <img src="/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/Obsidian%20AI%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95.9b08f17ba653076e5317d8dd0adabbb3_hu_5e6458c24243889.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Obsidian 个人知识库搭建全记录"
+                        data-key="2026-07-04-Obsidian 个人知识库搭建全记录" 
+                        data-hash="md5-mwjxe6ZTB25TF9jdCtq7sw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Obsidian 个人知识库搭建全记录</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/powershell-profile-%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/">
+        
+        
+            <div class="article-image">
+                <img src="/p/powershell-profile-%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/maxresdefault.07d33dc2e9aa6fc8c1613ce20e3eff43_hu_849fef1599b39fcb.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PowerShell $PROFILE 实用手册"
+                        data-key="PowerShell-PROFILE-实用手册" 
+                        data-hash="md5-B9M9wumqb8jBYTziDj7/Qw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PowerShell $PROFILE 实用手册</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/app%E6%8A%93%E5%8C%85%E4%B9%8B-burpsuite-mumu%E6%A8%A1%E6%8B%9F%E5%99%A812%E6%8A%93%E5%8C%85/">
+        
+        
+            <div class="article-image">
+                <img src="/p/app%E6%8A%93%E5%8C%85%E4%B9%8B-burpsuite-mumu%E6%A8%A1%E6%8B%9F%E5%99%A812%E6%8A%93%E5%8C%85/bp&#43;mumu.96deed941e65041bf50bfa0613f9a286_hu_6b5506dc499b374c.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post APP抓包之 Burpsuite&#43;MuMu模拟器12抓包"
+                        data-key="APP抓包之 Burpsuite&#43;MuMu模拟器12抓包" 
+                        data-hash="md5-lt7tlB5lBBv1C/oGE/mihg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">APP抓包之 Burpsuite&#43;MuMu模拟器12抓包</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="Ranch007/Message-Boards"
+    data-repo-id="R_kgDONBh4yw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDONBh4y84CjbwV"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Ranch&#39;s Blog
+    </section>
+
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script language="javascript"> 
+        var now = new Date();
+        function createtime(){
+            
+            now.setTime(now.getTime() + 250);
+            var grt = new Date("2024/10/15 00:00:00"); 
+            var days = (now - grt) / 1000 / 60 / 60 / 24;
+            var dnum = Math.floor(days);
+            var hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+            var hnum = Math.floor(hours);
+            if (String(hnum).length == 1) {
+                hnum = "0" + hnum;
+            }
+            var minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+            var mnum = Math.floor(minutes);
+            if (String(mnum).length == 1) {
+                mnum = "0" + mnum;
+            }
+            var seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            var snum = Math.round(seconds);
+            if (String(snum).length == 1) {
+                snum = "0" + snum;
+            }
+    
+            document.getElementById("timeDate").innerHTML = `本站已稳定运行<span style="color: lightblue;">${dnum}</span> 天`;
+            document.getElementById("timeDate").style.color = "gray"; 
+            document.getElementById("times").innerHTML = `<span style="color: lightblue;">${hnum}</span> 小时 <span style="color: lightblue;">${mnum}</span> 分 <span style="color: lightblue;">${snum}</span> 秒`;
+            document.getElementById("times").style.color = "gray"; 
+        }
+        setInterval(createtime, 250); 
+    </script>
+
+    
+    <section class="powerby">
+        
+            🤝本博客仅用于记录个人学习和成长。所有内容仅为个人观点，不代表任何团体或组织的立场。如有疑问，欢迎联系！ <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.27.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+
+</footer>
+
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script src="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.css" crossorigin="anonymous" />
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+
+    </body>
+</html>

@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 前言 【GNS3懒人版-2.2.45】—— by 熄灭的蜡烛\n【GNS3懒人版入门视频教程】—— by 熄灭的蜡烛\n感谢大佬的辛勤创作和无私分享！🫶\n镜像集成列表 镜像 Cisco 1: Cisco IOL Router 15.7(3)M22: Cisco IOL Switch 15.2(CML_NIGHTLY_20180510)3: Cisco IOL Switch 15.2(CML_NIGHTLY_20190423)4: Cisco IOSv 15.9(3)M65: Cisco IOSvL2 15.2(20200924:215240) H3C 6: H3C vAC1000 7.1.064 R5466P017: H3C vFW1000 7.1.064 E1190P028: H3C vSR1000 7.1.064 R1362P12 HillStone 9: HillStone SG6000 CloudEdge 5.5R10P4 v6 FortiGate 10: FortiGate 7.0.13 HuaWei 11: HuaWei AR1kv V300R021C00SPC100T12: HuaWei CE6800 V200R005C10SPC607B60713: HuaWei CE12800 V200R005C10SPC607B60714: HuaWei NE40E V800R011C00SPC607B60715: HuaWei USG6000V2 V500R005C00SPC100 Ruijie 16: Ruijie RG NSE router v1.0617: Ruijie RG NSE switch v1.0618: Ruijie RG NSE firewall v1.03 Juniper 19: Juniper vMX vCP 23.2R1-S1.620: Juniper vMX vFP 23.2R1-S1.6-KVM Windows 21: Windows XP Pro SP3 x8622: Windows Server 2022 DC x6423: Windows 10 22H2 Pro for Workstation x6424: Windows 11 23H2 Pro for Workstation x64 Ubuntu 25: Ubuntu Docker Guest\n26: Ubuntu 22.04 Desktop amd64\n27: Ubuntu Cloud 20.04 Server28: Ubuntu Cloud 22.04 Server RHEL 29: RHEL 7.9 update 1230: RHEL 8.831: RHEL 9.3 关于镜像密码的查看 在左侧设备列表里面双击你想要查看密码的那个，然后在打开的窗口里面点击最右边的选项卡里面查看。\n">
+<title>GNS3懒人版-2.2.45安装部署详细教程</title>
+
+<link rel='canonical' href='http://ranch007.github.io/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/'>
+
+<link rel="stylesheet" href="/scss/style.min.4dd5c05f7d951cb9f11c52fd8df2136a7affc98c428b6152d7519788cd1ab5dd.css"><meta property='og:title' content="GNS3懒人版-2.2.45安装部署详细教程">
+<meta property='og:description' content=" 前言 【GNS3懒人版-2.2.45】—— by 熄灭的蜡烛\n【GNS3懒人版入门视频教程】—— by 熄灭的蜡烛\n感谢大佬的辛勤创作和无私分享！🫶\n镜像集成列表 镜像 Cisco 1: Cisco IOL Router 15.7(3)M22: Cisco IOL Switch 15.2(CML_NIGHTLY_20180510)3: Cisco IOL Switch 15.2(CML_NIGHTLY_20190423)4: Cisco IOSv 15.9(3)M65: Cisco IOSvL2 15.2(20200924:215240) H3C 6: H3C vAC1000 7.1.064 R5466P017: H3C vFW1000 7.1.064 E1190P028: H3C vSR1000 7.1.064 R1362P12 HillStone 9: HillStone SG6000 CloudEdge 5.5R10P4 v6 FortiGate 10: FortiGate 7.0.13 HuaWei 11: HuaWei AR1kv V300R021C00SPC100T12: HuaWei CE6800 V200R005C10SPC607B60713: HuaWei CE12800 V200R005C10SPC607B60714: HuaWei NE40E V800R011C00SPC607B60715: HuaWei USG6000V2 V500R005C00SPC100 Ruijie 16: Ruijie RG NSE router v1.0617: Ruijie RG NSE switch v1.0618: Ruijie RG NSE firewall v1.03 Juniper 19: Juniper vMX vCP 23.2R1-S1.620: Juniper vMX vFP 23.2R1-S1.6-KVM Windows 21: Windows XP Pro SP3 x8622: Windows Server 2022 DC x6423: Windows 10 22H2 Pro for Workstation x6424: Windows 11 23H2 Pro for Workstation x64 Ubuntu 25: Ubuntu Docker Guest\n26: Ubuntu 22.04 Desktop amd64\n27: Ubuntu Cloud 20.04 Server28: Ubuntu Cloud 22.04 Server RHEL 29: RHEL 7.9 update 1230: RHEL 8.831: RHEL 9.3 关于镜像密码的查看 在左侧设备列表里面双击你想要查看密码的那个，然后在打开的窗口里面点击最右边的选项卡里面查看。\n">
+<meta property='og:url' content='http://ranch007.github.io/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/'>
+<meta property='og:site_name' content='Ranch&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='GNS3' /><meta property='article:published_time' content='2024-11-12T23:01:09&#43;08:00'/><meta property='article:modified_time' content='2026-07-04T12:38:17&#43;08:00'/><meta property='og:image' content='http://ranch007.github.io/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/gns3.png' />
+<meta name="twitter:title" content="GNS3懒人版-2.2.45安装部署详细教程">
+<meta name="twitter:description" content=" 前言 【GNS3懒人版-2.2.45】—— by 熄灭的蜡烛\n【GNS3懒人版入门视频教程】—— by 熄灭的蜡烛\n感谢大佬的辛勤创作和无私分享！🫶\n镜像集成列表 镜像 Cisco 1: Cisco IOL Router 15.7(3)M22: Cisco IOL Switch 15.2(CML_NIGHTLY_20180510)3: Cisco IOL Switch 15.2(CML_NIGHTLY_20190423)4: Cisco IOSv 15.9(3)M65: Cisco IOSvL2 15.2(20200924:215240) H3C 6: H3C vAC1000 7.1.064 R5466P017: H3C vFW1000 7.1.064 E1190P028: H3C vSR1000 7.1.064 R1362P12 HillStone 9: HillStone SG6000 CloudEdge 5.5R10P4 v6 FortiGate 10: FortiGate 7.0.13 HuaWei 11: HuaWei AR1kv V300R021C00SPC100T12: HuaWei CE6800 V200R005C10SPC607B60713: HuaWei CE12800 V200R005C10SPC607B60714: HuaWei NE40E V800R011C00SPC607B60715: HuaWei USG6000V2 V500R005C00SPC100 Ruijie 16: Ruijie RG NSE router v1.0617: Ruijie RG NSE switch v1.0618: Ruijie RG NSE firewall v1.03 Juniper 19: Juniper vMX vCP 23.2R1-S1.620: Juniper vMX vFP 23.2R1-S1.6-KVM Windows 21: Windows XP Pro SP3 x8622: Windows Server 2022 DC x6423: Windows 10 22H2 Pro for Workstation x6424: Windows 11 23H2 Pro for Workstation x64 Ubuntu 25: Ubuntu Docker Guest\n26: Ubuntu 22.04 Desktop amd64\n27: Ubuntu Cloud 20.04 Server28: Ubuntu Cloud 22.04 Server RHEL 29: RHEL 7.9 update 1230: RHEL 8.831: RHEL 9.3 关于镜像密码的查看 在左侧设备列表里面双击你想要查看密码的那个，然后在打开的窗口里面点击最右边的选项卡里面查看。\n"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='http://ranch007.github.io/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/gns3.png' />
+    <link rel="shortcut icon" href="/favcion.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside
+  class="sidebar left-sidebar sticky "
+>
+  <button
+    class="hamburger hamburger--spin"
+    type="button"
+    id="toggle-menu"
+    aria-label="切换菜单"
+  >
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </button>
+
+  <header>
+     
+    <figure class="site-avatar">
+      <a href="https://github.com/Ranch007">
+        
+        <img
+          src="https://github.com/Ranch007.png"
+          width="300"
+          height="300"
+          class="site-logo"
+          loading="lazy"
+          alt="Avatar"
+        />
+        
+      </a>
+      
+    </figure>
+     
+
+    <div class="site-meta">
+      <h1 class="site-name">
+        <a href="/"><span>Ranch</span></a>
+      </h1>
+      <h2 class="site-description">
+        知是行之始<br />行是知之成
+      </h2>
+    </div>
+  </header><ol class="menu-social">
+    
+    <li>
+      <a
+        href="https://github.com/Ranch007/Ranch007.github.io"
+        target="_blank"
+        
+        title="Ranch&#39;s GitHub"
+        
+        rel="me"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+ 
+      </a>
+    </li>
+    
+    <li>
+      <a
+        href="mailto:zhao11345lin07@163.com"
+        target="_blank"
+        
+        title="Email"
+        
+        rel="me"
+      >
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z" /><path d="M3 7l9 6l9 -6" /></svg> 
+      </a>
+    </li>
+    
+    <li>
+      <a
+        href="/index.xml"
+        target="_blank"
+        
+        title="RSS"
+        
+        rel="me"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="5" cy="19" r="1" />
+  <path d="M4 4a16 16 0 0 1 16 16" />
+  <path d="M4 11a9 9 0 0 1 9 9" />
+</svg>
+
+
+ 
+      </a>
+    </li>
+    
+  </ol><ol class="menu" id="main-menu">
+      
+    <li >
+      <a
+        href="/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+ 
+        <span>主页</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/about/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+ 
+        <span>关于</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/archives/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+ 
+        <span>归档</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/talk/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-messages" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10" />
+  <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2" />
+</svg>
+
+
+ 
+        <span>留言</span>
+      </a>
+    </li>
+     
+    <li >
+      <a
+        href="/links/"
+        
+      >
+           <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+ 
+        <span>友链</span>
+      </a>
+    </li>
+    
+    <li class="menu-bottom-section">
+      <ol class="menu">
+
+        
+        
+        <li id="dark-mode-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-sun-high" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M14.828 14.828a4 4 0 1 0 -5.656 -5.656a4 4 0 0 0 5.656 5.656z" />
+  <path d="M6.343 17.657l-1.414 1.414" />
+  <path d="M6.343 6.343l-1.414 -1.414" />
+  <path d="M17.657 6.343l1.414 -1.414" />
+  <path d="M17.657 17.657l1.414 1.414" />
+  <path d="M4 12h-2" />
+  <path d="M12 4v-2" />
+  <path d="M20 12h2" />
+  <path d="M12 20v2" />
+</svg> <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon-stars" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+  <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+  <path d="M19 11h2m-1 -1v2" />
+</svg>
+          <span>背景模式</span>
+        </li>
+        
+      </ol>
+    </li>
+  </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#镜像集成列表">镜像集成列表</a>
+      <ol>
+        <li><a href="#关于镜像密码的查看">关于镜像密码的查看</a></li>
+      </ol>
+    </li>
+    <li><a href="#资源链接">资源链接</a>
+      <ol>
+        <li><a href="#文件信息">文件信息</a></li>
+      </ol>
+    </li>
+    <li><a href="#使用vmware导入gns3-vm">使用VMware导入GNS3 VM</a>
+      <ol>
+        <li><a href="#下载gns3懒人版">下载GNS3懒人版</a></li>
+        <li><a href="#导入gns3-vm">导入<code>GNS3 VM</code></a></li>
+        <li><a href="#打开gns3-vm">打开GNS3 VM</a></li>
+      </ol>
+    </li>
+    <li><a href="#安装gns3-2245-all-in-oneexe">安装<code>GNS3-2.2.45-all-in-one.exe</code></a>
+      <ol>
+        <li><a href="#准备工作">准备工作</a></li>
+        <li><a href="#双击安装">双击安装</a></li>
+      </ol>
+    </li>
+    <li><a href="#附录">附录</a>
+      <ol>
+        <li><a href="#参考文献">参考文献</a></li>
+        <li><a href="#版权信息">版权信息</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/">
+                <img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/gns3_hu_d66de772e544489c.png"
+                        srcset="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/gns3_hu_d66de772e544489c.png 800w, /p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/gns3_hu_7c002c27047edc63.png 1600w"
+                        width="800" 
+                        height="419" 
+                        loading="lazy"
+                        alt="Featured image of post GNS3懒人版-2.2.45安装部署详细教程" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/" style="background-color: #2a9d8f; color: #fff;">
+                网络技术
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/">GNS3懒人版-2.2.45安装部署详细教程</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024-11-12</time>
+            </div>
+        
+
+        
+            <div>
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-file-word"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 12l1.333 5l1.667 -4l1.667 4l1.333 -5" /></svg>
+                <time class="article-words">
+                    1023 字
+                </time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    
+                    阅读时长: 11 分钟
+                </time>
+            </div>
+        <div>
+            <section class="article-lastmod">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z" /></svg>
+                    <time class="article-lastmod">2026-07-04 12:38</time>
+            </section>
+        </div></footer>
+    
+
+    
+</div>
+
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <hr>
+<h2 id="前言">前言
+</h2><blockquote>
+<p>【<a class="link" href="https://www.emulatedlab.com/thread-1561-1-1.html"  target="_blank" rel="noopener"
+    >GNS3懒人版-2.2.45</a>】—— by 熄灭的蜡烛</p>
+<p>【<a class="link" href="https://www.bilibili.com/video/BV1fi4y1r7Tb/"  target="_blank" rel="noopener"
+    >GNS3懒人版入门视频教程</a>】—— by 熄灭的蜡烛</p>
+<p>感谢大佬的辛勤创作和无私分享！🫶</p>
+</blockquote>
+<h2 id="镜像集成列表">镜像集成列表
+</h2><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th style="text-align: center">镜像</th>
+					<th style="text-align: left"></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: center"><br /><br />Cisco</td>
+					<td style="text-align: left">1: Cisco IOL Router 15.7(3)M2<br/>2: Cisco IOL Switch 15.2(CML_NIGHTLY_20180510)<br/>3: Cisco IOL Switch 15.2(CML_NIGHTLY_20190423)<br/>4: Cisco IOSv 15.9(3)M6<br/>5: Cisco IOSvL2 15.2(20200924:215240)</td>
+			</tr>
+			<tr>
+					<td style="text-align: center"><br />H3C</td>
+					<td style="text-align: left">6: H3C vAC1000 7.1.064 R5466P01<br/>7: H3C vFW1000 7.1.064 E1190P02<br/>8: H3C vSR1000 7.1.064 R1362P12</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">HillStone</td>
+					<td style="text-align: left">9: HillStone SG6000 CloudEdge 5.5R10P4 v6</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">FortiGate</td>
+					<td style="text-align: left">10: FortiGate 7.0.13</td>
+			</tr>
+			<tr>
+					<td style="text-align: center"><br /><br />HuaWei</td>
+					<td style="text-align: left">11: HuaWei AR1kv V300R021C00SPC100T<br/>12: HuaWei CE6800 V200R005C10SPC607B607<br/>13: HuaWei CE12800 V200R005C10SPC607B607<br/>14: HuaWei NE40E V800R011C00SPC607B607<br/>15: HuaWei USG6000V2 V500R005C00SPC100</td>
+			</tr>
+			<tr>
+					<td style="text-align: center"><br />Ruijie</td>
+					<td style="text-align: left">16: Ruijie RG NSE router v1.06<br/>17: Ruijie RG NSE switch v1.06<br/>18: Ruijie RG NSE firewall v1.03</td>
+			</tr>
+			<tr>
+					<td style="text-align: center">Juniper</td>
+					<td style="text-align: left">19: Juniper vMX vCP 23.2R1-S1.6<br/>20: Juniper vMX vFP 23.2R1-S1.6-KVM</td>
+			</tr>
+			<tr>
+					<td style="text-align: center"><br />Windows</td>
+					<td style="text-align: left">21: Windows XP Pro SP3 x86<br/>22: Windows Server 2022 DC x64<br/>23: Windows 10 22H2 Pro for Workstation x64<br/>24: Windows 11 23H2 Pro for Workstation x64</td>
+			</tr>
+			<tr>
+					<td style="text-align: center"><br />Ubuntu</td>
+					<td style="text-align: left">25: Ubuntu Docker Guest<br />26: Ubuntu 22.04 Desktop amd64<br />27: Ubuntu Cloud 20.04 Server<br/>28: Ubuntu Cloud 22.04 Server</td>
+			</tr>
+			<tr>
+					<td style="text-align: center"><br />RHEL</td>
+					<td style="text-align: left">29: RHEL 7.9 update 12<br/>30: RHEL 8.8<br/>31: RHEL 9.3</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="关于镜像密码的查看">关于镜像密码的查看
+</h3><p>在左侧设备列表里面双击你想要查看密码的那个，然后在打开的窗口里面点击最右边的选项卡里面查看。</p>
+<p><img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/assets/image-20241113000705087.png"
+	width="1200"
+	height="717"
+	
+	loading="lazy"
+	
+		alt="大部分设备没有密码，具体请看Usage中备注"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="167"
+		data-flex-basis="401px"
+	
+></p>
+<h2 id="资源链接">资源链接
+</h2><blockquote>
+<p><strong>百度网盘</strong><br>
+链接: <a class="link" href="https://pan.baidu.com/s/19aqOB7iBvXN9olJDZKwkjg?pwd=qpk3"  target="_blank" rel="noopener"
+    >https://pan.baidu.com/s/19aqOB7iBvXN9olJDZKwkjg?pwd=qpk3</a></p>
+<p><strong>123云盘</strong><br>
+链接: <a class="link" href="https://www.123pan.com/s/QCF9-8yWTd.html"  target="_blank" rel="noopener"
+    >https://www.123pan.com/s/QCF9-8yWTd.html</a><br>
+提取码：DrnB</p>
+<p><strong>OneDrive商业版</strong><br>
+链接：https://xmdlz-my.sharepoint.com/:f:/p/xmdlz_vip/Es7y5_IPGR9PuhMXZoYKT-gBbDXt7Yo_voEEYFCBznCutw?e=Sw1YQ8<br>
+密码：TjptvEgWRyZidYgjCZw0</p>
+</blockquote>
+<h3 id="文件信息">文件信息
+</h3><p>文件名：GNS3.VM.VMware.Workstation.2.2.45.ova
+大小：57572920832字节
+MD5: 20c6aa8778ef84c08b5f9857469ac896
+SHA1: a67e4a41acdec8802307dfa0490c5a1adf447db2
+SHA256: 70bb6c738570ca6db011c003938cd8cde6ccf8ad11a48493c587234218307c2e</p>
+<h2 id="使用vmware导入gns3-vm">使用VMware导入GNS3 VM
+</h2><h3 id="下载gns3懒人版">下载GNS3懒人版
+</h3><p>这里我使用的是作者提供的百度网盘中的链接</p>
+<p><img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/assets/image-20241113001638655.png"
+	width="916"
+	height="417"
+	
+	loading="lazy"
+	
+		alt="GNS3中的文件"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="219"
+		data-flex-basis="527px"
+	
+></p>
+<h3 id="导入gns3-vm">导入<code>GNS3 VM</code>
+</h3><p>前提是得装好<code>VMwate Workstation Pro</code>，直接双击打开<code>GNS3.VM.VMware.Workstation.2.2.45.ova</code></p>
+<p><img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/assets/image-20241113003139231.png"
+	width="828"
+	height="168"
+	
+	loading="lazy"
+	
+		alt="image-20241113003139231"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="492"
+		data-flex-basis="1182px"
+	
+></p>
+<p><img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/assets/image-20241113003316264.png"
+	width="1106"
+	height="388"
+	
+	loading="lazy"
+	
+		alt="填写英文名称，会自动生成默认路径，亦可更改路径"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="285"
+		data-flex-basis="684px"
+	
+></p>
+<p><img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/assets/image-20241113003444382.png"
+	width="745"
+	height="218"
+	
+	loading="lazy"
+	
+		alt="点击确认后开始导入GNS3 VM"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="341"
+		data-flex-basis="820px"
+	
+></p>
+<p><img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/assets/image-20241113004639962.png"
+	width="1221"
+	height="648"
+	
+	loading="lazy"
+	
+		alt="GNS VM导入完成"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="188"
+		data-flex-basis="452px"
+	
+></p>
+<h3 id="打开gns3-vm">打开GNS3 VM
+</h3><p>如果虚拟机正常开启并获取到IP，请保持打开状态继续下一步操作。</p>
+<p><img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/assets/image-20241113004826066.png"
+	width="1024"
+	height="600"
+	
+	loading="lazy"
+	
+		alt="点击Power On打开GNS3 VM"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="170"
+		data-flex-basis="409px"
+	
+></p>
+<p>⚠️这里可能存在导入成功后，打开GNS3 VM获取不到IP地址。可能是<code>VMware DHCP Service</code>服务没有打开</p>
+<p><img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/assets/image-20241113004257856.png"
+	width="1200"
+	height="704"
+	
+	loading="lazy"
+	
+		alt="image-20241113004257856"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="170"
+		data-flex-basis="409px"
+	
+></p>
+<h2 id="安装gns3-2245-all-in-oneexe">安装<code>GNS3-2.2.45-all-in-one.exe</code>
+</h2><h3 id="准备工作">准备工作
+</h3><p><img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/assets/image-20241113005635705.png"
+	width="728"
+	height="211"
+	
+	loading="lazy"
+	
+		alt="按照提示安装即可"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="345"
+		data-flex-basis="828px"
+	
+></p>
+<h3 id="双击安装">双击安装
+</h3><p>无特殊需求，即可按照默认配置依序安装。</p>
+<p><img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/assets/image-20241113005315222.png"
+	width="833"
+	height="549"
+	
+	loading="lazy"
+	
+		alt="双击安装GNS3-2.2.45-all-in-one.exe"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="151"
+		data-flex-basis="364px"
+	
+></p>
+<p>安装完成后打开GNS3</p>
+<p>虚拟机GNS3 VM与GNS3版本必须保持一致，此教程使用<code>GNS3-2.2.45</code></p>
+<p>根据<code>Setup Wizard</code>提示，选择第三个，点击下一步</p>
+<p><img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/assets/image-20241113010801976.png"
+	width="924"
+	height="447"
+	
+	loading="lazy"
+	
+		alt="作者演示视频截图"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="206"
+		data-flex-basis="496px"
+	
+></p>
+<p>将虚拟机中获取的IP地址和端口号，依次输入。并取消<code>Enable authentication</code>的勾选。</p>
+<p><img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/assets/image-20241113010510802.png"
+	width="525"
+	height="392"
+	
+	loading="lazy"
+	
+		alt="输入虚拟机中生成的IP和端口"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="133"
+		data-flex-basis="321px"
+	
+></p>
+<p>稍等一会就会出现这个，点击下面的Finish就完成了</p>
+<p><img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/assets/image-20241113011652728.png"
+	width="1327"
+	height="621"
+	
+	loading="lazy"
+	
+		alt="image-20241113011652728"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="213"
+		data-flex-basis="512px"
+	
+></p>
+<p><img src="/p/gns3%E6%87%92%E4%BA%BA%E7%89%88-2.2.45%E5%AE%89%E8%A3%85%E9%83%A8%E7%BD%B2%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B/assets/image-20241113011825413.png"
+	width="1191"
+	height="682"
+	
+	loading="lazy"
+	
+		alt="点开右侧栏倒数第二个按钮就可以看见集成的所有镜像"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="174"
+		data-flex-basis="419px"
+	
+></p>
+<p>再次感谢“熄灭的蜡烛”大大的制作与分享，让我们用上集成般的GNS3！👏</p>
+<h2 id="附录">附录
+</h2><h3 id="参考文献">参考文献
+</h3><p>《<a class="link" href="https://www.emulatedlab.com/thread-1561-1-1.html"  target="_blank" rel="noopener"
+    >GNS3懒人版-2.2.45</a>》</p>
+<p>《<a class="link" href="https://www.bilibili.com/video/BV1fi4y1r7Tb/"  target="_blank" rel="noopener"
+    >GNS3懒人版入门视频教程</a>》</p>
+<h3 id="版权信息">版权信息
+</h3><p>本文原载于 <a class="link" href="https://ranch007.github.io"  target="_blank" rel="noopener"
+    >Ranch&rsquo;s Blog</a>，遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/gns3/">GNS3</a>
+        
+    </section>
+
+    
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>根据CC BY-NC-SA 4.0协议授权，转载请在留言板告知🔔</span>
+    </section>
+    <div>
+            <section class="article-lastmod">
+                <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39z" /></svg>
+                    <time class="article-lastmod">
+                        最后更新于 2026-07-04 12:38</time>
+            </section>
+        </div></footer>
+
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/">
+        
+        
+            <div class="article-image">
+                <img src="/p/2026-07-04-obsidian-github-hugo-%E5%8D%9A%E5%AE%A2%E5%8F%91%E5%B8%83%E5%B7%A5%E4%BD%9C%E6%B5%81/cover.6a116deb2d7c877da897835890e75137_hu_be21fa37db6b5854.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Obsidian &#43; GitHub &#43; Hugo 博客发布工作流"
+                        data-key="2026-07-04-Obsidian-GitHub-Hugo-博客发布工作流" 
+                        data-hash="md5-ahFt6y18h32ol4NYkOdRNw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Obsidian &#43; GitHub &#43; Hugo 博客发布工作流</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/">
+        
+        
+            <div class="article-image">
+                <img src="/p/2026-07-04-obsidian-%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E5%85%A8%E8%AE%B0%E5%BD%95/Obsidian%20AI%E7%9F%A5%E8%AF%86%E5%BA%93%E6%90%AD%E5%BB%BA%E8%AE%B0%E5%BD%95.9b08f17ba653076e5317d8dd0adabbb3_hu_5e6458c24243889.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post Obsidian 个人知识库搭建全记录"
+                        data-key="2026-07-04-Obsidian 个人知识库搭建全记录" 
+                        data-hash="md5-mwjxe6ZTB25TF9jdCtq7sw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Obsidian 个人知识库搭建全记录</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/powershell-profile-%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/">
+        
+        
+            <div class="article-image">
+                <img src="/p/powershell-profile-%E5%AE%9E%E7%94%A8%E6%89%8B%E5%86%8C/maxresdefault.07d33dc2e9aa6fc8c1613ce20e3eff43_hu_849fef1599b39fcb.jpg" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post PowerShell $PROFILE 实用手册"
+                        data-key="PowerShell-PROFILE-实用手册" 
+                        data-hash="md5-B9M9wumqb8jBYTziDj7/Qw==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">PowerShell $PROFILE 实用手册</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/app%E6%8A%93%E5%8C%85%E4%B9%8B-burpsuite-mumu%E6%A8%A1%E6%8B%9F%E5%99%A812%E6%8A%93%E5%8C%85/">
+        
+        
+            <div class="article-image">
+                <img src="/p/app%E6%8A%93%E5%8C%85%E4%B9%8B-burpsuite-mumu%E6%A8%A1%E6%8B%9F%E5%99%A812%E6%8A%93%E5%8C%85/bp&#43;mumu.96deed941e65041bf50bfa0613f9a286_hu_6b5506dc499b374c.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post APP抓包之 Burpsuite&#43;MuMu模拟器12抓包"
+                        data-key="APP抓包之 Burpsuite&#43;MuMu模拟器12抓包" 
+                        data-hash="md5-lt7tlB5lBBv1C/oGE/mihg==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">APP抓包之 Burpsuite&#43;MuMu模拟器12抓包</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/">
+        
+        
+            <div class="article-image">
+                <img src="/p/hcia-%E8%B7%AF%E7%94%B1%E4%B8%8E%E4%BA%A4%E6%8D%A2-wakin-%E8%B0%A2sirtcp/ip%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/icipie.a033ad6466af6169cda29396add266da_hu_66fc20d42c1883a6.png" 
+                        width="250" 
+                        height="150" 
+                        loading="lazy"
+                        alt="Featured image of post 【HCIA 路由与交换 Wakin 谢Sir】TCP/IP网络模型"
+                        data-key="【HCIA 路由与交换 Wakin 谢Sir】TCP/IP网络模型" 
+                        data-hash="md5-oDOtZGavYWnNopOWrdJm2g==">
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">【HCIA 路由与交换 Wakin 谢Sir】TCP/IP网络模型</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="Ranch007/Message-Boards"
+    data-repo-id="R_kgDONBh4yw"
+    data-category="Announcements"
+    data-category-id="DIC_kwDONBh4y84CjbwV"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="zh-CN"
+    crossorigin="anonymous"
+    async>
+</script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Ranch&#39;s Blog
+    </section>
+
+    <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+    <script language="javascript"> 
+        var now = new Date();
+        function createtime(){
+            
+            now.setTime(now.getTime() + 250);
+            var grt = new Date("2024/10/15 00:00:00"); 
+            var days = (now - grt) / 1000 / 60 / 60 / 24;
+            var dnum = Math.floor(days);
+            var hours = (now - grt) / 1000 / 60 / 60 - (24 * dnum);
+            var hnum = Math.floor(hours);
+            if (String(hnum).length == 1) {
+                hnum = "0" + hnum;
+            }
+            var minutes = (now - grt) / 1000 / 60 - (24 * 60 * dnum) - (60 * hnum);
+            var mnum = Math.floor(minutes);
+            if (String(mnum).length == 1) {
+                mnum = "0" + mnum;
+            }
+            var seconds = (now - grt) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+            var snum = Math.round(seconds);
+            if (String(snum).length == 1) {
+                snum = "0" + snum;
+            }
+    
+            document.getElementById("timeDate").innerHTML = `本站已稳定运行<span style="color: lightblue;">${dnum}</span> 天`;
+            document.getElementById("timeDate").style.color = "gray"; 
+            document.getElementById("times").innerHTML = `<span style="color: lightblue;">${hnum}</span> 小时 <span style="color: lightblue;">${mnum}</span> 分 <span style="color: lightblue;">${snum}</span> 秒`;
+            document.getElementById("times").style.color = "gray"; 
+        }
+        setInterval(createtime, 250); 
+    </script>
+
+    
+    <section class="powerby">
+        
+            🤝本博客仅用于记录个人学习和成长。所有内容仅为个人观点，不代表任何团体或组织的立场。如有疑问，欢迎联系！ <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.27.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+
+</footer>
+
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script src="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://npm.elemecdn.com/nprogress@0.2.0/nprogress.css" crossorigin="anonymous" />
+<script>
+    NProgress.start();
+    document.addEventListener("readystatechange", () => {
+        if (document.readyState === "interactive") NProgress.inc(0.8);
+        if (document.readyState === "complete") NProgress.done();
+    });
+</script>
+
+
+
+    </body>
+</html>
