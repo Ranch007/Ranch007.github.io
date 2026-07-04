@@ -3,7 +3,7 @@ title: "Obsidian + GitHub + Hugo 博客发布工作流"
 slug: "2026-07-04-Obsidian-GitHub-Hugo-博客发布工作流"
 description: ""
 date: "2026-07-04T08:00:00+08:00"
-image: 
+image: cover.jpg
 math:
 license:
 hidden: false
@@ -208,7 +208,7 @@ title: "Obsidian 个人知识库搭建全记录"
 slug: "2026-07-04-Obsidian-个人知识库搭建全记录"
 description: ""
 date: "2026-07-04T08:00:00+08:00"
-image:
+image: cover.jpg
 math:
 license:
 hidden: false
@@ -490,4 +490,5 @@ hugo server -D
 
 ### 版权信息
 > 本文原载于 [Ranch's Blog](https://ranch007.github.io)，遵循 CC BY-NC-SA 4.0 协议，复制请保留原文出处。
+
 
