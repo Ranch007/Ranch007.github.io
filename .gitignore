@@ -3,6 +3,7 @@ public
 resources
 .hugo_build.lock
 .reasonix
+docs
 
 # hugo命令
 ChuangJian.py
