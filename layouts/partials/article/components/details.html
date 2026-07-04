@@ -42,7 +42,7 @@
             <section class="article-lastmod">
                 {{ partial "helper/icon" "edit" }}
                     <time class="article-lastmod">
-                        {{- .Lastmod.Format (or .Site.Params.dateFormat.lastUpdated "2006-01-02T15:04") -}}
+                        {{- .Lastmod | time.Format (or .Site.Params.dateFormat.lastUpdated "2006-01-02 15:04") -}}
                     </time>
             </section>
         </div>
