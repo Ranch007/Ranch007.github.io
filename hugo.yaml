@@ -34,6 +34,7 @@ permalinks:
   page: /:slug/
 
 params:
+  readingspeed: 100
   mainSections:
     - post
   featuredImageField: image
