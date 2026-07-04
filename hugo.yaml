@@ -52,8 +52,8 @@ params:
   sidebar:
     compact: false
     emoji:
-    subtitle1: 知识面决定攻击面
-    subtitle2: 知识链决定攻击链
+    subtitle1: 知是行之始
+    subtitle2: 行是知之成
 
     avatar:
       enabled: true
