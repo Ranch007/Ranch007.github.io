@@ -1,9 +1,6 @@
 {{ define "main" }}
 
-    {{ $pages := where .Site.RegularPages "Type" "in" .Site.Params.mainSections }}
-    {{ $notHidden := where .Site.RegularPages "Params.hidden" "!=" true }}
-    {{ $filtered := ($pages | intersect $notHidden) }}
-    {{ $pag := .Paginate ($filtered) }}
+    {{- $paginator := partial "helper/paginator.html" . -}}
 
     <!-- 首页欢迎字幅 -->
     <div class="welcome">
@@ -18,17 +15,17 @@
         </p>
     </div>
     <!-- 首页欢迎字幅 -->
-     
+
     <section class="article-list">
-        {{ range $index, $element := $pag.Pages }}
+        {{ range $index, $element := $paginator.Pages }}
             {{ partial "article-list/default" . }}
         {{ end }}
     </section>
-    
+
     {{- partial "pagination.html" . -}}
-    
+
     {{- partial "footer/footer" . -}}
-    
+
 {{ end }}
 
 {{ define "right-sidebar" }}

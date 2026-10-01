@@ -595,8 +595,27 @@ kbd {
 //     transform: rotate(360deg); // 旋转角度为360度
 //   }
 
-// 统一并收紧文章元信息图标与文字的间距（主题默认 15px，偏大）
-.article-time > div,
-.article-translations > div {
-  gap: 6px;
+// 统一并收紧文章元信息图标与文字的间距（v4 结构：.article-meta > .inline-meta）
+.article-meta > .inline-meta {
+  gap: 15px; // 项目之间
+}
+.article-meta .meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px; // 图标与文字之间收紧
+}
+
+// 暗色模式下日/月图标切换（原覆盖 sidebar.scss，现收敛到这里）
+#dark-mode-toggle {
+  .icon-tabler-moon-stars {
+    display: none;
+  }
+}
+[data-scheme="dark"] #dark-mode-toggle {
+  .icon-tabler-sun-high {
+    display: none;
+  }
+  .icon-tabler-moon-stars {
+    display: unset;
+  }
 }
