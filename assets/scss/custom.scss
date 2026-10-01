@@ -605,9 +605,12 @@ kbd {
   gap: 6px; // 图标与文字之间收紧
 }
 
-// 暗色模式下日/月图标切换（原覆盖 sidebar.scss，现收敛到这里）
+// 配色切换：日月图标与文字按当前配色互斥显示
 #dark-mode-toggle {
   .icon-tabler-moon-stars {
+    display: none;
+  }
+  .color-scheme-label--dark {
     display: none;
   }
 }
@@ -617,5 +620,11 @@ kbd {
   }
   .icon-tabler-moon-stars {
     display: unset;
+  }
+  .color-scheme-label--light {
+    display: none;
+  }
+  .color-scheme-label--dark {
+    display: inline;
   }
 }
