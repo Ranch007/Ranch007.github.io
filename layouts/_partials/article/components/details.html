@@ -58,15 +58,6 @@
                     </time>
                 </span>
             {{ end }}
-
-            {{- if ne $Page.Lastmod $Page.Date -}}
-                <span class="meta-item">
-                    {{ partial "helper/icon" "edit" }}
-                    <time class="article-lastmod">
-                        {{- $Page.Lastmod | time.Format (or $Page.Site.Params.dateFormat.lastUpdated "2006-01-02 15:04") -}}
-                    </time>
-                </span>
-            {{- end -}}
         </div>
     </footer>
     {{ end }}
