@@ -4,10 +4,7 @@
     {{ if $Page.Params.categories }}
     <header class="article-category">
         {{ range ($Page.GetTerms "categories") }}
-            {{ $color := partial "helper/color-from-str" .LinkTitle }}
-            {{ $BackgroundColor := default $color.BackgroundColor .Params.style.background }}
-            {{ $TextColor := default $color.TextColor .Params.style.color }}
-            <a href="{{ .RelPermalink }}" style="background-color: {{ $BackgroundColor | safeCSS }}; color: {{ $TextColor | safeCSS }};">
+            <a href="{{ .RelPermalink }}" {{ with .Params.style }}style="background-color: {{ .background }}; color: {{ .color }};"{{ end }}>
                 {{ .LinkTitle }}
             </a>
         {{ end }}
@@ -30,56 +27,58 @@
 
     {{ $showReadingTime := $Page.Params.readingTime | default ($Page.Site.Params.article.readingTime) }}
     {{ $showDate := not $Page.Date.IsZero }}
-    {{ $showTime := or $showDate $showReadingTime }}
-    {{ $showTranslations := $Page.IsTranslated }}
-    {{ $showTags := and $Page.Site.Params.Article.List.ShowTags ($Page.GetTerms "tags") $IsList }}
-
-    {{ if or $showTime $showTranslations $showTags }}
+    {{ $showFooter := or $showDate $showReadingTime }}
+    {{ if $showFooter }}
     <footer class="article-meta">
-        {{ if $showTime }}
-            <div class="inline-meta">
-                {{ if $showDate }}
-                    <span class="meta-item">
-                        {{ partial "helper/icon" "date" }}
-                        <time class="article-time--published" datetime='{{ $Page.Date.Format "2006-01-02T15:04:05Z07:00" }}'>
-                            {{- $Page.Date | time.Format $Page.Site.Params.dateFormat.published -}}
-                        </time>
-                    </span>
-                {{ end }}
+        <div class="inline-meta">
+            {{ if $showDate }}
+                <span class="meta-item">
+                    {{ partial "helper/icon" "date" }}
+                    <time class="article-time--published">
+                        {{- $Page.Date | time.Format (or $Page.Site.Params.dateFormat.published "Jan 02, 2006") -}}
+                    </time>
+                </span>
+            {{ end }}
 
+            {{ if $Page.Site.Params.article.readingTime }}
                 <span class="meta-item">
                     {{ partial "helper/icon" "file-description" }}
-                    <time class="article-words">{{ $Page.WordCount }} 字</time>
+                    <time class="article-words">
+                        {{ $Page.WordCount }} 字
+                    </time>
                 </span>
+            {{ end }}
 
-                {{ if $showReadingTime }}
-                    <span class="meta-item">
-                        {{ partial "helper/icon" "clock" }}
-                        <time class="article-time--reading">
-                            {{ T "article.readingTime" $Page.ReadingTime }}
-                        </time>
-                    </span>
-                {{ end }}
-            </div>
-        {{ end }}
+            {{ if $showReadingTime }}
+                <span class="meta-item">
+                    {{ partial "helper/icon" "clock" }}
+                    <time class="article-time--reading">
+                        {{ $readingTime := math.Ceil (div (float $Page.WordCount) 100.0) }}
+                        {{ T "article.readingTime" (int $readingTime) }}
+                    </time>
+                </span>
+            {{ end }}
 
-        {{ if $showTranslations }}
+            {{- if ne $Page.Lastmod $Page.Date -}}
+                <span class="meta-item">
+                    {{ partial "helper/icon" "edit" }}
+                    <time class="article-lastmod">
+                        {{- $Page.Lastmod | time.Format (or $Page.Site.Params.dateFormat.lastUpdated "2006-01-02 15:04") -}}
+                    </time>
+                </span>
+            {{- end -}}
+        </div>
+    </footer>
+    {{ end }}
+
+    {{ if $Page.IsTranslated }}
+        <footer class="article-meta">
             <div class="inline-meta">
                 {{ partial "helper/icon" "language" }}
                 {{ range $Page.Translations }}
                     <a href="{{ .RelPermalink }}" class="link">{{ .Language.Label }}</a>
                 {{ end }}
             </div>
-        {{ end }}
-
-        {{ if $showTags }}
-            <div class="article-tags inline-meta">
-                {{ partial "helper/icon" "tag" }}
-                {{ range ($Page.GetTerms "tags") }}
-                    <a href="{{ .RelPermalink }}" class="link">{{ .LinkTitle }}</a>
-                {{ end }}
-            </div>
-        {{ end }}
-    </footer>
+        </footer>
     {{ end }}
 </div>
