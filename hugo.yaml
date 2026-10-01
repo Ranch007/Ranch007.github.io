@@ -147,7 +147,7 @@ menu:
 
     - identifier: email
       name: Email
-      url: mailto:zhao11345lin07@163.com
+      url: mailto:Ranch@ranch007.top
       weight: 2
       params:
         icon: email
