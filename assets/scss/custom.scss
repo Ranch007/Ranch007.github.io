@@ -594,4 +594,9 @@ kbd {
 //   .sidebar header .site-avatar .site-logo:hover {
 //     transform: rotate(360deg); // 旋转角度为360度
 //   }
-  
+
+// 统一并收紧文章元信息图标与文字的间距（主题默认 15px，偏大）
+.article-time > div,
+.article-translations > div {
+  gap: 6px;
+}
