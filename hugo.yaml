@@ -1,4 +1,4 @@
-baseurl: http://ranch007.github.io
+baseurl: https://ranch007.github.io
 languageCode: zh-cn
 theme: hugo-theme-stack
 title:
@@ -77,9 +77,9 @@ params:
 
     giscus:
       repo: Ranch007/Message-Boards
-      repoID: R_kgDONBh4yw
+      repoID: R_kgDOU2NFUQ
       category: Announcements
-      categoryID: DIC_kwDONBh4y84CjbwV
+      categoryID: DIC_kwDOU2NFUc4DGyIT
       mapping: pathname
       strict: 0
       lightTheme: 0
