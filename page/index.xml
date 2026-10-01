@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Pages on Ranch&#39;s Blog</title>
+        <link>https://ranch007.github.io/page/</link>
+        <description>Recent content in Pages on Ranch&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh</language>
+        <copyright>Ranch&#39;s Blog</copyright>
+        <lastBuildDate>Thu, 01 Oct 2026 16:50:44 +0800</lastBuildDate><atom:link href="https://ranch007.github.io/page/index.xml" rel="self" type="application/rss+xml" /><item>
+            <title>关于</title>
+            <link>https://ranch007.github.io/about/</link>
+            <pubDate>Tue, 15 Oct 2024 00:00:00 +0000</pubDate>
+            <guid>https://ranch007.github.io/about/</guid>
+            <description>&lt;p&gt;  这里是&lt;a class=&#34;link&#34; href=&#34;https://github.com/Ranch007&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;&#xA;    &gt;Ranch&lt;/a&gt;的个人站点，托管在GitHub上。&lt;/p&gt;&#xA;&lt;p&gt;  这个博客是我的数字小花园，承载着我内心的宁静。不追求更新频率，只记录一些自己瞎折腾的笔记，不辜负与计算机的相遇。&lt;/p&gt;&#xA;&#xA;    &lt;blockquote&gt;&#xA;        &lt;p&gt;“Simplicity is prerequisite for reliability”&lt;/p&gt;&#xA;&#xA;    &lt;/blockquote&gt;&#xA;&lt;hr&gt;&#xA;&lt;h1 id=&#34;关于本人&#34;&gt;👨‍💻关于本人&#xA;&lt;/h1&gt;&lt;p&gt;千禧年人，因为一部小说与计算机结缘。&lt;/p&gt;&#xA;&lt;p&gt;选了计算机专业，课程主要是计算机网络和路由与交换。&lt;del&gt;当时并不喜欢，却意外学的不错，后来找到原因是喜欢敲键盘&lt;/del&gt;还开设了Linux，Python，一直在用仅限在用。&lt;/p&gt;&#xA;&lt;p&gt;后来又主动接触了网安，见猎心喜，却始终只是刚入门甚至自我感觉只是踏进去半只脚。又因为种种原因，老是拾起又搁置，现在是埋在心底的一个“黑客”梦。&lt;/p&gt;&#xA;&lt;p&gt;发现好玩的项目会点个⭐拉下来玩，以后会继续折腾下去，这是我解压放松的娱乐方式。&lt;/p&gt;&#xA;&lt;p&gt;我一定会重燃我的梦！&lt;/p&gt;&#xA;&lt;h1 id=&#34;关于内容&#34;&gt;📝关于内容&#xA;&lt;/h1&gt;&lt;p&gt;这里主要是我折腾时留下的笔记和碎碎念。&lt;/p&gt;&#xA;&lt;p&gt;内容偏向实用向、记录向，可能包括：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;计算机网络、路由与交换相关的学习笔记&lt;/li&gt;&#xA;&lt;li&gt;Linux 与 Python 的使用与小实验&lt;/li&gt;&#xA;&lt;li&gt;网安入门路上的零散思考与踩坑记录&lt;/li&gt;&#xA;&lt;li&gt;发现有趣项目后的尝试与复盘&lt;/li&gt;&#xA;&lt;li&gt;&amp;hellip;&amp;hellip;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;不追求更新频率，也不保证内容的系统性。只是把那些“玩着玩着就记下来了”的东西放在这里，方便以后回头看看。&lt;/p&gt;&#xA;&lt;p&gt;如果碰巧对你有一点点帮助，那就是额外的收获了。&lt;/p&gt;&#xA;&lt;h1 id=&#34;关于本站&#34;&gt;🏡关于本站&#xA;&lt;/h1&gt;&lt;ul&gt;&#xA;&lt;li&gt;博客框架：&lt;a class=&#34;link&#34; href=&#34;https://gohugo.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;&#xA;    &gt;Hugo&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;博客主题：&lt;a class=&#34;link&#34; href=&#34;https://stack.jimmycai.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;&#xA;    &gt;Stack&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;托管部署：&lt;a class=&#34;link&#34; href=&#34;https://www.github.com/Ranch007&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;&#xA;    &gt;GitHub&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;评论系统：&lt;a class=&#34;link&#34; href=&#34;https://giscus.app/zh-CN&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;&#xA;    &gt;Giscus&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;版权声明：&lt;a class=&#34;link&#34; href=&#34;https://creativecommons.org/licenses/by-nc-sa/4.0/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;&#xA;    &gt;CC BY-NC-SA 4.0&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;</description>
+        </item><item>
+            <title>归档</title>
+            <link>https://ranch007.github.io/archives/</link>
+            <pubDate>Tue, 15 Oct 2024 00:00:00 +0000</pubDate>
+            <guid>https://ranch007.github.io/archives/</guid>
+            <description></description>
+        </item><item>
+            <title>留言</title>
+            <link>https://ranch007.github.io/talk/</link>
+            <pubDate>Tue, 15 Oct 2024 00:00:00 +0000</pubDate>
+            <guid>https://ranch007.github.io/talk/</guid>
+            <description>&lt;p&gt;只有心灵相通的人，才有共鸣看人世间的潮起潮落&lt;br&gt;&#xA;只有灵魂相近的人，才能看到彼此内心深藏的美丽&lt;/p&gt;&#xA;</description>
+        </item><item>
+            <title>友链</title>
+            <link>https://ranch007.github.io/links/</link>
+            <pubDate>Tue, 15 Oct 2024 00:00:00 +0000</pubDate>
+            <guid>https://ranch007.github.io/links/</guid>
+            <description>&lt;h1 id=&#34;人生漫长转瞬即逝有人见尘埃有人见星辰&#34;&gt;&amp;ldquo;人生漫长转瞬即逝，有人见尘埃，有人见星辰&amp;rdquo;&lt;br&gt;&#xA;&lt;/h1&gt;</description>
+        </item><item>
+            <title>搜索</title>
+            <link>https://ranch007.github.io/search/</link>
+            <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+            <guid>https://ranch007.github.io/search/</guid>
+            <description></description>
+        </item></channel>
+</rss>
