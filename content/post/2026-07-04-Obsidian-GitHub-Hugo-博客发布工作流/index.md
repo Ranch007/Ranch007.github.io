@@ -91,9 +91,9 @@ git submodule update --init
 | 配置项                     | 值                            | 说明                                               |
 | -------------------------- | ----------------------------- | -------------------------------------------------- |
 | `theme`                  | `hugo-theme-stack`          | Stack 主题                                         |
-| `DefaultContentLanguage` | `zh-cn`                     | 简体中文                                           |
+| `DefaultContentLanguage` | `zh`                        | 简体中文                                           |
 | `hasCJKLanguage`         | `true`                      | 中日韩语言支持，影响`.Summary` 和 `.WordCount` |
-| `baseurl`                | `http://ranch007.github.io` | 站点根 URL                                         |
+| `baseurl`                | `https://ranch007.github.io` | 站点根 URL                                         |
 | `permalinks.post`        | `/p/:slug/`                 | 博文 URL 结构                                      |
 | `pagination.pagerSize`   | `6`                         | 每页文章数                                         |
 
@@ -118,8 +118,7 @@ comments:
 sidebar:
   subtitle1: "知是行之始"
   subtitle2: "行是知之成"
-  avatar:
-    src: https://github.com/Ranch007.png  # GitHub 头像
+  avatar: https://github.com/Ranch007.png  # GitHub 头像
 ```
 
 使用了两个副标题来呈现个人格言。
@@ -129,7 +128,7 @@ sidebar:
 ```
 content/
 ├── _index.md              # 首页
-├── _index.zh-cn.md        # 中文首页
+├── _index.zh.md           # 中文首页
 ├── post/                  # 博文（page bundle 结构）
 │   └── 文章slug/
 │       └── index.md       # 博文正文 + 配图
