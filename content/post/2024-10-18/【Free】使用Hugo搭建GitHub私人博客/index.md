@@ -10,8 +10,8 @@ math:
 license: 
 hidden: false
 draft: false 
-categories: ["网络技术"]
-tags: ["blog"]
+categories: ["博客与建站"]
+tags: ["Hugo", "博客"]
 ---
 
 ## 环境准备

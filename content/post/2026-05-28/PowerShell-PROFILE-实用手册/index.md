@@ -9,8 +9,8 @@ math:
 license: 
 hidden: false
 draft: false 
-categories: ["网络技术"]
-tags: ["PowerShell", "Windows", "环境"]
+categories: ["环境部署"]
+tags: ["PowerShell", "Windows", "终端"]
 
 ---
 

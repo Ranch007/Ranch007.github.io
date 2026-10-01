@@ -9,7 +9,7 @@ math:
 license: 
 hidden: false
 draft: false 
-categories: ["网络技术"]
+categories: ["网络工程"]
 tags: ["GNS3"]
 
 ---

@@ -8,8 +8,8 @@ math:
 license:
 hidden: false
 draft: false
-categories: ["网络技术"]
-tags: ["Blog", "Obsidian", "Hugo"]
+categories: ["博客与建站"]
+tags: ["Obsidian", "Hugo", "自动化"]
 ---
 # Obsidian + GitHub + Hugo 博客发布工作流
 

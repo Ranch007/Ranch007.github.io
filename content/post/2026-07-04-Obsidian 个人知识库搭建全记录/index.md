@@ -8,8 +8,8 @@ math:
 license:
 hidden: false
 draft: false
-categories: ["网络技术"]
-tags: ["Obsidian", "wiki"]
+categories: ["环境部署"]
+tags: ["Obsidian", "知识管理"]
 ---
 # Obsidian 个人知识库搭建全记录
 
