@@ -8,8 +8,8 @@ math:
 license: 
 hidden: false
 draft: false 
-categories: ["网络技术"]
-tags: ["环境"]
+categories: ["环境部署"]
+tags: ["Windows", "WSL"]
 ---
 
 ---

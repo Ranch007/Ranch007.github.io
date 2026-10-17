@@ -21,7 +21,7 @@
 
 ## 环境准备
 
-1. 安装 [Hugo Extended](https://gohugo.io/installation/)（版本 ≥ 0.139.0）
+1. 安装 [Hugo Extended](https://gohugo.io/installation/)（版本 ≥ 0.157.0，建议使用最新稳定版）
 2. 克隆仓库并初始化子模块：
 
 ```bash
@@ -50,7 +50,7 @@ title: 文章标题
 description: 文章摘要
 date: 2026-05-22
 categories:
-  - 日常折腾
+  - 环境部署
 tags:
   - blog
 image: cover.png    # 文章封面图（放在同目录下）
@@ -81,6 +81,6 @@ git push origin main
 
 ## 分类与标签
 
-**分类**（4 个）：日常折腾、痴人呓语、网安笔记、网工笔记
+**分类**（4 个）：网络工程、网络安全、环境部署、博客与建站
 
 **标签**：在 Front Matter 中自由添加，已有标签会自动聚合。

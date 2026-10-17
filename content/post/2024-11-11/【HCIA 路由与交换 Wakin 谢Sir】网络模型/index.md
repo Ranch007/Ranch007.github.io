@@ -9,8 +9,8 @@ math:
 license: 
 hidden: false
 draft: false 
-categories: ["网络技术"]
-tags: ["HCIA"]
+categories: ["网络工程"]
+tags: ["HCIA", "TCP/IP"]
 
 ---
 

@@ -8,8 +8,8 @@ math:
 license:
 hidden: false
 draft: false
-categories: ["网络技术"]
-tags: ["Blog", "Obsidian", "Hugo"]
+categories: ["博客与建站"]
+tags: ["Obsidian", "Hugo", "自动化"]
 ---
 # Obsidian + GitHub + Hugo 博客发布工作流
 
@@ -91,9 +91,9 @@ git submodule update --init
 | 配置项                     | 值                            | 说明                                               |
 | -------------------------- | ----------------------------- | -------------------------------------------------- |
 | `theme`                  | `hugo-theme-stack`          | Stack 主题                                         |
-| `DefaultContentLanguage` | `zh-cn`                     | 简体中文                                           |
+| `DefaultContentLanguage` | `zh`                        | 简体中文                                           |
 | `hasCJKLanguage`         | `true`                      | 中日韩语言支持，影响`.Summary` 和 `.WordCount` |
-| `baseurl`                | `http://ranch007.github.io` | 站点根 URL                                         |
+| `baseurl`                | `https://ranch007.github.io` | 站点根 URL                                         |
 | `permalinks.post`        | `/p/:slug/`                 | 博文 URL 结构                                      |
 | `pagination.pagerSize`   | `6`                         | 每页文章数                                         |
 
@@ -118,8 +118,7 @@ comments:
 sidebar:
   subtitle1: "知是行之始"
   subtitle2: "行是知之成"
-  avatar:
-    src: https://github.com/Ranch007.png  # GitHub 头像
+  avatar: https://github.com/Ranch007.png  # GitHub 头像
 ```
 
 使用了两个副标题来呈现个人格言。
@@ -129,7 +128,7 @@ sidebar:
 ```
 content/
 ├── _index.md              # 首页
-├── _index.zh-cn.md        # 中文首页
+├── _index.zh.md           # 中文首页
 ├── post/                  # 博文（page bundle 结构）
 │   └── 文章slug/
 │       └── index.md       # 博文正文 + 配图
@@ -139,9 +138,10 @@ content/
 │   ├── links/             # 友链
 │   └── talk/              # 留言板
 ├── categories/            # 分类聚合页
-│   ├── 网络技术/
-│   ├── 投资理财/
-│   └── 阅读随记/
+│   ├── 网络工程/
+│   ├── 网络安全/
+│   ├── 环境部署/
+│   └── 博客与建站/
 └── tags/                  # 标签聚合页
 ```
 
@@ -149,13 +149,15 @@ content/
 
 #### 分类体系
 
-博客侧边栏显示的三个分类，与 Obsidian wiki 的三个兴趣方向一一映射：
+博客侧边栏显示的**四个分类**（网络工程 / 网络安全 / 环境部署 / 博客与建站），优先由笔记 frontmatter 的 `category` 字段决定，未指定时按 Obsidian 目录兜底：
 
-| Obsidian wiki 子目录 | Hugo 分类 |
-| -------------------- | --------- |
-| `wiki/it-tech/`    | 网络技术  |
-| `wiki/finance/`    | 投资理财  |
-| `wiki/reading/`    | 阅读随记  |
+| Obsidian 来源 | Hugo 分类 |
+| -------------------- | --------------- |
+| frontmatter `category: 网络工程` | 网络工程 |
+| frontmatter `category: 网络安全` | 网络安全 |
+| frontmatter `category: 环境部署` | 环境部署 |
+| frontmatter `category: 博客与建站` | 博客与建站 |
+| 兜底：`wiki/it-tech/` | 环境部署 |
 
 ---
 
@@ -198,7 +200,7 @@ Get-ChildItem -Path $WikiDir -Recurse -Filter "*.md" | ForEach-Object {
 | `description` | `description` | 原样保留                                        |
 | —              | `slug`        | 由标题和日期生成                                |
 | —              | `image`       | 正文第一张图片                                  |
-| —              | `categories`  | 根据 wiki 子目录自动映射                        |
+| `category`     | `categories`  | 优先取 frontmatter `category`，缺失时按目录兜底   |
 
 生成的 Hugo frontmatter 示例：
 
@@ -213,7 +215,7 @@ math:
 license:
 hidden: false
 draft: false
-categories: ["网络技术"]
+categories: ["环境部署"]
 tags: [""]
 ---
 ```
@@ -404,7 +406,7 @@ jobs:
 | Obsidian`wiki/`          | Hugo`content/post/`             |
 | 每个`publish: true` 笔记 | 一个 Hugo page bundle（独立目录） |
 | Obsidian`assets/`        | 复制到 post bundle 内             |
-| wiki 子目录（如 it-tech）  | 分类标签（如"网络技术"）          |
+| 笔记 frontmatter `category` | 分类标签（如"网络工程"） |
 
 #### 前后 frontmatter 对照
 
@@ -437,7 +439,7 @@ published: true
 title: "Obsidian 个人知识库搭建全记录"
 slug: "2026-07-04-Obsidian-个人知识库搭建全记录"
 date: "2026-07-04T08:00:00+08:00"
-categories: ["网络技术"]
+categories: ["环境部署"]
 tags: [""]
 draft: false
 ---
