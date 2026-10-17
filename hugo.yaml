@@ -140,14 +140,14 @@ menu:
   social:
     - identifier: github
       name: Ranch's GitHub
-      url: https://github.com/Ranch007/Ranch007.github.io
+      url: https://github.com/Ranch007
       weight: 1
       params:
         icon: brand-github
 
     - identifier: email
       name: Email
-      url: mailto:zhao11345lin07@163.com
+      url: mailto:ranch@ranch007.top
       weight: 2
       params:
         icon: email
