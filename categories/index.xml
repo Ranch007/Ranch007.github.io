@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Categories on Ranch&#39;s Blog</title>
+        <link>https://ranch007.github.io/categories/</link>
+        <description>Recent content in Categories on Ranch&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh</language>
+        <copyright>Ranch&#39;s Blog</copyright>
+        <lastBuildDate>Thu, 01 Oct 2026 17:30:20 +0800</lastBuildDate><atom:link href="https://ranch007.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+            <title>网络工程</title>
+            <link>https://ranch007.github.io/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/</link>
+            <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+            <guid>https://ranch007.github.io/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/</guid>
+            <description>&lt;img src=&#34;https://ranch007.github.io/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E7%A8%8B/cover.png&#34; alt=&#34;Featured image of post 网络工程&#34; /&gt;</description>
+        </item><item>
+            <title>网络安全</title>
+            <link>https://ranch007.github.io/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</link>
+            <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+            <guid>https://ranch007.github.io/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</guid>
+            <description>&lt;img src=&#34;https://ranch007.github.io/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/cover.png&#34; alt=&#34;Featured image of post 网络安全&#34; /&gt;</description>
+        </item><item>
+            <title>环境部署</title>
+            <link>https://ranch007.github.io/categories/%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</link>
+            <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+            <guid>https://ranch007.github.io/categories/%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</guid>
+            <description>&lt;img src=&#34;https://ranch007.github.io/categories/%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/cover.png&#34; alt=&#34;Featured image of post 环境部署&#34; /&gt;</description>
+        </item><item>
+            <title>博客与建站</title>
+            <link>https://ranch007.github.io/categories/%E5%8D%9A%E5%AE%A2%E4%B8%8E%E5%BB%BA%E7%AB%99/</link>
+            <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+            <guid>https://ranch007.github.io/categories/%E5%8D%9A%E5%AE%A2%E4%B8%8E%E5%BB%BA%E7%AB%99/</guid>
+            <description>&lt;img src=&#34;https://ranch007.github.io/categories/%E5%8D%9A%E5%AE%A2%E4%B8%8E%E5%BB%BA%E7%AB%99/cover.jpg&#34; alt=&#34;Featured image of post 博客与建站&#34; /&gt;</description>
+        </item></channel>
+</rss>
